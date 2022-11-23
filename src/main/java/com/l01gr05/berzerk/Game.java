@@ -10,7 +10,7 @@ public class Game {
     private final LanternaGUI gui;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.gui = new LanternaGUI(50, 25);
+        this.gui = new LanternaGUI(20, 20);
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
@@ -18,6 +18,7 @@ public class Game {
     }
 
     private void run() throws IOException {
+        gui.close();
     }
 }
 
