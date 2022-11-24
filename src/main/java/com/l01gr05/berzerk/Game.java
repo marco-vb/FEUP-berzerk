@@ -8,8 +8,11 @@ import com.l01gr05.berzerk.states.GameState;
 import com.l01gr05.berzerk.states.State;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class Game {
     private final LanternaGUI gui;

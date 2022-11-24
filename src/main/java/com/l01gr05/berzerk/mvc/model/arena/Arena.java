@@ -56,7 +56,7 @@ public class Arena {
         walls.add(wall);
     }
 
-    public void addElement(Object element) {
+    public void addElement(Element element) {
         if (element instanceof Agent) {
             agent = (Agent) element;
         } else if (element instanceof Enemy) {

@@ -2,6 +2,8 @@ package com.l01gr05.berzerk.mvc.model.elements;
 
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.view.Viewer;
+import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
+import com.l01gr05.berzerk.mvc.view.game.ElementViewer;
 
 public abstract class Element {
     private Position position;
@@ -19,5 +21,5 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract Viewer<Element> getViewer();
+    public abstract ElementViewer getViewer();
 }
