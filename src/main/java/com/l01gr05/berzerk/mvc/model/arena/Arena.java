@@ -1,6 +1,7 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.Wall;
 
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Arena {
@@ -62,5 +64,13 @@ public class Arena {
         } else if (element instanceof Wall) {
             walls.add((Wall) element);
         }
+    }
+
+    public List<Element> getElements() {
+        List<Element> elements = new ArrayList<Element>();
+        elements.add(agent);
+        elements.addAll(enemies);
+        elements.addAll(walls);
+        return elements;
     }
 }

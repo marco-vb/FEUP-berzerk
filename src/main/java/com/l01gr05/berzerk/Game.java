@@ -30,10 +30,7 @@ public class Game {
 
     private void run() throws IOException {
         while (state != null) {
-            // Control reads keys and takes care of movement
-            // View updates screen
             state.update(this, gui);
-
         }
         gui.close();
     }
