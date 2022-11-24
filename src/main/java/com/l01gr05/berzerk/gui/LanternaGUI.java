@@ -1,6 +1,7 @@
 package com.l01gr05.berzerk.gui;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -10,6 +11,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
+import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
 import java.awt.*;
 import java.io.File;
@@ -19,8 +21,12 @@ import java.net.URL;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
+    private final int width;
+    private final int height;
 
     public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
+        this.width = width;
+        this.height = height;
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
@@ -128,5 +134,21 @@ public class LanternaGUI implements GUI {
     public void draw(int x, int y, char c) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.putString(x, y, String.valueOf(c));
+    }
+
+    @Override
+    public void drawMenu(Menu menu) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
+        textGraphics.putString(width/2, height/2, menu.getTitle());
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+        for (int i = 0; i < menu.getOptions().size(); i++) {
+            if (i == menu.getCurrentOption()) {
+                textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+                textGraphics.putString(width/2, height/2 + i + 1, menu.getOptions().get(i));
+                textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+            }
+            textGraphics.putString(width/2, height/2 + i + 1, menu.getOptions().get(i));
+        }
     }
 }

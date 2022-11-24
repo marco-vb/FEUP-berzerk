@@ -3,6 +3,7 @@ package com.l01gr05.berzerk.mvc.model.menu;
 import com.l01gr05.berzerk.Game;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public abstract class Menu {
@@ -38,5 +39,5 @@ public abstract class Menu {
         this.currentOption = currentOption;
     }
 
-    public abstract void executeOption(Game game) throws FileNotFoundException;
+    public abstract void executeOption(Game game) throws IOException;
 }

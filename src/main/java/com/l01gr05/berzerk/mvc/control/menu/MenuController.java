@@ -3,12 +3,10 @@ package com.l01gr05.berzerk.mvc.control.menu;
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
-import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
-import com.l01gr05.berzerk.states.GameState;
-import com.l01gr05.berzerk.states.MenuState;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MenuController extends Controller<Menu> {
     public MenuController(Menu menu) {
@@ -16,7 +14,7 @@ public class MenuController extends Controller<Menu> {
     }
 
     @Override
-    public void update(Game game, GUI.INPUT action) throws FileNotFoundException {
+    public void update(Game game, GUI.INPUT action) throws IOException {
         selectOption(game, action);
     }
 
@@ -24,7 +22,7 @@ public class MenuController extends Controller<Menu> {
         getModel().setCurrentOption(option);
     }
 
-    private void selectOption(Game game, GUI.INPUT action) throws FileNotFoundException {
+    private void selectOption(Game game, GUI.INPUT action) throws IOException {
         int currentOption = getModel().getCurrentOption();
         int numberOfOptions = getModel().getNumberOfOptions();
 

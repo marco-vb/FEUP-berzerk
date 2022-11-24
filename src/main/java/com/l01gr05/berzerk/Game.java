@@ -28,7 +28,7 @@ public class Game {
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
-        new Game().run();
+        new Game().showStartMenu();
     }
 
     public void setState(State state) {
@@ -56,8 +56,13 @@ public class Game {
         gui.close();
     }
 
-    public void startGame() throws FileNotFoundException {
+    public void startGame() throws IOException {
         this.state = new GameState(new ArenaLoader(1).load());
+        this.run();
+    }
+
+    public void showStartMenu() {
+        this.state = new MenuState(new MenuStart());
     }
 
     public void showSettings() {
@@ -74,10 +79,6 @@ public class Game {
 
     public void toggleSound() {
         // TODO
-    }
-
-    public void showStartMenu() {
-        this.state = new MenuState(new MenuStart());
     }
 }
 
