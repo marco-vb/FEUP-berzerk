@@ -14,32 +14,37 @@ public class AgentController extends Controller<Arena> {
 
     @Override
     public void update(Game game, GUI.INPUT action) {
-        if (action == GUI.INPUT.UP) moveUp();
-        if (action == GUI.INPUT.DOWN) moveDown();
-        if (action == GUI.INPUT.LEFT) moveLeft();
-        if (action == GUI.INPUT.RIGHT) moveRight();
+        if (action == GUI.INPUT.UP) moveUp(game);
+        if (action == GUI.INPUT.DOWN) moveDown(game);
+        if (action == GUI.INPUT.LEFT) moveLeft(game);
+        if (action == GUI.INPUT.RIGHT) moveRight(game);
     }
 
-    private void moveUp() {
-        move(getModel().getAgent().getPosition().getUp());
+    private void moveUp(Game game) {
+        move(getModel().getAgent().getPosition().getUp(), game);
     }
 
-    private void moveDown() {
-        move(getModel().getAgent().getPosition().getDown());
+    private void moveDown(Game game) {
+        move(getModel().getAgent().getPosition().getDown(), game);
     }
 
-    private void moveLeft() {
-        move(getModel().getAgent().getPosition().getLeft());
+    private void moveLeft(Game game) {
+        move(getModel().getAgent().getPosition().getLeft(), game);
     }
 
-    private void moveRight() {
-        move(getModel().getAgent().getPosition().getRight());
+    private void moveRight(Game game) {
+        move(getModel().getAgent().getPosition().getRight(), game);
     }
 
-    private void move(Position position) {
+    private void move(Position position, Game game) {
         Agent agent = getModel().getAgent();
-        if (getModel().isEmpty(position)) {
+        if (getModel().isWall(position) || getModel().isEnemy(position) || getModel().isExit(position)) {
+            game.setState(null);
+        }
+
+        else {
             agent.setPosition(position);
         }
+
     }
 }
