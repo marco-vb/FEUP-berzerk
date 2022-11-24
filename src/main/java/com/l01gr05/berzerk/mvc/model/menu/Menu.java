@@ -1,5 +1,7 @@
 package com.l01gr05.berzerk.mvc.model.menu;
 
+import com.l01gr05.berzerk.Game;
+
 import java.util.List;
 
 public abstract class Menu {
@@ -33,5 +35,9 @@ public abstract class Menu {
 
     public void setCurrentOption(int currentOption) {
         this.currentOption = currentOption;
+    }
+
+    public void executeOption(Game game) {
+        // TODO: implement this method
     }
 }
