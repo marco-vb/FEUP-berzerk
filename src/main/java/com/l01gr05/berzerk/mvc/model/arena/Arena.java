@@ -6,7 +6,6 @@ import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.Wall;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -74,5 +73,14 @@ public class Arena {
         elements.addAll(enemies);
         elements.addAll(walls);
         return elements;
+    }
+
+    public boolean isEmpty(Position position) {
+        for (Element element : getElements()) {
+            if (element.getPosition().equals(position)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
