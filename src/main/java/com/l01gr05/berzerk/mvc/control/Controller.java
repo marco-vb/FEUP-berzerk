@@ -3,6 +3,9 @@ package com.l01gr05.berzerk.mvc.control;
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public abstract class Controller<Model> {
     private Model model;
 
@@ -14,5 +17,5 @@ public abstract class Controller<Model> {
         return model;
     }
 
-    public abstract void update(Game game, GUI.INPUT action);
+    public abstract void update(Game game, GUI.INPUT action) throws IOException;
 }

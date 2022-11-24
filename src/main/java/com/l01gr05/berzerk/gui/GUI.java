@@ -1,7 +1,7 @@
 package com.l01gr05.berzerk.gui;
 
-import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
+import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
 import java.io.IOException;
 
@@ -23,6 +23,8 @@ public interface GUI {
     abstract void drawBullet(Element model);
 
     abstract void draw(int x, int y, char c);
+
+    void drawMenu(Menu menu);
 
     enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
 }
