@@ -1,4 +1,4 @@
-package com.l01gr05.berzerk.mvc.models.game.arena;
+package com.l01gr05.berzerk.mvc.model.arena;
 
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
