@@ -6,11 +6,18 @@ import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
 import com.l01gr05.berzerk.mvc.view.game.BulletViewer;
 
 public class Bullet extends Element {
-
-    public Bullet(Position p) {super(p);}
+    private char direction;
+    public Bullet(Position p, char direction) {
+        super(p);
+        this.direction = direction;
+    }
 
     @Override
     public BulletViewer getViewer() {
         return new BulletViewer(this);
+    }
+
+    public char getDirection() {
+        return direction;
     }
 }

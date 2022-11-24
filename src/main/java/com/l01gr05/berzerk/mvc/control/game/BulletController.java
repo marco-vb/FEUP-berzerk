@@ -4,22 +4,40 @@ import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.model.Position;
+import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Bullet;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 
-public class BulletController extends Controller<Bullet> {
-    public BulletController(Bullet model) {
-        super(model);
+public class BulletController extends Controller<Arena> {
+    public BulletController(Arena arena) {
+        super(arena);
     }
 
     public void update(Game game, GUI.INPUT action) {
-// TO do
+       for (int i = 0; i < getModel().getBullets().size(); i++) {
+           Bullet bullet = getModel().getBullets().get(i);
+           if (bullet.getDirection() == 'N') move(bullet, bullet.getPosition().getUp());
+           if (bullet.getDirection() == 'S') move(bullet, bullet.getPosition().getDown());
+           if (bullet.getDirection() == 'W') move(bullet, bullet.getPosition().getLeft());
+           if (bullet.getDirection() == 'E') move(bullet, bullet.getPosition().getRight());
+       }
+
     }
 
-    private void moveBullet(Bullet bullet, Position position) {
-        if (bullet.getPosition().getX() == position.getX() && bullet.getPosition().getY() == position.getY()) {
-            bullet.setPosition(position);
+    private void move(Bullet bullet, Position position) {
+        if (getModel().isWall(position)) {
+            getModel().removeBullet(bullet);
         }
-        bullet.setPosition(position);
+
+        if (getModel().isEnemy(position)) {
+            getModel().removeBullet(bullet);
+            for (int i = 0; i < getModel().getEnemies().size(); i++) {
+                if (getModel().getEnemies().get(i).getPosition().equals(position)) {
+                    getModel().removeEnemy(getModel().getEnemies().get(i));
+                }
+            }
+        }
+
+        else bullet.setPosition(position);
     }
 }

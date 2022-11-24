@@ -18,43 +18,34 @@ public class Arena {
     private Exit exit;
     private List<Enemy> enemies;
     private List<Wall> walls;
+    private List<Bullet> bullets;
 
     public Arena(int width, int height){
         this.width = width;
         this.height = height;
         this.enemies = new ArrayList<>();
         this.walls = new ArrayList<>();
+        this.bullets = new ArrayList<>();
     }
-
-    public int getWidth() {return width;}
-
-    public int getHeight() {return height;}
-
-    public int getLevel() {return level;}
 
     public Agent getAgent() {return agent;}
 
     public List<Enemy> getEnemies() {return enemies;}
 
-    public List<Wall> getWalls() {return walls;}
-
-    public Exit getExit() {return exit;}
+    public List<Bullet> getBullets() {return bullets;}
 
     // set level
     public void setLevel(int level) {
         this.level = level;
     }
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
+    // Removes enemy on position
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
     }
 
-    public void addEnemy(Enemy enemy) {
-        enemies.add(enemy);
-    }
-
-    public void addWall(Wall wall) {
-        walls.add(wall);
+    public void removeBullet(Bullet bullet) {
+        bullets.remove(bullet);
     }
 
     public void addElement(Element element) {
@@ -69,10 +60,15 @@ public class Arena {
         }
     }
 
+    public void addBullet(Bullet bullet) {
+        bullets.add(bullet);
+    }
+
     public List<Element> getElements() {
         List<Element> elements = new ArrayList<>();
         elements.add(agent);
         elements.add(exit);
+        elements.addAll(bullets);
         elements.addAll(enemies);
         elements.addAll(walls);
         return elements;
