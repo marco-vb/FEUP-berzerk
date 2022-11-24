@@ -16,7 +16,7 @@ public class ArenaLoader {
     public ArenaLoader(int level) {this.level = level;}
 
     public Arena load() throws FileNotFoundException {
-        Arena arena = new Arena(20, 20);
+        Arena arena = new Arena(30, 20);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
