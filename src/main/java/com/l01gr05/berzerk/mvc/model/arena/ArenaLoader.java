@@ -2,10 +2,7 @@ package com.l01gr05.berzerk.mvc.model.arena;
 
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Agent;
-import com.l01gr05.berzerk.mvc.model.elements.Element;
-import com.l01gr05.berzerk.mvc.model.elements.Enemy;
-import com.l01gr05.berzerk.mvc.model.elements.Wall;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -36,6 +33,7 @@ public class ArenaLoader {
     private Element createElement(char element, int x, int y) {
         switch (element) {
             case 'A' -> {return new Agent(new Position(x, y));}
+            case 'X' -> {return new Exit(new Position(x, y));}
             case 'E' -> {return new Enemy(new Position(x, y));}
             case '#' -> {return new Wall(new Position(x, y));}
         }

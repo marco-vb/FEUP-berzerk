@@ -1,10 +1,7 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
 import com.l01gr05.berzerk.mvc.model.Position;
-import com.l01gr05.berzerk.mvc.model.elements.Agent;
-import com.l01gr05.berzerk.mvc.model.elements.Element;
-import com.l01gr05.berzerk.mvc.model.elements.Enemy;
-import com.l01gr05.berzerk.mvc.model.elements.Wall;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -18,6 +15,7 @@ public class Arena {
     private int height;
     private int level;
     private Agent agent;
+    private Exit exit;
     private List<Enemy> enemies;
     private List<Wall> walls;
 
@@ -40,6 +38,8 @@ public class Arena {
 
     public List<Wall> getWalls() {return walls;}
 
+    public Exit getExit() {return exit;}
+
     // set level
     public void setLevel(int level) {
         this.level = level;
@@ -60,6 +60,8 @@ public class Arena {
     public void addElement(Element element) {
         if (element instanceof Agent) {
             agent = (Agent) element;
+        } else if (element instanceof Exit) {
+            exit = (Exit) element;
         } else if (element instanceof Enemy) {
             enemies.add((Enemy) element);
         } else if (element instanceof Wall) {
@@ -70,17 +72,35 @@ public class Arena {
     public List<Element> getElements() {
         List<Element> elements = new ArrayList<>();
         elements.add(agent);
+        elements.add(exit);
         elements.addAll(enemies);
         elements.addAll(walls);
         return elements;
     }
 
-    public boolean isEmpty(Position position) {
-        for (Element element : getElements()) {
-            if (element.getPosition().equals(position)) {
-                return false;
+    public boolean isWall(Position position) {
+        for (Wall wall : walls) {
+            if (wall.getPosition().equals(position)) {
+                return true;
             }
         }
-        return true;
+        return false;
+    }
+
+    public boolean isEnemy(Position position) {
+        for (Enemy enemy : enemies) {
+            if (enemy.getPosition().equals(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isExit(Position position) {
+        return exit.getPosition().equals(position);
+    }
+
+    public boolean isAgent(Position position) {
+        return agent.getPosition().equals(position);
     }
 }

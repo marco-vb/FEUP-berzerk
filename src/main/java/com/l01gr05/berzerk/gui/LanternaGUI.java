@@ -102,13 +102,18 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawWall(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '#');
+    public void drawAgent(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'A');
     }
 
     @Override
-    public void drawAgent(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), 'A');
+    public void drawExit(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), ' ');
+    }
+
+    @Override
+    public void drawWall(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#');
     }
 
     @Override
