@@ -1,6 +1,6 @@
-package com.l01gr05.berzerk.mvc.models.game.elements;
+package com.l01gr05.berzerk.mvc.model.elements;
 
-import com.l01gr05.berzerk.models.game.Position;
+import com.l01gr05.berzerk.mvc.model.Position;
 
 public class Element {
     private Position position;

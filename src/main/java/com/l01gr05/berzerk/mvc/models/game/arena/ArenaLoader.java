@@ -1,6 +1,10 @@
 package com.l01gr05.berzerk.mvc.models.game.arena;
 
-import com.l01gr05.berzerk.mvc.models.game.elements.*;
+import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.Element;
+import com.l01gr05.berzerk.mvc.model.elements.Enemy;
+import com.l01gr05.berzerk.mvc.model.elements.Wall;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -6,4 +6,6 @@ public interface GUI {
     void clear() throws IOException;
     void refresh() throws IOException;
     void close() throws IOException;
+
+    enum ACTION { UP, DOWN, LEFT, RIGHT, NONE };
 }

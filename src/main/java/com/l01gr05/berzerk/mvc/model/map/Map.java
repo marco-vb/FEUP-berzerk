@@ -1,9 +1,8 @@
-package com.l01gr05.berzerk.mvc.models.game.arena;
+package com.l01gr05.berzerk.mvc.model.map;
 
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.Wall;
-
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,7 +10,7 @@ import java.net.URL;
 import java.io.FileReader;
 import java.util.List;
 
-public class Arena {
+public class Map {
     private int width;
     private int height;
     private int level;
@@ -20,9 +19,23 @@ public class Arena {
     private List<Wall> walls;
 
 
-    public Arena(int width, int height){
+    public Map(int width, int height, int level) throws FileNotFoundException {
         this.width = width;
         this.height = height;
+        this.level = level;
+        URL path = getClass().getResource("/map/lvl" + level + ".txt");
+        assert path != null;
+        BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
+        List<String> lines = level_reader.lines().toList();
+        for (int i = 0; i < lines.size(); i++) {
+            for (int j = 0; j < lines.get(i).length(); j++) {
+                switch (lines.get(i).charAt(j)) {
+                    case 'A' -> agent = new Agent(j, i);
+                    case 'E' -> enemies.add(new Enemy(j, i));
+                    case 'W' -> walls.add(new Wall(j, i));
+                }
+            }
+        }
     }
 
     public int getWidth() {return width;}
@@ -36,31 +49,4 @@ public class Arena {
     public List<Enemy> getEnemies() {return enemies;}
 
     public List<Wall> getWalls() {return walls;}
-
-    // set level
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setAgent(Agent agent) {
-        this.agent = agent;
-    }
-
-    public void addEnemy(Enemy enemy) {
-        enemies.add(enemy);
-    }
-
-    public void addWall(Wall wall) {
-        walls.add(wall);
-    }
-
-    public void addElement(Object element) {
-        if (element instanceof Agent) {
-            agent = (Agent) element;
-        } else if (element instanceof Enemy) {
-            enemies.add((Enemy) element);
-        } else if (element instanceof Wall) {
-            walls.add((Wall) element);
-        }
-    }
 }
