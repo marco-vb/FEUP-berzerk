@@ -7,5 +7,7 @@ public interface GUI {
     void refresh() throws IOException;
     void close() throws IOException;
 
-    enum ACTION { UP, DOWN, LEFT, RIGHT, NONE };
+    INPUT getInput() throws IOException;
+
+    enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
 }

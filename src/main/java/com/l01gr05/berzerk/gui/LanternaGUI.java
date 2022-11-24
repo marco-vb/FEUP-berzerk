@@ -69,4 +69,33 @@ public class LanternaGUI implements GUI {
     public void close() throws IOException {
         screen.close();
     }
+
+    public INPUT getInput() throws IOException {
+        KeyStroke keyStroke = screen.pollInput();
+        if (keyStroke == null) {
+            return INPUT.NONE;
+        }
+        KeyType keyType = keyStroke.getKeyType();
+
+        switch (keyType) {
+            case ArrowUp:
+                return INPUT.UP;
+            case ArrowDown:
+                return INPUT.DOWN;
+            case ArrowLeft:
+                return INPUT.LEFT;
+            case ArrowRight:
+                return INPUT.RIGHT;
+            case Escape:
+                return INPUT.QUIT;
+            case Enter:
+                return INPUT.ENTER;
+            case Character:
+                if (keyStroke.getCharacter() == ' ') {
+                    return INPUT.SHOOT;
+                }
+            default:
+                return INPUT.NONE;
+        }
+    }
 }
