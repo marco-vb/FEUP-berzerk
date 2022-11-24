@@ -21,10 +21,11 @@ public class Arena {
     private List<Enemy> enemies;
     private List<Wall> walls;
 
-
     public Arena(int width, int height){
         this.width = width;
         this.height = height;
+        this.enemies = new ArrayList<>();
+        this.walls = new ArrayList<>();
     }
 
     public int getWidth() {return width;}

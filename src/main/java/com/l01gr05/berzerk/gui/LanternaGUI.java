@@ -103,7 +103,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawWall(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '█');
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#');
     }
 
     @Override
@@ -113,7 +113,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawEnemy(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '☻');
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'E');
     }
 
     @Override

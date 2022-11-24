@@ -32,9 +32,23 @@ public class Game {
     }
 
     private void run() throws IOException {
+        int FPS = 10;
+        long frameDuration = 1000 / FPS;
+
         while (state != null) {
+            long start = System.currentTimeMillis();
             state.update(this, gui);
+            long end = System.currentTimeMillis();
+            long duration = end - start;
+            if (duration < frameDuration) {
+                try {
+                    Thread.sleep(frameDuration - duration);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         gui.close();
     }
 }
