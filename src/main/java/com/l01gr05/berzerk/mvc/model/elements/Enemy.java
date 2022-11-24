@@ -1,7 +1,7 @@
 package com.l01gr05.berzerk.mvc.model.elements;
 
+import com.l01gr05.berzerk.mvc.model.Position;
+
 public class Enemy extends Element {
-    public Enemy(int x, int y) {
-        super(x, y);
-    }
+    public Enemy(Position p) {super(p);}
 }
