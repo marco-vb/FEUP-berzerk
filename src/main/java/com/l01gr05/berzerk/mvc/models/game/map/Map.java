@@ -1,7 +1,7 @@
-package com.l01gr05.berzerk.models.game.map;
-
-import com.l01gr05.berzerk.models.game.elements.Agent;
-import com.l01gr05.berzerk.models.game.elements.Enemy;
+package com.l01gr05.berzerk.mvc.models.game.map;
+import com.l01gr05.berzerk.mvc.models.game.elements.Agent;
+import com.l01gr05.berzerk.mvc.models.game.elements.Enemy;
+import com.l01gr05.berzerk.mvc.models.game.elements.Agent;
 import com.l01gr05.berzerk.models.game.elements.Wall;
 
 import java.io.BufferedReader;
