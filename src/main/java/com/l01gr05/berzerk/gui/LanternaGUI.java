@@ -24,10 +24,6 @@ public class LanternaGUI implements GUI {
     private final int width;
     private final int height;
 
-    public LanternaGUI(Screen screen) {
-        this.screen = screen;
-    }
-
     public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
         this.width = width;
         this.height = height;
@@ -65,6 +61,14 @@ public class LanternaGUI implements GUI {
 
         Font loadedFont = font.deriveFont(Font.PLAIN, 25);
         return AWTTerminalFontConfiguration.newInstance(loadedFont);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     @Override
@@ -142,18 +146,20 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawMenu(Menu menu) {
+        int x = getWidth() / 2 - menu.getTitle().length() / 2 - 1;
+        int y = getHeight() / 2 - menu.getOptions().size() / 2 - 1;
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
-        textGraphics.putString(width/2, height/2, menu.getTitle());
+        textGraphics.putString(x, y, menu.getTitle());
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
 
         for (int i = 0; i < menu.getOptions().size(); i++) {
             if (i == menu.getCurrentOption()) {
                 textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-                textGraphics.putString(width/2, height/2 + i + 1, menu.getOptions().get(i));
+                textGraphics.putString(x, y + i + 1, menu.getOptions().get(i));
                 textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
             } else {
-                textGraphics.putString(width / 2, height / 2 + i + 1, menu.getOptions().get(i));
+                textGraphics.putString(x, y + i + 1, menu.getOptions().get(i));
             }
         }
     }

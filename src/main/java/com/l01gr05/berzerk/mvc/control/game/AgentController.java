@@ -49,10 +49,14 @@ public class AgentController extends Controller<Arena> {
 
     private void move(Position position, Game game) {
         Agent agent = getModel().getAgent();
-        if (getModel().isWall(position) || getModel().isEnemy(position) || getModel().isExit(position)) {
+        if (getModel().isWall(position) || getModel().isEnemy(position)) {
             game.setState(null);
+        } else if (getModel().isExit(position)) {
+            game.showStartMenu();
+        //} else if (getModel().isBullet(position)) {
+            //game.setState(null);
+        } else {
+            agent.setPosition(position);
         }
-
-        else agent.setPosition(position);
     }
 }

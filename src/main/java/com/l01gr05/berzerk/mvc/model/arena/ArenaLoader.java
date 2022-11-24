@@ -13,7 +13,9 @@ import java.util.List;
 public class ArenaLoader {
     private final int level;
 
-    public ArenaLoader(int level) {this.level = level;}
+    public ArenaLoader(int level) {
+        this.level = level;
+    }
 
     public Arena load() throws FileNotFoundException {
         Arena arena = new Arena(30, 20);
