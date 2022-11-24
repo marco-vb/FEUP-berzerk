@@ -122,7 +122,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBullet(Element model) { draw(model.getPosition().getX(), model.getPosition().getY(), '•'); }
+    public void drawBullet(Element model) { draw(model.getPosition().getX(), model.getPosition().getY(), '.'); }
 
     @Override
     public void draw(int x, int y, char c) {
