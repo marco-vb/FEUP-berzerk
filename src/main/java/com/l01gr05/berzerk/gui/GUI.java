@@ -17,7 +17,7 @@ public interface GUI {
 
     abstract void drawEnemy(Element model);
 
-    //abstract void drawBullet(Element model);
+    abstract void drawBullet(Element model);
 
     abstract void draw(int x, int y, char c);
 

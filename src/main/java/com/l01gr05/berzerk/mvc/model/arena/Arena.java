@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
+import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
