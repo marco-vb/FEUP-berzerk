@@ -1,4 +1,4 @@
-package com.l01gr05.berzerk.models.game.elements;
+package com.l01gr05.berzerk.mvc.models.game.elements;
 
 import com.l01gr05.berzerk.models.game.Position;
 
