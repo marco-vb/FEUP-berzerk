@@ -24,11 +24,12 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(20, 20);
-        this.state = new GameState(new ArenaLoader(1).load());
+        this.state = new MenuState(new MenuStart());
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
-        new Game().showStartMenu();
+        Game game = new Game();
+        game.run();
     }
 
     public void setState(State state) {
@@ -58,7 +59,6 @@ public class Game {
 
     public void startGame() throws IOException {
         this.state = new GameState(new ArenaLoader(1).load());
-        this.run();
     }
 
     public void showStartMenu() {

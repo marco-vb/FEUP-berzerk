@@ -142,13 +142,15 @@ public class LanternaGUI implements GUI {
         textGraphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         textGraphics.putString(width/2, height/2, menu.getTitle());
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+
         for (int i = 0; i < menu.getOptions().size(); i++) {
             if (i == menu.getCurrentOption()) {
                 textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
                 textGraphics.putString(width/2, height/2 + i + 1, menu.getOptions().get(i));
                 textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+            } else {
+                textGraphics.putString(width / 2, height / 2 + i + 1, menu.getOptions().get(i));
             }
-            textGraphics.putString(width/2, height/2 + i + 1, menu.getOptions().get(i));
         }
     }
 }
