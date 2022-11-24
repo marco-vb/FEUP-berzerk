@@ -24,6 +24,10 @@ public class LanternaGUI implements GUI {
     private final int width;
     private final int height;
 
+    public LanternaGUI(Screen screen) {
+        this.screen = screen;
+    }
+
     public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
         this.width = width;
         this.height = height;
