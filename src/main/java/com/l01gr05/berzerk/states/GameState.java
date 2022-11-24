@@ -1,23 +1,23 @@
 package com.l01gr05.berzerk.states;
 
 import com.l01gr05.berzerk.mvc.control.Controller;
-import com.l01gr05.berzerk.mvc.control.game.MapController;
-import com.l01gr05.berzerk.mvc.model.map.Map;
+import com.l01gr05.berzerk.mvc.control.game.ArenaController;
+import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.view.Viewer;
-import com.l01gr05.berzerk.mvc.view.game.MapViewer;
+import com.l01gr05.berzerk.mvc.view.game.ArenaViewer;
 
-public class GameState extends State<Map> {
-    public GameState(Map map) {
-        super(map);
+public class GameState extends State<Arena> {
+    public GameState(Arena arena) {
+        super(arena);
     }
 
     @Override
-    protected Controller<Map> getController() {
-        return new MapController(getModel());
+    protected Controller<Arena> getController() {
+        return new ArenaController(getModel());
     }
 
     @Override
-    protected Viewer<Map> getViewer() {
-        return new MapViewer(getModel());
+    protected Viewer<Arena> getViewer() {
+        return new ArenaViewer(getModel());
     }
 }

@@ -1,6 +1,7 @@
 package com.l01gr05.berzerk.gui;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -8,6 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.l01gr05.berzerk.mvc.model.elements.Element;
 
 import java.awt.*;
 import java.io.File;
@@ -68,5 +70,55 @@ public class LanternaGUI implements GUI {
     @Override
     public void close() throws IOException {
         screen.close();
+    }
+
+    public INPUT getInput() throws IOException {
+        KeyStroke keyStroke = screen.pollInput();
+        if (keyStroke == null) {
+            return INPUT.NONE;
+        }
+        KeyType keyType = keyStroke.getKeyType();
+
+        switch (keyType) {
+            case ArrowUp:
+                return INPUT.UP;
+            case ArrowDown:
+                return INPUT.DOWN;
+            case ArrowLeft:
+                return INPUT.LEFT;
+            case ArrowRight:
+                return INPUT.RIGHT;
+            case Escape:
+                return INPUT.QUIT;
+            case Enter:
+                return INPUT.ENTER;
+            case Character:
+                if (keyStroke.getCharacter() == ' ') {
+                    return INPUT.SHOOT;
+                }
+            default:
+                return INPUT.NONE;
+        }
+    }
+
+    @Override
+    public void drawWall(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#');
+    }
+
+    @Override
+    public void drawAgent(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'A');
+    }
+
+    @Override
+    public void drawEnemy(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'E');
+    }
+
+    @Override
+    public void draw(int x, int y, char c) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.putString(x, y, String.valueOf(c));
     }
 }

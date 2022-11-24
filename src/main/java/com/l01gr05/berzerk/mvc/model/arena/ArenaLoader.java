@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
+import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
@@ -21,12 +22,15 @@ public class ArenaLoader {
         Arena arena = new Arena(20, 20);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
+        for (String line : lines) {
+            System.out.println(line);
+        }
         setArenaElements(arena, lines);
         return arena;
     }
 
     private List<String> readArenaFile(int level) throws FileNotFoundException {
-        URL path = getClass().getResource("/map/lvl" + level + ".txt");
+        URL path = getClass().getResource("/levels/lvl" + level + ".txt");
         assert path != null;
         BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
         return level_reader.lines().toList();
@@ -34,9 +38,9 @@ public class ArenaLoader {
 
     private Element createElement(char element, int x, int y) {
         switch (element) {
-            case 'A' -> {return new Agent(x, y);}
-            case 'E' -> {return new Enemy(x, y);}
-            case 'W' -> {return new Wall(x, y);}
+            case 'A' -> {return new Agent(new Position(x, y));}
+            case 'E' -> {return new Enemy(new Position(x, y));}
+            case '#' -> {return new Wall(new Position(x, y));}
         }
         return null;
     }
@@ -44,7 +48,10 @@ public class ArenaLoader {
         for (int i = 0; i < lines.size(); i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
                 char c = lines.get(i).charAt(j);
-                if (c != '.') arena.addElement(createElement(c, j, i));
+                if (c != '.') {
+                    arena.addElement(createElement(c, j, i));
+                    System.out.println("Added element " + c + " at " + j + " " + i);
+                }
             }
         }
     }

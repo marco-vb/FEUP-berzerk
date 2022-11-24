@@ -1,13 +1,19 @@
 package com.l01gr05.berzerk.mvc.view;
 
-public abstract class Viewer<T> {
-    private final T model;
+import com.l01gr05.berzerk.gui.GUI;
 
-    public Viewer(T model) {
+import java.io.IOException;
+
+public abstract class Viewer<Model> {
+    private final Model model;
+
+    public Viewer(Model model) {
         this.model = model;
     }
 
-    public T getModel() {
+    public Model getModel() {
         return model;
     }
+
+    public abstract void draw(GUI gui) throws IOException;
 }

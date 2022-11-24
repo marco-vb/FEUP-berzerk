@@ -5,25 +5,29 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.view.Viewer;
 
-public abstract class State<T> {
-    private final T model;
-    private final Controller<T> controller;
-    private final Viewer<T> viewer;
+import java.io.IOException;
 
-    public State(T model) {
+public abstract class State<Model> {
+    private final Model model;
+    private final Controller<Model> controller;
+    private final Viewer<Model> viewer;
+
+    public State(Model model) {
         this.model = model;
         this.controller = getController();
         this.viewer = getViewer();
     }
 
-    protected abstract Controller<T> getController();
-    protected abstract Viewer<T> getViewer();
+    protected abstract Controller<Model> getController();
+    protected abstract Viewer<Model> getViewer();
 
-    public T getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void step(Game game, GUI gui) {
-
+    public void update(Game game, GUI gui) throws IOException {
+        GUI.INPUT action = gui.getInput();
+        controller.update(game, action);
+        viewer.draw(gui);
     }
 }

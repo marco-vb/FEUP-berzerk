@@ -3,16 +3,16 @@ package com.l01gr05.berzerk.mvc.control;
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 
-public abstract class Controller<T> {
-    private T model;
+public abstract class Controller<Model> {
+    private Model model;
 
-    public Controller(T model) {
+    public Controller(Model model) {
         this.model = model;
     }
 
-    public T getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public abstract void step(Game game, GUI.ACTION action);
+    public abstract void update(Game game, GUI.INPUT action);
 }
