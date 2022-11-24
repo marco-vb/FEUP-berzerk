@@ -21,6 +21,11 @@ public class MenuController extends Controller<Menu> {
         this.selectedOption = 0;
     }
 
+    @Override
+    public void update(Game game, GUI.INPUT action) throws FileNotFoundException {
+        selectOption(game, action);
+    }
+
     private void selectOption(int option) {
         selectedOption = option;
     }
@@ -45,10 +50,5 @@ public class MenuController extends Controller<Menu> {
             case 1 -> game.setState(new MenuState(menu));
             default -> game.setState(null);
         }
-    }
-
-    @Override
-    public void update(Game game, GUI.INPUT action) throws FileNotFoundException {
-        selectOption(game, action);
     }
 }
