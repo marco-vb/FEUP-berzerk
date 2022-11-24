@@ -22,9 +22,6 @@ public class ArenaLoader {
         Arena arena = new Arena(20, 20);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
-        for (String line : lines) {
-            System.out.println(line);
-        }
         setArenaElements(arena, lines);
         return arena;
     }
@@ -50,7 +47,6 @@ public class ArenaLoader {
                 char c = lines.get(i).charAt(j);
                 if (c != '.') {
                     arena.addElement(createElement(c, j, i));
-                    System.out.println("Added element " + c + " at " + j + " " + i);
                 }
             }
         }
