@@ -1,6 +1,7 @@
 package com.l01gr05.berzerk.gui;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -8,6 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.l01gr05.berzerk.mvc.model.elements.Element;
 
 import java.awt.*;
 import java.io.File;
@@ -97,5 +99,26 @@ public class LanternaGUI implements GUI {
             default:
                 return INPUT.NONE;
         }
+    }
+
+    @Override
+    public void drawWall(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '█');
+    }
+
+    @Override
+    public void drawAgent(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'A');
+    }
+
+    @Override
+    public void drawEnemy(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '☻');
+    }
+
+    @Override
+    public void draw(int x, int y, char c) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.putString(x, y, String.valueOf(c));
     }
 }

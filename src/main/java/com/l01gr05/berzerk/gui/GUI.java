@@ -1,6 +1,5 @@
 package com.l01gr05.berzerk.gui;
 
-import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 
 import java.io.IOException;
@@ -12,11 +11,15 @@ public interface GUI {
 
     INPUT getInput() throws IOException;
 
-    void drawWall(Element model);
+    abstract void drawWall(Element model);
 
-    void drawAgent(Agent model);
+    abstract void drawAgent(Element model);
 
-    void drawEnemy(Element model);
+    abstract void drawEnemy(Element model);
+
+    //abstract void drawBullet(Element model);
+
+    abstract void draw(int x, int y, char c);
 
     enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
 }
