@@ -29,7 +29,7 @@ public class MenuController extends Controller<Menu> {
         if (action == GUI.INPUT.DOWN) {
             selectOption((currentOption + 1) % numberOfOptions);
         } else if (action == GUI.INPUT.UP) {
-            selectOption((currentOption - 1) % numberOfOptions);
+            selectOption((currentOption - 1 + numberOfOptions) % numberOfOptions);
         }
         else if (action == GUI.INPUT.ENTER) {
             getModel().executeOption(game);
