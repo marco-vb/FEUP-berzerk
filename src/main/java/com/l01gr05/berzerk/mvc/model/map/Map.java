@@ -1,8 +1,8 @@
-package com.l01gr05.berzerk.models.game.map;
+package com.l01gr05.berzerk.mvc.model.map;
 
-import com.l01gr05.berzerk.models.game.elements.Agent;
-import com.l01gr05.berzerk.models.game.elements.Enemy;
-import com.l01gr05.berzerk.models.game.elements.Wall;
+import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.Enemy;
+import com.l01gr05.berzerk.mvc.model.elements.Wall;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

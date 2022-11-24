@@ -1,4 +1,4 @@
-package com.l01gr05.berzerk.models.game;
+package com.l01gr05.berzerk.mvc.model;
 
 public class Position {
     private int x;
