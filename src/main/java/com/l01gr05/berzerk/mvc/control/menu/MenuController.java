@@ -12,11 +12,13 @@ import java.io.FileNotFoundException;
 
 public class MenuController extends Controller<Menu> {
     private final Menu menu;
-    private int numOptions;
+    private final int numOptions;
     private int selectedOption;
     public MenuController(Menu menu) {
         super(menu);
         this.menu = menu;
+        this.numOptions = 3;
+        this.selectedOption = 0;
     }
 
     private void selectOption(int option) {
