@@ -14,6 +14,8 @@ public class MenuViewer extends Viewer<Menu> {
 
     @Override
     public void draw(GUI gui) throws IOException {
-
+        gui.clear();
+        gui.drawMenu(getModel());
+        gui.refresh();
     }
 }
