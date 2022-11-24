@@ -15,7 +15,7 @@ public class Arena {
     private int height;
     private int level;
     private Agent agent;
-    private Exit exit;
+    private List<Exit> exits;
     private List<Enemy> enemies;
     private List<Wall> walls;
     private List<Bullet> bullets;
@@ -26,6 +26,7 @@ public class Arena {
         this.enemies = new ArrayList<>();
         this.walls = new ArrayList<>();
         this.bullets = new ArrayList<>();
+        this.exits = new ArrayList<>();
     }
 
     public Agent getAgent() {return agent;}
@@ -52,7 +53,7 @@ public class Arena {
         if (element instanceof Agent) {
             agent = (Agent) element;
         } else if (element instanceof Exit) {
-            exit = (Exit) element;
+            exits.add((Exit) element);
         } else if (element instanceof Enemy) {
             enemies.add((Enemy) element);
         } else if (element instanceof Wall) {
@@ -67,7 +68,7 @@ public class Arena {
     public List<Element> getElements() {
         List<Element> elements = new ArrayList<>();
         elements.add(agent);
-        elements.add(exit);
+        elements.addAll(exits);
         elements.addAll(bullets);
         elements.addAll(enemies);
         elements.addAll(walls);
@@ -93,7 +94,12 @@ public class Arena {
     }
 
     public boolean isExit(Position position) {
-        return exit.getPosition().equals(position);
+        for (Exit exit : exits) {
+            if (exit.getPosition().equals(position)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isAgent(Position position) {
