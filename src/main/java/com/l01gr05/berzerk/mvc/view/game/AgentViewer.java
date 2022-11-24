@@ -11,6 +11,6 @@ public class AgentViewer extends Viewer<Agent> {
 
     @Override
     public void draw(GUI gui) {
-        // TODO
+        gui.drawAgent(getModel());
     }
 }

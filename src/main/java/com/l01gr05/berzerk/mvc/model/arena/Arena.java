@@ -67,7 +67,7 @@ public class Arena {
     }
 
     public List<Element> getElements() {
-        List<Element> elements = new ArrayList<Element>();
+        List<Element> elements = new ArrayList<>();
         elements.add(agent);
         elements.addAll(enemies);
         elements.addAll(walls);
