@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.gui;
 
+import com.googlecode.lanterna.TextColor;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
@@ -23,7 +24,7 @@ public interface GUI {
 
     abstract void drawBullet(Element model);
 
-    abstract void draw(int x, int y, char c);
+    abstract void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);
 
