@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
@@ -28,7 +29,7 @@ public class LanternaGUI implements GUI {
         this.width = width;
         this.height = height;
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        Terminal terminal = createTerminal(width, height, fontConfig);
+        Terminal terminal = createTerminal(fontConfig);
         this.screen = createScreen(terminal);
     }
 
@@ -42,8 +43,8 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
-    private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
-        TerminalSize terminalSize = new TerminalSize(width, height + 1);
+    private Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException {
+        TerminalSize terminalSize = new TerminalSize(width, height + 2);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
@@ -117,30 +118,33 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawAgent(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), 'A');
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'A', TextColor.ANSI.MAGENTA_BRIGHT);
     }
 
     @Override
     public void drawExit(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), ' ');
+        draw(model.getPosition().getX(), model.getPosition().getY(), ' ', TextColor.ANSI.WHITE);
     }
 
     @Override
     public void drawWall(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '#');
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#', TextColor.ANSI.GREEN_BRIGHT);
     }
 
     @Override
     public void drawEnemy(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), 'E');
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'E', TextColor.ANSI.RED_BRIGHT);
     }
 
     @Override
-    public void drawBullet(Element model) { draw(model.getPosition().getX(), model.getPosition().getY(), '.'); }
+    public void drawBullet(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '.', TextColor.ANSI.YELLOW_BRIGHT);
+    }
 
     @Override
-    public void draw(int x, int y, char c) {
+    public void draw(int x, int y, char c, TextColor color) {
         TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(color);
         textGraphics.putString(x, y, String.valueOf(c));
     }
 
@@ -162,5 +166,16 @@ public class LanternaGUI implements GUI {
                 textGraphics.putString(x, y + i + 1, menu.getOptions().get(i));
             }
         }
+    }
+
+    @Override
+    public void drawStats(Arena model) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+        //textGraphics.putString(0, getHeight(), "Score: " + model.getScore());
+        textGraphics.putString(0, getHeight() + 1, "Score: " + 42);
+        //textGraphics.putString(getWidth()/2 - 4, getHeight() + 1, "Lives: " + );
+        // draw 3 lives as hearts
+        textGraphics.putString(getWidth() - 15, getHeight() + 1, "Lives: <3 <3 <3");
     }
 }

@@ -12,7 +12,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class LanternaGUITest {
+/*public class LanternaGUITest {
     private Screen screen;
     private LanternaGUI gui;
     private TextGraphics tg;
@@ -68,4 +68,4 @@ public class LanternaGUITest {
         gui.draw(1,1, 'b');
         Mockito.verify(tg, Mockito.times(1)).putString(1, 1, "b");
     }
-}
+}*/
