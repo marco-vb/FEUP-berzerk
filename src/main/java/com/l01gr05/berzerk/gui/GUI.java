@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.gui;
 
+import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
@@ -25,6 +26,8 @@ public interface GUI {
     abstract void draw(int x, int y, char c);
 
     void drawMenu(Menu menu);
+
+    void drawStats(Arena model);
 
     enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
 }

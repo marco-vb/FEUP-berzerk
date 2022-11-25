@@ -20,6 +20,11 @@ public class ArenaViewer extends Viewer<Arena> {
         for (Element element : elements) {
             element.getViewer().draw(gui);
         }
+        drawStats(gui);
         gui.refresh();
+    }
+
+    public void drawStats(GUI gui) {
+        gui.drawStats(getModel());
     }
 }

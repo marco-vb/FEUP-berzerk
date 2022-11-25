@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
@@ -136,7 +137,9 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBullet(Element model) { draw(model.getPosition().getX(), model.getPosition().getY(), '.'); }
+    public void drawBullet(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), '.');
+    }
 
     @Override
     public void draw(int x, int y, char c) {
@@ -162,5 +165,16 @@ public class LanternaGUI implements GUI {
                 textGraphics.putString(x, y + i + 1, menu.getOptions().get(i));
             }
         }
+    }
+
+    @Override
+    public void drawStats(Arena model) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+        //textGraphics.putString(0, getHeight(), "Score: " + model.getScore());
+        textGraphics.putString(0, getHeight(), "Score: " + 42);
+        //textGraphics.putString(getWidth()/2 - 4, getHeight() + 1, "Lives: " + );
+        // draw 3 lives as hearts
+        textGraphics.putString(getWidth()/2 - 4, getHeight(), "Lives: " + "<3 <3 <3");
     }
 }
