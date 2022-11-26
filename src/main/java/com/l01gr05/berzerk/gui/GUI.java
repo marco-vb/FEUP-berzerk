@@ -14,17 +14,17 @@ public interface GUI {
 
     INPUT getInput() throws IOException;
 
-    abstract void drawAgent(Element model);
+    void drawAgent(Element model);
 
-    abstract void drawExit(Element model);
+    void drawExit(Element model);
 
-    abstract void drawWall(Element model);
+    void drawWall(Element model);
 
-    abstract void drawEnemy(Element model);
+    void drawEnemy(Element model);
 
-    abstract void drawBullet(Element model);
+    void drawBullet(Element model);
 
-    abstract void draw(int x, int y, char c, TextColor color);
+    void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);
 
