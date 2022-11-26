@@ -2,8 +2,11 @@
 
 ### Introdução
 
-	O Agente Anthony é um curioso detetive que pretende descobrir os maiores e mais bem guardados segredos mundo! Para tal, decide infiltrar-se no mais enigmático local do mundo: a Area 51. O que Anthony não sabia era que lhe esperavam guardas robots implacavéis, feitos para exterminar qualquer intruso!
-	Neste jogo serás o Agente A. e o teu objetivo é encontrar o caminho de saída de cada uma das salas da Area 51. Mas cuidado! Os robots estão à tua procura, e vão tentar impedir-te de suceder! Podes disparar contra eles para os eliminares, mas eles também estão armados, e dispararão de volta. Além disso, as paredes da sala são feitas de Koli, uma anti-matéria alienígena super secreta que faz com que qualquer entidade da Terra, pessoa ou máquina, se desintegre ao seu toque, por isso mantém-te longe das paredes no teu caminho para a saída!
+	O Agente Anthony é um curioso detetive que pretende descobrir os maiores e mais bem guardados segredos mundo! Para tal, decide infiltrar-se no mais enigmático local do mundo: 
+    a Area 51. O que Anthony não sabia era que lhe esperavam guardas robots implacavéis, feitos para exterminar qualquer intruso!
+	Neste jogo serás o Agente A. e o teu objetivo é encontrar o caminho de saída de cada uma das salas da Area 51. Mas cuidado! Os robots estão à tua procura, e vão tentar impedir-te 
+    de suceder! Podes disparar contra eles para os eliminares, mas eles também estão armados, e dispararão de volta. Além disso, as paredes da sala são feitas de Koli, uma anti-matéria 
+    alienígena super secreta que faz com que qualquer entidade da Terra, pessoa ou máquina, se desintegre ao seu toque, por isso mantém-te longe das paredes no teu caminho para a saída!
 	Este jogo é inspirado no Berzerk, mas com mais elementos de interação. O Berzerk é um jogo para a Atari 2600 que tem como principal objetivo a saída de uma sala repleta de monstros.
 	
 	Este projeto foi desenvolvido por Duarte Gonçalves (up202108772@up.pt), Gonçalo Miranda (up202108773@up.pt) e Marco Vilas Boas (up202108774@up.pt).
@@ -40,7 +43,7 @@ As seguintes funcionalidades foram implementadas:
 **Pattern:** Para resolver este problema usamos o pattern State. Implementamos uma abstract class State, e as classes MenuState e GameState, que implementam o método update() de forma diferente. O método update() é chamado a cada frame, e é responsável por desenhar o estado atual do jogo.
 
 **Implementação:** O seguinte diagrama mostra a implementação do pattern State no nosso projeto:
-<img src="state.png"/>
+<img src="snippets/state.png"/>
 
 **Consequências:** Este pattern permite-nos desenhar a GUI de forma diferente consoante o estado do jogo, e permite-nos adicionar mais estados ao jogo sem ter de alterar a GUI.
 
@@ -50,33 +53,36 @@ As seguintes funcionalidades foram implementadas:
 **Pattern:** Usamos o pattern Factory Method. Implementamos uma abstract class Element, e as classes Agent, Wall, Robot e Shot, que a implementam. Assim conseguimos tratar tudo como se de um Element se tratasse, e adicionar novos elementos ao jogo sem ter de alterar o código.
 
 **Implementação:** O seguinte diagrama mostra a implementação do pattern Factory Method no nosso projeto:
-<img src="factory.png"/>
+<img src="snippets/factory.png"/>
 
 **Consequências:** Este pattern permite-nos tratar todos os elementos como se de um Element se tratasse, e adicionar novos elementos ao jogo sem ter de alterar o código.
 
 ### 'Code smells' e oportunidades de 'refactoring'
 #### MenuSettings executeOption()
 **Problema:** O método executeOption() da classe MenuSettings está programado para mostrar o menu inicial quando se escolhe a opção "Back", assumindo que este menu é sempre chamado a partir do menu inicial.
-<img src="MenuSettingsSnippet.png"/>
+<img src="snippets/MenuSettingsSnippet.png"/>
+
 
 **Refactoring:** Devemos criar um método que mostre o menu anterior, e chamar esse método quando se escolhe a opção "Back".
 
 #### Adicionar os disparos
 **Problema:** O método addElement() não adiciona os disparos à lista de elementos.
-<img src="AddElementsSnippet.png"/>
+<img src="snippets/AddElementsSnippet.png"/>
+
 
 **Refactoring:** Deviamos adicionar os disparos aos Elements junto com os outros elementos, adicionando bullets.add(bullet) ao if statement.
 
 #### DrawMenu é demasiado longo
 **Problema:** O método drawMenu() na classe LanternaGUI é demasiado longo.
-<img src="DrawMenuSnippet.png"/>
+<img src="snippets/DrawMenuSnippet.png"/>
+
 
 **Refactoring:** Deviamos dividir este metodo em dois, drawTitle() e drawOptions(), para tornar o código mais legível.
 
 ### Testing
 #### Testes de unidade
-<img src="UnitTesting.png"/>
-<img src="MutationTesting.png"/>
+<img src="snippets/UnitTesting.png"/>
+<img src="snippets/MutationTesting.png"/>
 
 ### Auto-avaliação
 Gonçalo: 33%
