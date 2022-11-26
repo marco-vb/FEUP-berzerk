@@ -36,7 +36,16 @@ public class Position {
     }
 
     public Position getRandom() {
-        return new Position(x + (int) (Math.random() * 3) - 1, y + (int) (Math.random() * 3) - 1);
+        int new_x = x;
+        int new_y = y;
+        while (new_x == x) {
+            new_x += (int) (Math.random() * 3) - 1;
+        }
+        while (new_y == y) {
+            new_y += (int) (Math.random() * 3) - 1;
+        }
+
+        return new Position(new_x, new_y);
     }
 
     @Override
