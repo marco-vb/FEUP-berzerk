@@ -34,41 +34,51 @@ As seguintes funcionalidades foram implementadas:
 - [ ] 3.4. Sistema de score: O jogador ganha pontos quando mata um robot e quando ganha um nível.
 
 ### Design
-#### GUI drawing should be different according to the game state
-**Problem:** If the game is still in menu, the GUI should "list" the options, but if the game is in playing state, the GUI should show the arena and its elements.
+#### A GUI deve 'desenhar' de forma diferente conforme o estado do jogo
+**Problema:** Se o jogo está em estado de menu, a GUI deve desenhar o menu. Se o jogo está em estado de jogo, a GUI deve desenhar a arena e os respetivos elementos, o score e as vidas.
 
-**Pattern:** We used the State pattern to solve this problem. We implemented a State abstract class, and classes MenuState and GameState that implement the update() method accordingly, allowing us to use the same GUI class for both states.
+**Pattern:** Para resolver este problema usamos o pattern State. Implementamos uma abstract class State, e as classes MenuState e GameState, que implementam o método update() de forma diferente. O método update() é chamado a cada frame, e é responsável por desenhar o estado atual do jogo.
 
-**Implementation:** The following diagram shows the implementation of the State pattern in our project:
+**Implementação:** O seguinte diagrama mostra a implementação do pattern State no nosso projeto:
 <img src="state.png"/>
 
-**Consequences:** This pattern allows us to have a single GUI class that can be used for both states, and also allows us to easily add new states in the future.
+**Consequências:** Este pattern permite-nos desenhar a GUI de forma diferente consoante o estado do jogo, e permite-nos adicionar mais estados ao jogo sem ter de alterar a GUI.
 
-#### All elements behave and are drawn similarly, but have different properties
-**Problem:** The agent, the walls, the robots and the bullets are all drawn in the arena and behave similarly, just have different properties, such as ability to move, ability to shoot, etc. We needed a way to represent all of these elements in a single class.
+#### Todos os elementos se comportam de forma semelhante, mas com propriedades diferentes
+**Problema:** O agente, as paredes, os robots e os disparos são todos parte da arena e comportam-se de forma semelhante, mas têm propriedades diferentes, como o movimento e a abilidade de disparar. Precisavamos de uma maneira de representar todos estes elementos de forma a que fosse fácil adicionar novos elementos ao jogo.
 
-**Pattern:** We used the Factory pattern to solve this problem. We implemented an Element abstract class, and classes Agent, Wall, Enemy and Bullet that extend it. This way we can treat every element in the same way, but also have different properties for each element.
+**Pattern:** Usamos o pattern Factory Method. Implementamos uma abstract class Element, e as classes Agent, Wall, Robot e Shot, que a implementam. Assim conseguimos tratar tudo como se de um Element se tratasse, e adicionar novos elementos ao jogo sem ter de alterar o código.
 
-**Implementation:** The following diagram shows the implementation of the Factory pattern in our project:
+**Implementação:** O seguinte diagrama mostra a implementação do pattern Factory Method no nosso projeto:
 <img src="factory.png"/>
 
-**Consequences:** This pattern allows us to have a single class that can represent all elements, and also allows us to easily add new elements in the future. This is especially useful for reading the levels from a file, since we can just read the characters and create the corresponding elements.
+**Consequências:** Este pattern permite-nos tratar todos os elementos como se de um Element se tratasse, e adicionar novos elementos ao jogo sem ter de alterar o código.
 
-### Code smells and refactoring opportunities
-#### MenuSettings executeOption() method
-**Problem:** The executeOption() method in the MenuSettings class is showing the StartMenu when option 2 is chosen.
+### 'Code smells' e oportunidades de 'refactoring'
+#### MenuSettings executeOption()
+**Problema:** O método executeOption() da classe MenuSettings está programado para mostrar o menu inicial quando se escolhe a opção "Back", assumindo que este menu é sempre chamado a partir do menu inicial.
 <img src="MenuSettingsSnippet.png"/>
 
-**Refactoring:** We should create a method to show the previous menu, in case we add a menu between the starting one and the settings one.
+**Refactoring:** Devemos criar um método que mostre o menu anterior, e chamar esse método quando se escolhe a opção "Back".
 
-### Add elements and bullets
-**Problem:** The addElement() method in the Arena class is not adding bullets to the arena.
+#### Adicionar os disparos
+**Problema:** O método addElement() não adiciona os disparos à lista de elementos.
 <img src="AddElementsSnippet.png"/>
 
-**Refactoring:** We should add a case for the bullet element in the if statements instead of having a separate method to do so.
+**Refactoring:** Deviamos adicionar os disparos aos Elements junto com os outros elementos, adicionando bullets.add(bullet) ao if statement.
 
-### DrawMenu method is too long
-**Problem:** The drawMenu() method in the LanternaGUI class is too long.
+#### DrawMenu é demasiado longo
+**Problema:** O método drawMenu() na classe LanternaGUI é demasiado longo.
 <img src="DrawMenuSnippet.png"/>
 
-**Refactoring:** We should split this method into the call of two methods, drawTitle() and drawOptions(), to make it more readable.
+**Refactoring:** Deviamos dividir este metodo em dois, drawTitle() e drawOptions(), para tornar o código mais legível.
+
+### Testing
+#### Testes de unidade
+<img src="UnitTesting.png"/>
+<img src="MutationTesting.png"/>
+
+### Auto-avaliação
+Gonçalo: 33%
+Duarte: 33%
+Marco: 33%
