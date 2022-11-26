@@ -66,6 +66,7 @@ As seguintes funcionalidades foram implementadas:
 #### MenuSettings executeOption()
 **Problema:** O método executeOption() da classe MenuSettings está programado para mostrar o menu inicial 
 quando se escolhe a opção "Back", assumindo que este menu é sempre chamado a partir do menu inicial.
+
 <img src="snippets/MenuSettingsSnippet.png"/>
 
 
