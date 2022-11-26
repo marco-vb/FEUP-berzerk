@@ -66,6 +66,7 @@ As seguintes funcionalidades foram implementadas:
 #### MenuSettings executeOption()
 **Problema:** O método executeOption() da classe MenuSettings está programado para mostrar o menu inicial 
 quando se escolhe a opção "Back", assumindo que este menu é sempre chamado a partir do menu inicial.
+
 <img src="snippets/MenuSettingsSnippet.png"/>
 
 
@@ -87,7 +88,11 @@ quando se escolhe a opção "Back", assumindo que este menu é sempre chamado a 
 
 ### Testing
 #### Testes de unidade
+Todos os testes realizados passam, mas ainda falta implementar alguns testes.
 <img src="snippets/UnitTesting.png"/>
+
+### Testes de mutação
+Falta atingir uma maior coverage de código!
 <img src="snippets/MutationTesting.png"/>
 
 ### Auto-avaliação
