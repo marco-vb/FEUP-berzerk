@@ -60,3 +60,15 @@ As seguintes funcionalidades foram implementadas:
 <img src="MenuSettingsSnippet.png"/>
 
 **Refactoring:** We should create a method to show the previous menu, in case we add a menu between the starting one and the settings one.
+
+### Add elements and bullets
+**Problem:** The addElement() method in the Arena class is not adding bullets to the arena.
+<img src="AddElementsSnippet.png"/>
+
+**Refactoring:** We should add a case for the bullet element in the if statements instead of having a separate method to do so.
+
+### DrawMenu method is too long
+**Problem:** The drawMenu() method in the LanternaGUI class is too long.
+<img src="DrawMenuSnippet.png"/>
+
+**Refactoring:** We should split this method into the call of two methods, drawTitle() and drawOptions(), to make it more readable.
