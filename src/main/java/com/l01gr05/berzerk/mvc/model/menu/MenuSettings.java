@@ -12,9 +12,9 @@ public class MenuSettings extends Menu {
     @Override
     public void executeOption(Game game) {
         switch (getCurrentOption()) {
-            case 0 -> game.toggleMusic();
-            case 1 -> game.toggleSound();
-            case 2 -> game.showStartMenu();
+            case 0: game.toggleMusic(); break;
+            case 1: game.toggleSound(); break;
+            case 2: game.showStartMenu(); break;
         }
     }
 }

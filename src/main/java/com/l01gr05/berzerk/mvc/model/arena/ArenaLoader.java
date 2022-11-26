@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArenaLoader {
     private final int level;
@@ -29,15 +30,15 @@ public class ArenaLoader {
         URL path = getClass().getResource("/levels/lvl" + level + ".txt");
         assert path != null;
         BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
-        return level_reader.lines().toList();
+        return level_reader.lines().collect(Collectors.toList());
     }
 
     private Element createElement(char element, int x, int y) {
         switch (element) {
-            case 'A' -> {return new Agent(new Position(x, y));}
-            case 'X' -> {return new Exit(new Position(x, y));}
-            case 'E' -> {return new Enemy(new Position(x, y));}
-            case '#' -> {return new Wall(new Position(x, y));}
+            case 'A': return new Agent(new Position(x, y));
+            case 'X': return new Exit(new Position(x, y));
+            case 'E': return new Enemy(new Position(x, y));
+            case '#': return new Wall(new Position(x, y));
         }
         return null;
     }

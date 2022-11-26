@@ -14,9 +14,9 @@ public class MenuStart extends Menu {
     @Override
     public void executeOption(Game game) throws IOException {
         switch (getCurrentOption()) {
-            case 0 -> game.startGame();
-            case 1 -> game.showSettings();
-            case 2 -> game.exit();
+            case 0: game.startGame(); break;
+            case 1: game.showSettings(); break;
+            case 2: game.exit(); break;
         }
     }
 }
