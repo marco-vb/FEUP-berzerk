@@ -34,4 +34,29 @@ As seguintes funcionalidades foram implementadas:
 - [ ] 3.4. Sistema de score: O jogador ganha pontos quando mata um robot e quando ganha um nível.
 
 ### Design
-#### 
+#### GUI drawing should be different according to the game state
+**Problem:** If the game is still in menu, the GUI should "list" the options, but if the game is in playing state, the GUI should show the arena and its elements.
+
+**Pattern:** We used the State pattern to solve this problem. We implemented a State abstract class, and classes MenuState and GameState that implement the update() method accordingly, allowing us to use the same GUI class for both states.
+
+**Implementation:** The following diagram shows the implementation of the State pattern in our project:
+<img src="state.png"/>
+
+**Consequences:** This pattern allows us to have a single GUI class that can be used for both states, and also allows us to easily add new states in the future.
+
+#### All elements behave and are drawn similarly, but have different properties
+**Problem:** The agent, the walls, the robots and the bullets are all drawn in the arena and behave similarly, just have different properties, such as ability to move, ability to shoot, etc. We needed a way to represent all of these elements in a single class.
+
+**Pattern:** We used the Factory pattern to solve this problem. We implemented an Element abstract class, and classes Agent, Wall, Enemy and Bullet that extend it. This way we can treat every element in the same way, but also have different properties for each element.
+
+**Implementation:** The following diagram shows the implementation of the Factory pattern in our project:
+<img src="factory.png"/>
+
+**Consequences:** This pattern allows us to have a single class that can represent all elements, and also allows us to easily add new elements in the future. This is especially useful for reading the levels from a file, since we can just read the characters and create the corresponding elements.
+
+### Code smells and refactoring opportunities
+#### MenuSettings executeOption() method
+**Problem:** The executeOption() method in the MenuSettings class is showing the StartMenu when option 2 is chosen.
+<img src="MenuSettingsSnippet.png"/>
+
+**Refactoring:** We should create a method to show the previous menu, in case we add a menu between the starting one and the settings one.
