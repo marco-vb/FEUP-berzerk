@@ -41,6 +41,10 @@ As seguintes funcionalidades foram implementadas:
 - [ ] 3.3. Sistema de vidas: O jogador tem um número limitado de vidas, e perde uma vida quando colide com um robot, com uma parede ou com um disparo de robot.
 - [ ] 3.4. Sistema de score: O jogador ganha pontos quando mata um robot e quando ganha um nível.
 
+### Diagrama UML
+Neste diagrama UML, podemos ver as classes que foram implementadas e como se relacionam entre si.
+<img src="mockups/UML.png">
+
 ### Design
 #### A GUI deve 'desenhar' de forma diferente conforme o estado do jogo
 **Problema:** Se o jogo está em estado de menu, a GUI deve desenhar o menu. Se o jogo está em estado de jogo, a GUI deve desenhar a arena e os respetivos elementos, o score e as vidas.
