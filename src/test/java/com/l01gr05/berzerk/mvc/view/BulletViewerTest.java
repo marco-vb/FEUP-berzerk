@@ -4,6 +4,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
 import com.l01gr05.berzerk.mvc.model.elements.Bullet;
 import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
 import com.l01gr05.berzerk.mvc.view.game.BulletViewer;
@@ -19,7 +20,7 @@ public class BulletViewerTest {
 
     @BeforeEach
     void setUp()  {
-        this.bullet= new Bullet(new Position(10,10), 'N');
+        this.bullet= new AgentBullet(new Position(10,10), 'N');
         bulletViewer = new BulletViewer(bullet);
         gui = Mockito.mock(GUI.class);
     }
