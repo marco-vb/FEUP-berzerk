@@ -36,6 +36,7 @@ public class BulletController extends Controller<Arena> {
                     getModel().removeEnemy(getModel().getEnemies().get(i));
                 }
             }
+            getModel().getAgent().setScore(getModel().getAgent().getScore() + 10);
         }
 
         else bullet.setPosition(position);

@@ -175,7 +175,7 @@ public class LanternaGUI implements GUI {
         textGraphics.putString(0, getHeight() + 1, "Score: " + model.getScore());
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < model.getLives(); i++)
-            lives.append("♥");
+            lives.append("A");
         textGraphics.putString(getWidth() - 10, getHeight() + 1, "Lives: " + lives);
     }
 }
