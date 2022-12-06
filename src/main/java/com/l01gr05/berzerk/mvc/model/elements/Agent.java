@@ -48,4 +48,8 @@ public class Agent extends Element {
     public Position getInitialPosition() {
         return initialPosition;
     }
+
+    public boolean isDead() {
+        return lives == 0;
+    }
 }

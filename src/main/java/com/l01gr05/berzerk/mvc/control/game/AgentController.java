@@ -53,9 +53,7 @@ public class AgentController extends Controller<Arena> {
         Agent agent = getModel().getAgent();
         if (getModel().isWall(position) || getModel().isEnemy(position)) {
             agent.setLives(agent.getLives() - 1);
-            if (agent.getLives() <= 0) {
-                game.showStartMenu();
-            }
+            if (agent.isDead()) game.showStartMenu();
             agent.setPosition(agent.getInitialPosition());
         } else if (getModel().isExit(position)) {
             agent.setScore(agent.getScore() + 100);

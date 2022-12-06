@@ -5,8 +5,7 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Bullet;
-import com.l01gr05.berzerk.mvc.model.elements.Enemy;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 
 public class BulletController extends Controller<Arena> {
     public BulletController(Arena arena) {
@@ -39,6 +38,16 @@ public class BulletController extends Controller<Arena> {
             getModel().getAgent().setScore(getModel().getAgent().getScore() + 10);
         }
 
-        else bullet.setPosition(position);
+        else if (getModel().isAgent(position) && bullet instanceof EnemyBullet) {
+            Agent agent = getModel().getAgent();
+            getModel().removeBullet(bullet);
+            agent.setLives(getModel().getAgent().getLives() - 1);
+            if (agent.isDead()) getModel().getGame().showStartMenu();
+            agent.setPosition(getModel().getAgent().getInitialPosition());
+        }
+
+        else {
+            bullet.setPosition(position);
+        }
     }
 }

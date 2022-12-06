@@ -58,7 +58,7 @@ public class Game {
     }
 
     public void startGame() throws IOException {
-        this.state = new GameState(new ArenaLoader(1).load());
+        this.state = new GameState(new ArenaLoader(1, this).load());
     }
 
     public void showStartMenu() {
