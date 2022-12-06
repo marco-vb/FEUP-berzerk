@@ -172,10 +172,10 @@ public class LanternaGUI implements GUI {
     public void drawStats(Arena model) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        //textGraphics.putString(0, getHeight(), "Score: " + model.getScore());
-        textGraphics.putString(0, getHeight() + 1, "Score: " + 42);
-        //textGraphics.putString(getWidth()/2 - 4, getHeight() + 1, "Lives: " + );
-        // draw 3 lives as hearts
-        textGraphics.putString(getWidth() - 15, getHeight() + 1, "Lives: <3 <3 <3");
+        textGraphics.putString(0, getHeight() + 1, "Score: " + model.getScore());
+        StringBuilder lives = new StringBuilder();
+        for (int i = 0; i < model.getLives(); i++)
+            lives.append("A");
+        textGraphics.putString(getWidth() - 10, getHeight() + 1, "Lives: " + lives);
     }
 }

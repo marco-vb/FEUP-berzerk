@@ -25,7 +25,7 @@ public class EnemyController extends Controller<Arena> {
         }
 
         if (getModel().isAgent(position)) {
-            game.setState(null);
+            //game.setState(null);
         }
     }
 

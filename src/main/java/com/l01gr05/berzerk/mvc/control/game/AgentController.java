@@ -20,6 +20,7 @@ public class AgentController extends Controller<Arena> {
         if (action == GUI.INPUT.LEFT) moveLeft(game);
         if (action == GUI.INPUT.RIGHT) moveRight(game);
         if (action == GUI.INPUT.SHOOT) shoot();
+        if (action == GUI.INPUT.NONE) move(getModel().getAgent().getPosition(), game);
     }
 
     private void moveUp(Game game) {
@@ -50,11 +51,14 @@ public class AgentController extends Controller<Arena> {
     private void move(Position position, Game game) {
         Agent agent = getModel().getAgent();
         if (getModel().isWall(position) || getModel().isEnemy(position)) {
-            game.setState(null);
+            agent.setLives(agent.getLives() - 1);
+            if (agent.getLives() <= 0) {
+                game.showStartMenu();
+            }
+            agent.setPosition(agent.getInitialPosition());
         } else if (getModel().isExit(position)) {
+            agent.setScore(agent.getScore() + 100);
             game.showStartMenu();
-        //} else if (getModel().isBullet(position)) {
-            //game.setState(null);
         } else {
             agent.setPosition(position);
         }
