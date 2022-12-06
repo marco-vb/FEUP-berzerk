@@ -11,7 +11,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Element;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
 import java.awt.*;
@@ -138,7 +138,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawBullet(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '.', TextColor.ANSI.YELLOW_BRIGHT);
+        TextColor color = model instanceof AgentBullet ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.RED;
+        draw(model.getPosition().getX(), model.getPosition().getY(), '.', color);
     }
 
     @Override
