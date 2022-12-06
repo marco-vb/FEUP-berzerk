@@ -21,7 +21,7 @@ public class ArenaLoader {
     }
 
     public Arena load() throws IOException {
-        Arena arena = new Arena(31, 19, level, game);
+        Arena arena = new Arena(Game.WIDTH, Game.HEIGHT, level, game);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
@@ -41,15 +41,14 @@ public class ArenaLoader {
         URL path = getClass().getResource("/levels/lvlaux.txt");
         assert path != null;
         BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
-        char[][] grid = new char[19][31];
+        char[][] grid = new char[Game.HEIGHT][Game.WIDTH];
         createWalls(grid);
         createExit(grid);
-        createRandomBoxes(grid);
         createRandomEnemies(grid);
         //createRandomPowerUps(grid);
         spawnPlayer(grid);
-        for (int i = 0; i <= 18; i++) {
-            for (int j = 0; j <= 30; j++) {
+        for (int i = 0; i < Game.HEIGHT; i++) {
+            for (int j = 0; j < Game.WIDTH; j++) {
                 level_writer.write(grid[i][j]);
             }
             level_writer.write("\n");
@@ -71,12 +70,31 @@ public class ArenaLoader {
         grid [1][1] = 'E';
     }
 
-    private void createRandomBoxes(char[][] grid) {
-        int dx[] = {6, 6, 12, 12, 18, 18, 24, 24};
-        int dy[] = {6, 12, 6, 12, 6, 12, 6, 12};
-        int wall_size = 6;
+    private void createWalls(char[][] grid) {
+        for (int i = 0; i < Game.HEIGHT; i++) {
+            for (int j = 0; j < Game.WIDTH; j++) {
+                if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
+                else grid[i][j] = ' ';
+            }
+        }
 
+        int x_offset = (Game.WIDTH - 6) / 5;
+        int y_offset = (Game.HEIGHT - 4) / 3;
+        int dx[] = new int[8];
+        int dy[] = new int[8];
         for (int i = 0; i < 8; i++) {
+            dx[i] = (i/2+1) * (x_offset+1);
+            dy[i] = (i % 2 == 0) ? y_offset + 1 : 2 * y_offset + 2;
+        }
+
+        // Makes 8 central pillars of the arena
+        for (int i = 0; i < 8; i++) grid[dy[i]][dx[i]] = '#';
+
+        createRandomWalls(grid, dx, dy);
+    }
+
+    private void createRandomWalls(char[][] grid, int[] dx, int[] dy) {
+        for (int i = 0; i < dx.length; i++) {
             int x = dx[i];
             int y = dy[i];
             char[] directions = {'N', 'S', 'E', 'W'};
@@ -93,23 +111,6 @@ public class ArenaLoader {
                 x += new_x;
                 y += new_y;
             }
-        }
-    }
-
-    private void createWalls(char[][] grid) {
-        for (int i = 0; i <= 18; i++) {
-            for (int j = 0; j <= 30; j++) {
-                if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
-                else grid[i][j] = ' ';
-            }
-        }
-
-        int dx[] = {6, 6, 12, 12, 18, 18, 24, 24};
-        int dy[] = {6, 12, 6, 12, 6, 12, 6, 12};
-
-        // Makes 8 central pillars of the arena
-        for (int i = 0; i < 8; i++) {
-            grid[dy[i]][dx[i]] = '#';
         }
     }
 

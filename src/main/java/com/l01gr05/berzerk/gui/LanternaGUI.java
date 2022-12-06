@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
@@ -24,10 +25,12 @@ public class LanternaGUI implements GUI {
     private final Screen screen;
     private final int width;
     private final int height;
+    private final Game game;
 
-    public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
+    public LanternaGUI(int width, int height, Game game) throws IOException, URISyntaxException, FontFormatException {
         this.width = width;
         this.height = height;
+        this.game = game;
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(fontConfig);
         this.screen = createScreen(terminal);
@@ -173,9 +176,9 @@ public class LanternaGUI implements GUI {
     public void drawStats(Arena model) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        textGraphics.putString(0, getHeight() + 1, "Score: " + model.getScore());
+        textGraphics.putString(0, getHeight() + 1, "Score: " + game.getScore());
         StringBuilder lives = new StringBuilder();
-        for (int i = 0; i < model.getLives(); i++)
+        for (int i = 0; i < game.getLives(); i++)
             lives.append("A");
         textGraphics.putString(getWidth() - 10, getHeight() + 1, "Lives: " + lives);
     }

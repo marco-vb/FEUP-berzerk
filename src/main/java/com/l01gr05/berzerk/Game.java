@@ -1,8 +1,6 @@
 package com.l01gr05.berzerk;
 
-import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.gui.LanternaGUI;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
 import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
@@ -11,20 +9,24 @@ import com.l01gr05.berzerk.states.MenuState;
 import com.l01gr05.berzerk.states.State;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 public class Game {
+    public static final int WIDTH = 31;
+    public static final int HEIGHT = 19;
+    private int level;
+    private int score;
+    private int lives;
     private final LanternaGUI gui;
     private State state;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.gui = new LanternaGUI(31, 19);
+        this.gui = new LanternaGUI(WIDTH, HEIGHT, this);
         this.state = new MenuState(new MenuStart());
+        this.level = 1;
+        this.score = 0;
+        this.lives = 3;
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
@@ -34,6 +36,26 @@ public class Game {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void decreaseLives() {
+        this.lives--;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public boolean isGameOver() {
+        return lives == 0;
     }
 
     private void run() throws IOException {
@@ -58,7 +80,16 @@ public class Game {
     }
 
     public void startGame() throws IOException {
+        this.score = 0;
+        this.lives = 3;
+        this.level = 1;
         this.state = new GameState(new ArenaLoader(1, this).load());
+    }
+
+    public void nextLevel() throws IOException {
+        this.level++;
+        this.score += 100;
+        this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
 
     public void showStartMenu() {

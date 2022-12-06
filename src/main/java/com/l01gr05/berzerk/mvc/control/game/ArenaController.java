@@ -5,6 +5,8 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 
+import java.io.IOException;
+
 public class ArenaController extends Controller<Arena> {
     private final AgentController agentController;
     private final EnemyController enemyController;
@@ -19,7 +21,7 @@ public class ArenaController extends Controller<Arena> {
     }
 
     @Override
-    public void update(Game game, GUI.INPUT action) {
+    public void update(Game game, GUI.INPUT action) throws IOException {
         if (action == GUI.INPUT.QUIT) {
             game.setState(null);
 

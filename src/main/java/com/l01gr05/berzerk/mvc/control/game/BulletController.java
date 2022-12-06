@@ -15,15 +15,15 @@ public class BulletController extends Controller<Arena> {
     public void update(Game game, GUI.INPUT action) {
        for (int i = 0; i < getModel().getBullets().size(); i++) {
            Bullet bullet = getModel().getBullets().get(i);
-           if (bullet.getDirection() == 'N') move(bullet, bullet.getPosition().getUp());
-           if (bullet.getDirection() == 'S') move(bullet, bullet.getPosition().getDown());
-           if (bullet.getDirection() == 'W') move(bullet, bullet.getPosition().getLeft());
-           if (bullet.getDirection() == 'E') move(bullet, bullet.getPosition().getRight());
+           if (bullet.getDirection() == 'N') move(bullet, bullet.getPosition().getUp(), game);
+           if (bullet.getDirection() == 'S') move(bullet, bullet.getPosition().getDown(), game);
+           if (bullet.getDirection() == 'W') move(bullet, bullet.getPosition().getLeft(), game);
+           if (bullet.getDirection() == 'E') move(bullet, bullet.getPosition().getRight(), game);
        }
 
     }
 
-    private void move(Bullet bullet, Position position) {
+    private void move(Bullet bullet, Position position, Game game) {
         if (getModel().isWall(position)) {
             getModel().removeBullet(bullet);
         }
@@ -35,15 +35,15 @@ public class BulletController extends Controller<Arena> {
                     getModel().removeEnemy(getModel().getEnemies().get(i));
                 }
             }
-            getModel().getAgent().setScore(getModel().getAgent().getScore() + 10);
+            game.setScore(game.getScore() + 10);
         }
 
         else if (getModel().isAgent(position) && bullet instanceof EnemyBullet) {
             Agent agent = getModel().getAgent();
             getModel().removeBullet(bullet);
-            agent.setLives(getModel().getAgent().getLives() - 1);
-            if (agent.isDead()) getModel().getGame().showStartMenu();
-            agent.setPosition(getModel().getAgent().getInitialPosition());
+            game.decreaseLives();
+            if (game.isGameOver()) getModel().getGame().showStartMenu();
+            agent.setPosition(agent.getInitialPosition());
         }
 
         else {
