@@ -33,7 +33,7 @@ public class BulletControllerTest {
     @BeforeEach
     void setUp() throws IOException, URISyntaxException, FontFormatException {
         game = Mockito.mock(Game.class);
-        arena = new ArenaLoader(1).load();
+        arena = new ArenaLoader(1, game).load();
         game.setState(new GameState(arena));
         exit = new Exit(new Position(9, 9));
         arena.addElement(exit);

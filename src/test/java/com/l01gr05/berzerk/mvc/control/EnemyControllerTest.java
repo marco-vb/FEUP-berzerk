@@ -29,7 +29,7 @@ public class EnemyControllerTest {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
         enemy = new Enemy(new Position(1, 1));
-        arena = new Arena(10, 10);
+        arena = new Arena(10, 10, game);
         exit = new Exit(new Position(9, 9));
         arena.addElement(enemy);
         arena.addElement(agent);

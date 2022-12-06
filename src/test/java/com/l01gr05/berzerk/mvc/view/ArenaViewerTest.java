@@ -28,7 +28,8 @@ public class ArenaViewerTest {
 
     @BeforeEach
     void setUp()  {
-        this.arena = new Arena(10,10);
+        Game game = Mockito.mock(Game.class);
+        this.arena = new Arena(10,10, game);
         agent = new Agent(new Position(1, 1));
         enemy = new Enemy(new Position(1, 1));
         exit = new Exit(new Position(9, 9));

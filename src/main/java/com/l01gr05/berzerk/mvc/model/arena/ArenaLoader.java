@@ -5,9 +5,7 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +19,7 @@ public class ArenaLoader {
         this.game = game;
     }
 
-    public Arena load() throws FileNotFoundException {
+    public Arena load() throws IOException {
         Arena arena = new Arena(30, 20, level, game);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
@@ -29,11 +27,54 @@ public class ArenaLoader {
         return arena;
     }
 
-    private List<String> readArenaFile(int level) throws FileNotFoundException {
+    private List<String> readArenaFile(int level) throws IOException {
+        createRandomLevel(level);
         URL path = getClass().getResource("/levels/lvl" + level + ".txt");
         assert path != null;
         BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
         return level_reader.lines().collect(Collectors.toList());
+    }
+
+    private void createRandomLevel(int level) throws IOException {
+        // open file for writing
+        URL path = getClass().getResource("/levels/lvl" + level + ".txt");
+        assert path != null;
+        BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
+        char[][] grid = new char[20][30];
+        createWalls(grid);
+        createExit(grid);
+        createRandomBoxes(grid);
+        createRandomEnemies(grid);
+        //createRandomPowerUps(grid);
+        spawnPlayer(grid);
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                level_writer.write(grid[i][j]);
+            }
+            level_writer.write("\n");
+        }
+        level_writer.close();
+    }
+
+    private void createExit(char[][] grid) {
+    }
+
+    private void spawnPlayer(char[][] grid) {
+    }
+
+    private void createRandomEnemies(char[][] grid) {
+    }
+
+    private void createRandomBoxes(char[][] grid) {
+    }
+
+    private void createWalls(char[][] grid) {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                if (i == 0 || i == 19 || j == 0 || j == 29) grid[i][j] = '#';
+                else grid[i][j] = ' ';
+            }
+        }
     }
 
     private Element createElement(char element, int x, int y) {
