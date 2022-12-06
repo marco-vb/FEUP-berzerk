@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
+import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
@@ -13,13 +14,15 @@ import java.util.stream.Collectors;
 
 public class ArenaLoader {
     private final int level;
+    private final Game game;
 
-    public ArenaLoader(int level) {
+    public ArenaLoader(int level, Game game) {
         this.level = level;
+        this.game = game;
     }
 
     public Arena load() throws FileNotFoundException {
-        Arena arena = new Arena(30, 20);
+        Arena arena = new Arena(30, 20, level, game);
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);

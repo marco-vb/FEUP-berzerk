@@ -8,6 +8,7 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
 import com.l01gr05.berzerk.mvc.model.elements.Bullet;
 import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import com.l01gr05.berzerk.states.GameState;
@@ -40,7 +41,7 @@ public class BulletControllerTest {
 
     @Test
     void testShootUp() {
-        bullet = new Bullet(new Position(1, 1), 'N');
+        bullet = new AgentBullet(new Position(1, 1), 'N');
         arena.addBullet(bullet);
         bulletController = new BulletController(arena);
 
@@ -51,7 +52,7 @@ public class BulletControllerTest {
 
     @Test
     void testShootDown() {
-        bullet = new Bullet(new Position(1, 1), 'S');
+        bullet = new AgentBullet(new Position(1, 1), 'S');
         arena.addBullet(bullet);
         bulletController = new BulletController(arena);
 
@@ -62,7 +63,7 @@ public class BulletControllerTest {
 
     @Test
     void testShootRight() {
-        bullet = new Bullet(new Position(1, 1), 'E');
+        bullet = new AgentBullet(new Position(1, 1), 'E');
         arena.addBullet(bullet);
         bulletController = new BulletController(arena);
 
@@ -72,7 +73,7 @@ public class BulletControllerTest {
 
     @Test
     void testShootLeft() {
-        bullet = new Bullet(new Position(1, 1), 'W');
+        bullet = new AgentBullet(new Position(1, 1), 'W');
         arena.addBullet(bullet);
         bulletController = new BulletController(arena);
 

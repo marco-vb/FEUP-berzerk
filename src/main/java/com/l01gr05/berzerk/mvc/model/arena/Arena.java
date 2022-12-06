@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.mvc.model.arena;
 
+import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
@@ -14,21 +15,32 @@ public class Arena {
     private int width;
     private int height;
     private int level;
+
+    private Game game;
     private Agent agent;
     private List<Exit> exits;
     private List<Enemy> enemies;
     private List<Wall> walls;
     private List<Bullet> bullets;
 
-    public Arena(int width, int height){
+    public Arena(int width, int height, Game game) {
         this.width = width;
         this.height = height;
+        this.game = game;
         this.enemies = new ArrayList<>();
         this.walls = new ArrayList<>();
         this.bullets = new ArrayList<>();
         this.exits = new ArrayList<>();
     }
 
+    public Arena(int width, int height, int level, Game game) {
+        this(width, height, game);
+        this.level = level;
+    }
+
+    public Game getGame() {
+        return game;
+    }
     public Agent getAgent() {return agent;}
 
     public List<Enemy> getEnemies() {return enemies;}
