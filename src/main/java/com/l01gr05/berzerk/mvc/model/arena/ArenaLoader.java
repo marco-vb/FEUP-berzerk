@@ -2,7 +2,6 @@ package com.l01gr05.berzerk.mvc.model.arena;
 
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.Position;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.io.*;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 public class ArenaLoader {
     private final int level;
     private final Game game;
-
     private Position exit;
 
     public ArenaLoader(int level, Game game) {
@@ -22,7 +20,6 @@ public class ArenaLoader {
         this.game = game;
         this.exit = new Position(0, 0);
     }
-
     public Arena load() throws IOException {
         Arena arena = new Arena(Game.WIDTH, Game.HEIGHT, level, game);
         arena.setLevel(level);
@@ -30,50 +27,68 @@ public class ArenaLoader {
         setArenaElements(arena, lines);
         return arena;
     }
-
     private List<String> readArenaFile(int level) throws IOException {
         createRandomLevel(level);
-        URL path = getClass().getResource("/levels/lvlaux.txt");
+        URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
         BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
         return level_reader.lines().collect(Collectors.toList());
     }
-
     private void createRandomLevel(int level) throws IOException {
-        // open file for writing
-        URL path = getClass().getResource("/levels/lvlaux.txt");
+        URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
         BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
+
         char[][] grid = new char[Game.HEIGHT][Game.WIDTH];
         int dx[] = new int[8], dy[] = new int[8], distances_from_exit[][] = new int[Game.HEIGHT][Game.WIDTH];
+
         setup_arrays(dx, dy, distances_from_exit);
         createWalls(grid, dx, dy);
         createExit(grid, dx, dy);
         Position agent_spawn = spawnPlayer(grid, distances_from_exit);
         createRandomEnemies(distances_from_exit, grid, agent_spawn.getX(), agent_spawn.getY(), level);
-        //createRandomPowerUps(grid);
+        //createKeys(grid);
+        //createTowers(grid);
+        //createPowerUps(grid);
 
         for (int i = 0; i < Game.HEIGHT; i++) {
-            for (int j = 0; j < Game.WIDTH; j++) {
-                level_writer.write(grid[i][j]);
-            }
+            for (int j = 0; j < Game.WIDTH; j++) level_writer.write(grid[i][j]);
             level_writer.write("\n");
         }
         level_writer.close();
     }
-
-    private void setup_arrays(int[] dx, int[] dy, int[][] distances_from_exit) {
-        int x_offset = (Game.WIDTH - 6) / 5;
-        int y_offset = (Game.HEIGHT - 4) / 3;
-        for (int i = 0; i < 8; i++) {
-            dx[i] = (i/2+1) * (x_offset+1);
-            dy[i] = (i % 2 == 0) ? y_offset + 1 : 2 * y_offset + 2;
+    private void createWalls(char[][] grid, int dx[], int dy[]) {
+        for (int i = 0; i < Game.HEIGHT; i++) {
+            for (int j = 0; j < Game.WIDTH; j++) {
+                if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
+                else grid[i][j] = ' ';
+            }
         }
+        // Makes 8 central pillars of the arena
+        for (int i = 0; i < 8; i++) grid[dy[i]][dx[i]] = '#';
 
-        for (int i = 0; i < Game.HEIGHT; i++)
-            for (int j = 0; j < Game.WIDTH; j++) distances_from_exit[i][j] = -1;
+        createRandomWalls(grid, dx, dy);
     }
+    private void createRandomWalls(char[][] grid, int[] dx, int[] dy) {
+        for (int i = 0; i < dx.length; i++) {
+            int x = dx[i];
+            int y = dy[i];
+            char[] directions = {'N', 'S', 'E', 'W'};
+            Random random = new Random();
+            char direction = directions[random.nextInt(directions.length)];
+            int new_x = 0, new_y = 0;
+            if (direction == 'N') new_y--;
+            if (direction == 'S') new_y++;
+            if (direction == 'E') new_x++;
+            if (direction == 'W') new_x--;
 
+            while (grid[y + new_y][x + new_x] != '#') {
+                grid[y + new_y][x + new_x] = '#';
+                x += new_x;
+                y += new_y;
+            }
+        }
+    }
     private void createExit(char[][] grid, int[] dx, int[] dy) {
         Random random = new Random();
         int wall = random.nextInt(4);
@@ -99,7 +114,6 @@ public class ArenaLoader {
         }
         this.exit = new Position(x, y);
     }
-
     private Position spawnPlayer(char[][] grid, int[][] distances_from_exit) {
         Position p = bfs_distances(distances_from_exit, grid, exit.getX(), exit.getY());
         int x = p.getX(), y = p.getY();
@@ -109,7 +123,40 @@ public class ArenaLoader {
         grid[y][x] = 'A';
         return new Position(x, y);
     }
-
+    private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
+        for (int i = 0; i < level; i++) {
+            do {
+                Random random = new Random();
+                int x = random.nextInt(Game.WIDTH);
+                int y = random.nextInt(Game.HEIGHT);
+                boolean empty = grid[y][x] == ' ';
+                boolean far_enough = distances_from_exit[y][x] > 5;
+                boolean not_too_close = distances_from_exit[y][x] < distances_from_exit[agent_y][agent_x] - 8;
+                if (empty && far_enough && not_too_close) {
+                    grid[y][x] = 'E'; break;
+                }
+            } while (true);
+        }
+    }
+    private Element createElement(char element, int x, int y) {
+        switch (element) {
+            case 'A': return new Agent(new Position(x, y));
+            case 'X': return new Exit(new Position(x, y));
+            case 'E': return new Enemy(new Position(x, y));
+            case '#': return new Wall(new Position(x, y));
+        }
+        return null;
+    }
+    private void setArenaElements(Arena arena, List<String> lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            for (int j = 0; j < lines.get(i).length(); j++) {
+                char c = lines.get(i).charAt(j);
+                if (c != '.') {
+                    arena.addElement(createElement(c, j, i));
+                }
+            }
+        }
+    }
     private Position bfs_distances(int[][] distances_from_exit, char[][] grid, int x, int y) {
         int dx[] = new int[]{-1, 0, 1, 0};
         int dy[] = new int[]{0, -1, 0, 1};
@@ -140,74 +187,15 @@ public class ArenaLoader {
         }
         return new Position(x, y);
     }
-
-    private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
-        for (int i = 0; i < level; i++) {
-            do {
-                Random random = new Random();
-                int x = random.nextInt(Game.WIDTH);
-                int y = random.nextInt(Game.HEIGHT);
-                boolean empty = grid[y][x] == ' ';
-                boolean far_enough = distances_from_exit[y][x] > 5;
-                boolean not_too_close = distances_from_exit[y][x] < distances_from_exit[agent_y][agent_x] - 8;
-                if (empty && far_enough && not_too_close) {
-                    grid[y][x] = 'E'; break;
-                }
-            } while (true);
+    private void setup_arrays(int[] dx, int[] dy, int[][] distances_from_exit) {
+        int x_offset = (Game.WIDTH - 6) / 5;
+        int y_offset = (Game.HEIGHT - 4) / 3;
+        for (int i = 0; i < 8; i++) {
+            dx[i] = (i/2+1) * (x_offset+1);
+            dy[i] = (i % 2 == 0) ? y_offset + 1 : 2 * y_offset + 2;
         }
-    }
 
-    private void createWalls(char[][] grid, int dx[], int dy[]) {
-        for (int i = 0; i < Game.HEIGHT; i++) {
-            for (int j = 0; j < Game.WIDTH; j++) {
-                if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
-                else grid[i][j] = ' ';
-            }
-        }
-        // Makes 8 central pillars of the arena
-        for (int i = 0; i < 8; i++) grid[dy[i]][dx[i]] = '#';
-
-        createRandomWalls(grid, dx, dy);
-    }
-
-    private void createRandomWalls(char[][] grid, int[] dx, int[] dy) {
-        for (int i = 0; i < dx.length; i++) {
-            int x = dx[i];
-            int y = dy[i];
-            char[] directions = {'N', 'S', 'E', 'W'};
-            Random random = new Random();
-            char direction = directions[random.nextInt(directions.length)];
-            int new_x = 0, new_y = 0;
-            if (direction == 'N') new_y--;
-            if (direction == 'S') new_y++;
-            if (direction == 'E') new_x++;
-            if (direction == 'W') new_x--;
-
-            while (grid[y + new_y][x + new_x] != '#') {
-                grid[y + new_y][x + new_x] = '#';
-                x += new_x;
-                y += new_y;
-            }
-        }
-    }
-
-    private Element createElement(char element, int x, int y) {
-        switch (element) {
-            case 'A': return new Agent(new Position(x, y));
-            case 'X': return new Exit(new Position(x, y));
-            case 'E': return new Enemy(new Position(x, y));
-            case '#': return new Wall(new Position(x, y));
-        }
-        return null;
-    }
-    private void setArenaElements(Arena arena, List<String> lines) {
-        for (int i = 0; i < lines.size(); i++) {
-            for (int j = 0; j < lines.get(i).length(); j++) {
-                char c = lines.get(i).charAt(j);
-                if (c != '.') {
-                    arena.addElement(createElement(c, j, i));
-                }
-            }
-        }
+        for (int i = 0; i < Game.HEIGHT; i++)
+            for (int j = 0; j < Game.WIDTH; j++) distances_from_exit[i][j] = -1;
     }
 }

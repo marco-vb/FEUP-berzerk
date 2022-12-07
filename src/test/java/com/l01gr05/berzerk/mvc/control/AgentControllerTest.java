@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AgentControllerTest {
@@ -34,25 +36,25 @@ public class AgentControllerTest {
     }
 
     @Test
-    void testMoveUp() {
+    void testMoveUp() throws IOException {
         agentController.update(game, GUI.INPUT.UP);
         assertEquals(new Position(1, 0), agent.getPosition());
     }
 
     @Test
-    void testMoveDown() {
+    void testMoveDown() throws IOException {
         agentController.update(game, GUI.INPUT.DOWN);
         assertEquals(new Position(1, 2), agent.getPosition());
     }
 
     @Test
-    void testMoveRight() {
+    void testMoveRight() throws IOException {
         agentController.update(game, GUI.INPUT.RIGHT);
         assertEquals(new Position(2, 1), agent.getPosition());
     }
 
     @Test
-    void testMoveLeft() {
+    void testMoveLeft() throws IOException {
         agentController.update(game, GUI.INPUT.LEFT);
         assertEquals(new Position(0, 1), agent.getPosition());
     }
