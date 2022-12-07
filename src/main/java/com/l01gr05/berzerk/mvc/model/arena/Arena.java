@@ -117,12 +117,4 @@ public class Arena {
     public boolean isAgent(Position position) {
         return agent.getPosition().equals(position);
     }
-
-    public int getScore() {
-        return agent.getScore();
-    }
-
-    public int getLives() {
-        return agent.getLives();
-    }
 }
