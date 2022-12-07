@@ -15,9 +15,12 @@ public class ArenaLoader {
     private final int level;
     private final Game game;
 
+    private Position exit;
+
     public ArenaLoader(int level, Game game) {
         this.level = level;
         this.game = game;
+        this.exit = new Position(0, 0);
     }
 
     public Arena load() throws IOException {
@@ -42,8 +45,16 @@ public class ArenaLoader {
         assert path != null;
         BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
         char[][] grid = new char[Game.HEIGHT][Game.WIDTH];
-        createWalls(grid);
-        createExit(grid);
+        int x_offset = (Game.WIDTH - 6) / 5;
+        int y_offset = (Game.HEIGHT - 4) / 3;
+        int dx[] = new int[8];
+        int dy[] = new int[8];
+        for (int i = 0; i < 8; i++) {
+            dx[i] = (i/2+1) * (x_offset+1);
+            dy[i] = (i % 2 == 0) ? y_offset + 1 : 2 * y_offset + 2;
+        }
+        createWalls(grid, dx, dy);
+        createExit(grid, dx, dy);
         createRandomEnemies(grid);
         //createRandomPowerUps(grid);
         spawnPlayer(grid);
@@ -56,37 +67,87 @@ public class ArenaLoader {
         level_writer.close();
     }
 
-    private void createExit(char[][] grid) {
-        grid[0][15] = 'X';
-        grid[0][16] = 'X';
-        grid[0][17] = 'X';
+    private void createExit(char[][] grid, int[] dx, int[] dy) {
+        Random random = new Random();
+        int wall = random.nextInt(4);
+        int x = 0, y = 0;
+        int sign = random.nextInt(2) * 2 - 1;
+        switch (wall) {
+            case 0:
+                x = dx[random.nextInt(dx.length)] + 2 * sign;
+                break;
+            case 1:
+                y = Game.HEIGHT - 1; x = dx[random.nextInt(dx.length)] + 2 * sign;
+                break;
+            case 2:
+                y = dy[random.nextInt(dy.length)] + sign * 2;
+                break;
+            case 3:
+                x = Game.WIDTH - 1; y = dy[random.nextInt(dy.length)] + sign * 2;
+                break;
+        }
+        for (int i = 0; i < 3; i++){
+            if (wall <= 1) grid[y][x+ i*sign] = 'X';
+            else grid[y + i*sign][x] = 'X';
+        }
+        this.exit = new Position(x, y);
     }
 
     private void spawnPlayer(char[][] grid) {
-        grid[17][15] = 'A';
+        int distances_from_exit[][] = new int[Game.HEIGHT][Game.WIDTH];
+        for (int i = 0; i < Game.HEIGHT; i++)
+            for (int j = 0; j < Game.WIDTH; j++) distances_from_exit[i][j] = -1;
+
+        Position p = bfs_distances(distances_from_exit, grid, exit.getX(), exit.getY());
+        int x = p.getX(), y = p.getY();
+        if (x == 1) x = 2; if (x == Game.WIDTH - 2) x = Game.WIDTH - 3;
+        if (y == 1) y = 2; if (y == Game.HEIGHT - 2) y = Game.HEIGHT - 3;
+
+        grid[y][x] = 'A';
+    }
+
+    private Position bfs_distances(int[][] distances_from_exit, char[][] grid, int x, int y) {
+        int dx[] = new int[]{-1, 0, 1, 0};
+        int dy[] = new int[]{0, -1, 0, 1};
+        int queue[][] = new int[Game.HEIGHT * Game.WIDTH][2];
+        int head = 0, tail = 0;
+        queue[tail][0] = x; queue[tail][1] = y; tail++;
+        distances_from_exit[y][x] = 0;
+        while (head < tail) {
+            int cx = queue[head][0], cy = queue[head][1];
+            head++;
+            for (int i = 0; i < 4; i++) {
+                int nx = cx + dx[i], ny = cy + dy[i];
+                if (nx < 0 || nx >= Game.WIDTH || ny < 0 || ny >= Game.HEIGHT || grid[ny][nx] == '#') continue;
+                if (distances_from_exit[ny][nx] == -1) {
+                    distances_from_exit[ny][nx] = distances_from_exit[cy][cx] + 1;
+                    queue[tail][0] = nx; queue[tail][1] = ny; tail++;
+                }
+            }
+        }
+        int max_distance = 0;
+        for (int i = 0; i < Game.HEIGHT; i++) {
+            for (int j = 0; j < Game.WIDTH; j++) {
+                if (grid[i][j] != '#' && distances_from_exit[i][j] > max_distance) {
+                    max_distance = distances_from_exit[i][j];
+                    x = j; y = i;
+                }
+            }
+        }
+        return new Position(x, y);
     }
 
     private void createRandomEnemies(char[][] grid) {
         grid [1][1] = 'E';
     }
 
-    private void createWalls(char[][] grid) {
+    private void createWalls(char[][] grid, int dx[], int dy[]) {
         for (int i = 0; i < Game.HEIGHT; i++) {
             for (int j = 0; j < Game.WIDTH; j++) {
                 if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
                 else grid[i][j] = ' ';
             }
         }
-
-        int x_offset = (Game.WIDTH - 6) / 5;
-        int y_offset = (Game.HEIGHT - 4) / 3;
-        int dx[] = new int[8];
-        int dy[] = new int[8];
-        for (int i = 0; i < 8; i++) {
-            dx[i] = (i/2+1) * (x_offset+1);
-            dy[i] = (i % 2 == 0) ? y_offset + 1 : 2 * y_offset + 2;
-        }
-
         // Makes 8 central pillars of the arena
         for (int i = 0; i < 8; i++) grid[dy[i]][dx[i]] = '#';
 
