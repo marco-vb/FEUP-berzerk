@@ -8,6 +8,7 @@ import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
 import com.l01gr05.berzerk.mvc.model.elements.Bullet;
+import com.l01gr05.berzerk.mvc.model.elements.Exit;
 
 import java.io.IOException;
 
@@ -59,6 +60,10 @@ public class AgentController extends Controller<Arena> {
             agent.setPosition(agent.getInitialPosition());
         } else if (getModel().isExit(position)) {
             game.nextLevel();
+        } else if (getModel().isKey(position)) {
+            getModel().removeKey();
+            getModel().setOpen();
+            agent.setPosition(position);
         } else {
             agent.setPosition(position);
         }

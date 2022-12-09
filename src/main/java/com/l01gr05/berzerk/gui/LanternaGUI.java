@@ -147,7 +147,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawKey(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), 'K', TextColor.ANSI.CYAN_BRIGHT);
+
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'K', TextColor.ANSI.CYAN_BRIGHT);
     }
 
     @Override
