@@ -148,6 +148,10 @@ public class Arena {
         return false;
     }
 
+    public Key getKey() {
+        return key;
+    }
+
     public void setOpen() {
         for (Exit exit : exits) {
             removeWall(exit.getPosition());

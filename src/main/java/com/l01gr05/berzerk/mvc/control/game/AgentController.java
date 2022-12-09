@@ -53,16 +53,18 @@ public class AgentController extends Controller<Arena> {
     }
 
     private void move(Position position, Game game) throws IOException {
+        Arena arena = getModel();
         Agent agent = getModel().getAgent();
-        if (getModel().isWall(position) || getModel().isEnemy(position)) {
+        if (arena.getKey() == null) arena.setOpen();
+        if (arena.isWall(position) || arena.isEnemy(position)) {
             game.decreaseLives();
             if (game.isGameOver()) game.showStartMenu();
             agent.setPosition(agent.getInitialPosition());
-        } else if (getModel().isExit(position)) {
+        } else if (arena.isExit(position)) {
             game.nextLevel();
-        } else if (getModel().isKey(position)) {
-            getModel().removeKey();
-            getModel().setOpen();
+        } else if (arena.isKey(position)) {
+            arena.removeKey();
+            arena.setOpen();
             agent.setPosition(position);
         } else {
             agent.setPosition(position);
