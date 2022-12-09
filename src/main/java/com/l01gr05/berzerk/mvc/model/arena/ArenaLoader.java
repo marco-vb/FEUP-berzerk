@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.min;
+
 public class ArenaLoader {
     private final int level;
     private final Game game;
@@ -47,9 +49,9 @@ public class ArenaLoader {
         createExit(grid, dx, dy);
         Position agent_spawn = spawnPlayer(grid, distances_from_exit);
         createRandomEnemies(distances_from_exit, grid, agent_spawn.getX(), agent_spawn.getY(), level);
-        createKeys(grid);
-        createTowers(grid);
-        //createPowerUps(grid);
+        //if (level > 3) createPowerUps(grid);
+        if (level > 4) createTowers(grid, distances_from_exit, agent_spawn.getX(), agent_spawn.getY());
+        if (level > 6) createKeys(grid, distances_from_exit, agent_spawn.getX(), agent_spawn.getY());
 
         for (int i = 0; i < Game.HEIGHT; i++) {
             for (int j = 0; j < Game.WIDTH; j++) level_writer.write(grid[i][j]);
@@ -114,25 +116,13 @@ public class ArenaLoader {
         }
         this.exit = new Position(x, y);
     }
-    private void createTowers(char[][] grid) {
-        Random random = new Random();
-        int x = random.nextInt(Game.WIDTH - 2) + 1;
-        int y = random.nextInt(Game.HEIGHT - 2) + 1;
-        while (grid[y][x] != ' ') {
-            x = random.nextInt(Game.WIDTH - 2) + 1;
-            y = random.nextInt(Game.HEIGHT - 2) + 1;
-        }
-        grid[y][x] = 'T';
+    private void createTowers(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
+        int number_of_towers = level / 4;
+        place(grid, distances_from_exit, number_of_towers, 'T', agent_x, agent_y);
     }
-    private void createKeys(char[][] grid) {
-        Random random = new Random();
-        int x = random.nextInt(Game.WIDTH - 2) + 1;
-        int y = random.nextInt(Game.HEIGHT - 2) + 1;
-        while (grid[y][x] != ' ') {
-            x = random.nextInt(Game.WIDTH - 2) + 1;
-            y = random.nextInt(Game.HEIGHT - 2) + 1;
-        }
-        grid[y][x] = 'K';
+    private void createKeys(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
+        int number_of_keys = 1;
+        place(grid, distances_from_exit, number_of_keys, 'K', agent_x, agent_y);
     }
     private Position spawnPlayer(char[][] grid, int[][] distances_from_exit) {
         Position p = bfs_distances(distances_from_exit, grid, exit.getX(), exit.getY());
@@ -144,19 +134,8 @@ public class ArenaLoader {
         return new Position(x, y);
     }
     private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
-        for (int i = 0; i < level; i++) {
-            do {
-                Random random = new Random();
-                int x = random.nextInt(Game.WIDTH);
-                int y = random.nextInt(Game.HEIGHT);
-                boolean empty = grid[y][x] == ' ';
-                boolean far_enough = distances_from_exit[y][x] > 5;
-                boolean not_too_close = distances_from_exit[y][x] < distances_from_exit[agent_y][agent_x] - 8;
-                if (empty && far_enough && not_too_close) {
-                    grid[y][x] = 'E'; break;
-                }
-            } while (true);
-        }
+        int num_enemies = min(10, level);
+        place(grid, distances_from_exit, num_enemies, 'E', agent_x, agent_y);
     }
     private Element createElement(char element, int x, int y) {
         switch (element) {
@@ -178,6 +157,21 @@ public class ArenaLoader {
                     if (c == 'X') arena.addElement(new Wall(new Position(j, i)));
                 }
             }
+        }
+    }
+    private void place(char[][] grid, int[][] distances_from_exit, int n, char c, int agent_x, int agent_y) {
+        for (int i = 0; i < n; i++) {
+            do {
+                Random random = new Random();
+                int x = random.nextInt(Game.WIDTH);
+                int y = random.nextInt(Game.HEIGHT);
+                boolean empty = grid[y][x] == ' ';
+                boolean far_enough = distances_from_exit[y][x] > 5;
+                boolean not_too_close = distances_from_exit[y][x] < distances_from_exit[agent_y][agent_x] - 8;
+                if (empty && far_enough && not_too_close) {
+                    grid[y][x] = c; break;
+                }
+            } while (true);
         }
     }
     private Position bfs_distances(int[][] distances_from_exit, char[][] grid, int x, int y) {
