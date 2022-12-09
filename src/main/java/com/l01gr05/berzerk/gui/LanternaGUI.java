@@ -146,6 +146,16 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public void drawKey(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'K', TextColor.ANSI.CYAN_BRIGHT);
+    }
+
+    @Override
+    public void drawTower(Element model) {
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'T', TextColor.ANSI.RED);
+    }
+
+    @Override
     public void draw(int x, int y, char c, TextColor color) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(color);

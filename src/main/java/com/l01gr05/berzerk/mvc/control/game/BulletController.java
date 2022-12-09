@@ -24,7 +24,7 @@ public class BulletController extends Controller<Arena> {
     }
 
     private void move(Bullet bullet, Position position, Game game) {
-        if (getModel().isWall(position)) {
+        if (getModel().isWall(position) || getModel().isTower(position)) {
             getModel().removeBullet(bullet);
         }
 
@@ -38,7 +38,7 @@ public class BulletController extends Controller<Arena> {
             game.setScore(game.getScore() + 10);
         }
 
-        else if (getModel().isAgent(position) && bullet instanceof EnemyBullet) {
+        else if (getModel().isAgent(position) && (bullet instanceof EnemyBullet)) {
             Agent agent = getModel().getAgent();
             getModel().removeBullet(bullet);
             game.decreaseLives();

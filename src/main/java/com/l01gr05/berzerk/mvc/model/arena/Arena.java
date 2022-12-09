@@ -23,6 +23,8 @@ public class Arena {
     private List<Wall> walls;
     private List<Bullet> bullets;
 
+    private List<Tower> towers;
+
     public Arena(int width, int height, Game game) {
         this.width = width;
         this.height = height;
@@ -31,6 +33,7 @@ public class Arena {
         this.walls = new ArrayList<>();
         this.bullets = new ArrayList<>();
         this.exits = new ArrayList<>();
+        this.towers = new ArrayList<>();
     }
 
     public Arena(int width, int height, int level, Game game) {
@@ -46,6 +49,8 @@ public class Arena {
     public List<Enemy> getEnemies() {return enemies;}
 
     public List<Bullet> getBullets() {return bullets;}
+
+    public List<Tower> getTowers() {return towers;}
 
     // set level
     public void setLevel(int level) {
@@ -70,6 +75,8 @@ public class Arena {
             enemies.add((Enemy) element);
         } else if (element instanceof Wall) {
             walls.add((Wall) element);
+        } else if (element instanceof Tower) {
+            towers.add((Tower) element);
         }
     }
 
@@ -84,6 +91,7 @@ public class Arena {
         elements.addAll(bullets);
         elements.addAll(enemies);
         elements.addAll(walls);
+        elements.addAll(towers);
         return elements;
     }
 
@@ -108,6 +116,15 @@ public class Arena {
     public boolean isExit(Position position) {
         for (Exit exit : exits) {
             if (exit.getPosition().equals(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isTower(Position position) {
+        for (Tower tower : towers) {
+            if (tower.getPosition().equals(position)) {
                 return true;
             }
         }

@@ -24,6 +24,10 @@ public interface GUI {
 
     void drawBullet(Element model);
 
+    void drawKey(Element model);
+
+    void drawTower(Element model);
+
     void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);
