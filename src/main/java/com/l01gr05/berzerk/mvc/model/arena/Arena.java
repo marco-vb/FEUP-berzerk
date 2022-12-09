@@ -4,10 +4,6 @@ import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +18,8 @@ public class Arena {
     private List<Enemy> enemies;
     private List<Wall> walls;
     private List<Bullet> bullets;
-
     private List<Tower> towers;
+    private Key key = null;
 
     public Arena(int width, int height, Game game) {
         this.width = width;
@@ -66,6 +62,17 @@ public class Arena {
         bullets.remove(bullet);
     }
 
+    public Wall getWall(Position position) {
+        for (Wall wall : walls) {
+            if (wall.getPosition().equals(position)) return wall;
+        }
+        return null;
+    }
+
+    public void removeWall(Position position) {
+        walls.remove(getWall(position));
+    }
+
     public void addElement(Element element) {
         if (element instanceof Agent) {
             agent = (Agent) element;
@@ -77,6 +84,8 @@ public class Arena {
             walls.add((Wall) element);
         } else if (element instanceof Tower) {
             towers.add((Tower) element);
+        } else if (element instanceof Key) {
+            key = (Key) element;
         }
     }
 
@@ -92,6 +101,7 @@ public class Arena {
         elements.addAll(enemies);
         elements.addAll(walls);
         elements.addAll(towers);
+        if (key != null) elements.add(key);
         return elements;
     }
 
@@ -129,6 +139,23 @@ public class Arena {
             }
         }
         return false;
+    }
+
+    public boolean isKey(Position position) {
+        if (key != null) {
+            return key.getPosition().equals(position);
+        }
+        return false;
+    }
+
+    public void setOpen() {
+        for (Exit exit : exits) {
+            removeWall(exit.getPosition());
+        }
+    }
+
+    public void removeKey() {
+        key = null;
     }
 
     public boolean isAgent(Position position) {
