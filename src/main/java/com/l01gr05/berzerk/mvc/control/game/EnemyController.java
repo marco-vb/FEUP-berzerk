@@ -37,9 +37,4 @@ public class EnemyController extends Controller<Arena> {
             enemy.setPosition(position);
         }
     }
-
-    private void shoot() {
-        EnemyBullet bullet = new EnemyBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
-        getModel().addBullet(bullet);
-    }
 }

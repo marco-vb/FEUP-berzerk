@@ -48,7 +48,7 @@ public class ArenaLoader {
         Position agent_spawn = spawnPlayer(grid, distances_from_exit);
         createRandomEnemies(distances_from_exit, grid, agent_spawn.getX(), agent_spawn.getY(), level);
         //createKeys(grid);
-        //createTowers(grid);
+        createTowers(grid);
         //createPowerUps(grid);
 
         for (int i = 0; i < Game.HEIGHT; i++) {
@@ -114,11 +114,21 @@ public class ArenaLoader {
         }
         this.exit = new Position(x, y);
     }
+    private void createTowers(char[][] grid) {
+        Random random = new Random();
+        int x = random.nextInt(Game.WIDTH - 2) + 1;
+        int y = random.nextInt(Game.HEIGHT - 2) + 1;
+        while (grid[y][x] != ' ') {
+            x = random.nextInt(Game.WIDTH - 2) + 1;
+            y = random.nextInt(Game.HEIGHT - 2) + 1;
+        }
+        grid[y][x] = 'T';
+    }
     private Position spawnPlayer(char[][] grid, int[][] distances_from_exit) {
         Position p = bfs_distances(distances_from_exit, grid, exit.getX(), exit.getY());
         int x = p.getX(), y = p.getY();
-        if (x == 1) x = 2; if (x == Game.WIDTH - 2) x = Game.WIDTH - 3;
-        if (y == 1) y = 2; if (y == Game.HEIGHT - 2) y = Game.HEIGHT - 3;
+        if (grid[y][x-1] == '#') x++; if (grid[y][x+1] == '#') x--;
+        if (grid[y-1][x] == '#') y++; if (grid[y+1][x] == '#') y--;
 
         grid[y][x] = 'A';
         return new Position(x, y);
@@ -144,6 +154,7 @@ public class ArenaLoader {
             case 'X': return new Exit(new Position(x, y));
             case 'E': return new Enemy(new Position(x, y));
             case '#': return new Wall(new Position(x, y));
+            case 'T': return new Tower(new Position(x, y));
         }
         return null;
     }

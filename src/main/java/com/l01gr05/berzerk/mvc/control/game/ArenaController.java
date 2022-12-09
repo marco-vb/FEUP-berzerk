@@ -12,12 +12,15 @@ public class ArenaController extends Controller<Arena> {
     private final EnemyController enemyController;
     private final BulletController bulletController;
 
+    private final TowerController towerController;
+
     public ArenaController(Arena arena) {
         super(arena);
 
         this.agentController = new AgentController(arena);
         this.enemyController = new EnemyController(arena);
         this.bulletController = new BulletController(arena);
+        this.towerController = new TowerController(arena);
     }
 
     @Override
@@ -29,6 +32,7 @@ public class ArenaController extends Controller<Arena> {
             agentController.update(game, action);
             enemyController.update(game, action);
             bulletController.update(game, action);
+            towerController.update(game, action);
         }
     }
 }
