@@ -42,4 +42,10 @@ public class EnemyControllerTest {
         enemyController.update(game, GUI.INPUT.UP);
         assertNotEquals(startingPos, enemy.getPosition());
     }
+
+    @Test
+    void testEnemyShoots() {    // Tests in if at least one bullet is added to the arena in 1000 iterations
+        for (int i = 0; i < 1000; i++) enemyController.update(game, GUI.INPUT.UP);
+        assertNotEquals(0, arena.getBullets().size());
+    }
 }

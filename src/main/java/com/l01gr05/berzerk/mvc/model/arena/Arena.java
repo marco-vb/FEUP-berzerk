@@ -64,7 +64,10 @@ public class Arena {
             exits.add((Exit) element);
         } else if (element instanceof Enemy) {
             enemies.add((Enemy) element);
-        } else if (element instanceof Wall) {
+        } else if (element instanceof Bullet) {
+            bullets.add((Bullet) element);
+        }
+        else if (element instanceof Wall) {
             walls.add((Wall) element);
         } else if (element instanceof Tower) {
             towers.add((Tower) element);
