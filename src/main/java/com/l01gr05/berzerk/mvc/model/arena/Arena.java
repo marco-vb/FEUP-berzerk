@@ -47,9 +47,8 @@ public class Arena {
     }
 
     public Wall getWall(Position position) {
-        for (Wall wall : walls) {
+        for (Wall wall : walls)
             if (wall.getPosition().equals(position)) return wall;
-        }
         return null;
     }
 
@@ -74,10 +73,6 @@ public class Arena {
         } else if (element instanceof Key) {
             key = (Key) element;
         }
-    }
-
-    public void addBullet(Bullet bullet) {
-        bullets.add(bullet);
     }
 
     public List<Element> getElements() {
@@ -120,11 +115,8 @@ public class Arena {
     }
 
     public boolean isTower(Position position) {
-        for (Tower tower : towers) {
-            if (tower.getPosition().equals(position)) {
-                return true;
-            }
-        }
+        for (Tower tower : towers)
+            if (tower.getPosition().equals(position)) return true;
         return false;
     }
 

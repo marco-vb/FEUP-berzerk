@@ -5,7 +5,6 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.EnemyBullet;
 
@@ -27,7 +26,7 @@ public class EnemyController extends Controller<Arena> {
                 char[] directions = {'N', 'S', 'E', 'W'};
                 Random random = new Random();
                 char direction = directions[random.nextInt(directions.length)];
-                getModel().addBullet(new EnemyBullet(enemy.getPosition(), direction));
+                getModel().addElement(new EnemyBullet(enemy.getPosition(), direction));
             }
         }
     }
