@@ -23,8 +23,7 @@ public class ArenaLoader {
         this.exit = new Position(0, 0);
     }
     public Arena load() throws IOException {
-        Arena arena = new Arena(Game.WIDTH, Game.HEIGHT, level, game);
-        arena.setLevel(level);
+        Arena arena = new Arena(game);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
         return arena;

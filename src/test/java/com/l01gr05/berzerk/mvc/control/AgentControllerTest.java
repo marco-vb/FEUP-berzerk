@@ -1,10 +1,7 @@
 package com.l01gr05.berzerk.mvc.control;
 
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.gui.LanternaGUI;
 import com.l01gr05.berzerk.mvc.control.game.AgentController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
@@ -28,7 +25,7 @@ public class AgentControllerTest {
     void setUp() {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
-        arena = new Arena(10, 10, game);
+        arena = new Arena(game);
         exit = new Exit(new Position(9, 9));
         arena.addElement(agent);
         arena.addElement(exit);

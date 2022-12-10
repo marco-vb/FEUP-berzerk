@@ -83,7 +83,7 @@ public class Game {
         this.score = 0;
         this.lives = 3;
         this.level = 1;
-        this.state = new GameState(new ArenaLoader(1, this).load());
+        this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
 
     public void nextLevel() throws IOException {
