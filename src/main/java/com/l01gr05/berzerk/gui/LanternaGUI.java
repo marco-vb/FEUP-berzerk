@@ -110,6 +110,8 @@ public class LanternaGUI implements GUI {
                 return INPUT.QUIT;
             case Enter:
                 return INPUT.ENTER;
+            case Tab:
+                return INPUT.ACTIVATE;
             case Character:
                 if (keyStroke.getCharacter() == ' ') {
                     return INPUT.SHOOT;
@@ -191,8 +193,15 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawStats(Arena model) {
         TextGraphics textGraphics = screen.newTextGraphics();
+
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         textGraphics.putString(0, getHeight() + 1, "Score: " + game.getScore());
+
+        textGraphics.putString(getWidth() - 20, getHeight() + 1, "P Up: ");
+        textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.YELLOW_BRIGHT);
+        textGraphics.putString(getWidth() - 14, getHeight() + 1, game.getPowerUp());
+
+        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < game.getLives(); i++)
             lives.append("A");

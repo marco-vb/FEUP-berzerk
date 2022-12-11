@@ -15,9 +15,10 @@ public class ShieldController extends Controller<Arena> {
     public void update(Game game, GUI.INPUT action) throws IOException {
          if (getModel().getPowerUps() != null) {
              for (int i = 0; i < getModel().getPowerUps().size(); i++) {
-                 if (getModel().getPowerUps().get(i).getType().equals("Shield") && getModel().getPowerUps().get(i).getPosition().equals(getModel().getAgent().getPosition())) {
+                 if (getModel().getPowerUps().get(i) instanceof Shield && getModel().getPowerUps().get(i).getPosition().equals(getModel().getAgent().getPosition())) {
                      getModel().getAgent().setPowerUp(getModel().getPowerUps().get(i));
                      getModel().getPowerUps().remove(i);
+                     game.setPowerUp(getModel().getAgent().getPowerUp().getType().substring(0,1));
                  }
              }
          }

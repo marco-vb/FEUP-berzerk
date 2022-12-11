@@ -18,6 +18,8 @@ public class Game {
     private int level;
     private int score;
     private int lives;
+    private String powerUp = "-";
+    private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
 
@@ -110,6 +112,22 @@ public class Game {
 
     public void toggleSound() {
         // TODO
+    }
+
+    public String getPowerUp() {
+        return powerUp;
+    }
+
+    public void setPowerUp(String powerUp) {
+        this.powerUp = powerUp;
+    }
+
+    public boolean isPowerUpActive() {
+        return isPowerUpActive;
+    }
+
+    public void setIsPowerUpActive(boolean powerUpActive) {
+        isPowerUpActive = powerUpActive;
     }
 }
 

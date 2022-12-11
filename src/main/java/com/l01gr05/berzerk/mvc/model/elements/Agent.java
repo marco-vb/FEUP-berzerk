@@ -3,6 +3,8 @@ package com.l01gr05.berzerk.mvc.model.elements;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
 
+import java.util.List;
+
 public class Agent extends Element {
     private final Position initialPosition;
     private char direction;
@@ -37,4 +39,5 @@ public class Agent extends Element {
     public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
+
 }

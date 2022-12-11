@@ -14,7 +14,7 @@ public class BulletController extends Controller<Arena> {
     }
 
     public void update(Game game, GUI.INPUT action) {
-       for (int i = 0; i < getModel().getBullets().size(); i++) {
+        for (int i = 0; i < getModel().getBullets().size(); i++) {
            Bullet bullet = getModel().getBullets().get(i);
            if (bullet.getDirection() == 'N') move(bullet, bullet.getPosition().getUp(), game);
            if (bullet.getDirection() == 'S') move(bullet, bullet.getPosition().getDown(), game);
@@ -46,12 +46,25 @@ public class BulletController extends Controller<Arena> {
 
         else if (getModel().isAgent(position) && (bullet instanceof EnemyBullet)) {
             Agent agent = getModel().getAgent();
-            getModel().removeBullet(bullet);
-            game.decreaseLives();
-            if (game.isGameOver()) getModel().getGame().showStartMenu();
+            if (agent.getPowerUp() instanceof Shield && agent.getPowerUp().isEnabled()) {
+                getModel().removeBullet(bullet);
+                agent.setPowerUp(null);
+                game.setPowerUp("-");
+                game.setIsPowerUpActive(false);
+                return;
+            } else {
+                getModel().removeBullet(bullet);
+                game.decreaseLives();
+            }
+            if (game.isGameOver()) {
+                getModel().getGame().showStartMenu();
+                game.showStartMenu();
+                agent.setPowerUp(null);
+                game.setPowerUp("-");
+                game.setIsPowerUpActive(false);
+            };
             agent.setPosition(agent.getInitialPosition());
         }
-
         else {
             bullet.setPosition(position);
         }

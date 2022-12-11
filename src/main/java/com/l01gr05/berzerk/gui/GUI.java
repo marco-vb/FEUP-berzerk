@@ -37,5 +37,5 @@ public interface GUI {
 
     void drawStats(Arena model);
 
-    enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
+    enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, ACTIVATE, SHOOT};
 }
