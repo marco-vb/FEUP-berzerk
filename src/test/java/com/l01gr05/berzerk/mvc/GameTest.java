@@ -43,9 +43,11 @@ public class GameTest {
     @Test
     public void testGameOver() {
         game.decreaseLives();
+        boolean notOver = game.isGameOver();
         game.decreaseLives();
         game.decreaseLives();
-        Assertions.assertTrue(game.isGameOver());
+        boolean over = game.isGameOver();
+        Assertions.assertTrue(over && !notOver);
     }
 
     @Test

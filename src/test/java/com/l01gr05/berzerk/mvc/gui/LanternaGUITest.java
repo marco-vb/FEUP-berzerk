@@ -76,15 +76,24 @@ public class LanternaGUITest {
     @Test
     void testGetInput() throws IOException {
         KeyStroke keyStroke = Mockito.mock(KeyStroke.class);
-        List<KeyType> keyTypes = List.of(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft, KeyType.ArrowRight, KeyType.Enter, KeyType.Escape);
-        List<GUI.INPUT> inputs = List.of(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT, GUI.INPUT.RIGHT, GUI.INPUT.ENTER, GUI.INPUT.QUIT);
+        List<KeyType> keyTypes = List.of(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft,
+                KeyType.ArrowRight, KeyType.Enter, KeyType.Escape, KeyType.Character, KeyType.Character, KeyType.F2);
+        List<GUI.INPUT> inputs = List.of(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT,
+                GUI.INPUT.RIGHT, GUI.INPUT.ENTER, GUI.INPUT.QUIT, GUI.INPUT.SHOOT, GUI.INPUT.NONE, GUI.INPUT.NONE);
+
         boolean isEqual = true;
         for (KeyType keyType : keyTypes) {
             Mockito.when(keyStroke.getKeyType()).thenReturn(keyType);
+            Mockito.when(keyStroke.getCharacter()).thenReturn(' ', 'a');
             Mockito.when(screen.pollInput()).thenReturn(keyStroke);
             GUI.INPUT input = gui.getInput();
             isEqual = isEqual && input == inputs.get(keyTypes.indexOf(keyType));
         }
+
+        Mockito.when(screen.pollInput()).thenReturn(null);
+        GUI.INPUT input = gui.getInput();
+        isEqual = isEqual && input == GUI.INPUT.NONE;
+
         Assertions.assertTrue(isEqual);
     }
 
