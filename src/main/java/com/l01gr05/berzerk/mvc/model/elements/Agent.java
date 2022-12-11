@@ -6,6 +6,7 @@ import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
 public class Agent extends Element {
     private final Position initialPosition;
     private char direction;
+    private PowerUp powerUp;
     public Agent(Position p) {
         super(p);
         this.initialPosition = p;
@@ -28,4 +29,5 @@ public class Agent extends Element {
     public Position getInitialPosition() {
         return initialPosition;
     }
+
 }

@@ -20,6 +20,7 @@ public class Arena {
     private List<Bullet> bullets;
     private List<Tower> towers;
     private Key key = null;
+    private PowerUp powerUp;
 
     public Arena(int width, int height, Game game) {
         this.width = width;
@@ -165,4 +166,6 @@ public class Arena {
     public boolean isAgent(Position position) {
         return agent.getPosition().equals(position);
     }
+
+    public PowerUp getPowerUp() { return powerUp; }
 }
