@@ -2,6 +2,7 @@ package com.l01gr05.berzerk;
 
 import com.l01gr05.berzerk.gui.LanternaGUI;
 import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
+import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import com.l01gr05.berzerk.states.GameState;
@@ -18,7 +19,7 @@ public class Game {
     private int level;
     private int score;
     private int lives;
-    private String powerUp = "-";
+    private PowerUp powerUp;
     private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
@@ -114,20 +115,20 @@ public class Game {
         // TODO
     }
 
-    public String getPowerUp() {
+    public PowerUp getPowerUp() {
         return powerUp;
     }
 
-    public void setPowerUp(String powerUp) {
+    public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
 
     public boolean isPowerUpActive() {
-        return isPowerUpActive;
+        return (powerUp == null) ? false : powerUp.isEnabled();
     }
 
-    public void setIsPowerUpActive(boolean powerUpActive) {
-        isPowerUpActive = powerUpActive;
+    public void switchIsPowerUpActive() {
+        isPowerUpActive = !isPowerUpActive;
     }
 }
 

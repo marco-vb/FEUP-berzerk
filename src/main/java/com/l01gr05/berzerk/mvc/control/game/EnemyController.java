@@ -33,7 +33,7 @@ public class EnemyController extends Controller<Arena> {
     }
 
     private void move(Enemy enemy, Position position, Game game) {
-        if (!(getModel().isWall(position)|| getModel().isEnemy(position) || getModel().isExit(position))) {
+        if (!(getModel().isWall(position) || getModel().isEnemy(position) || getModel().isExit(position))) {
             enemy.setPosition(position);
         }
     }

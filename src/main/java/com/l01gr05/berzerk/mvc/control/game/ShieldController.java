@@ -17,8 +17,8 @@ public class ShieldController extends Controller<Arena> {
              for (int i = 0; i < getModel().getPowerUps().size(); i++) {
                  if (getModel().getPowerUps().get(i) instanceof Shield && getModel().getPowerUps().get(i).getPosition().equals(getModel().getAgent().getPosition())) {
                      getModel().getAgent().setPowerUp(getModel().getPowerUps().get(i));
+                     game.setPowerUp(getModel().getAgent().getPowerUp());
                      getModel().getPowerUps().remove(i);
-                     game.setPowerUp(getModel().getAgent().getPowerUp().getType().substring(0,1));
                  }
              }
          }

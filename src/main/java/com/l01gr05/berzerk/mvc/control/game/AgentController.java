@@ -7,6 +7,7 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
+import com.l01gr05.berzerk.mvc.model.elements.Shield;
 
 import java.io.IOException;
 
@@ -55,21 +56,38 @@ public class AgentController extends Controller<Arena> {
     private void switchPowerUp(Game game) {
         if (getModel().getAgent().getPowerUp() != null) {
             getModel().getAgent().getPowerUp().switchPowerUp(getModel().getAgent());
-            game.setIsPowerUpActive(true);
+            game.setPowerUp(getModel().getAgent().getPowerUp());
+            game.switchIsPowerUpActive();
         }
     }
     private void move(Position position, Game game) throws IOException {
         Arena arena = getModel();
         Agent agent = getModel().getAgent();
         if (arena.getKey() == null) arena.setOpen();
-        if (arena.isWall(position) || arena.isEnemy(position)) {
+        if (arena.isWall(position)) {
             game.decreaseLives();
-            if (game.isGameOver())
-            {
+            if (game.isGameOver()) {
                 game.showStartMenu();
                 agent.setPowerUp(null);
-                game.setPowerUp("-");
-                game.setIsPowerUpActive(false);
+                game.setPowerUp(agent.getPowerUp());
+                game.switchIsPowerUpActive();
+            }
+            agent.setPosition(agent.getInitialPosition());
+        } else if (arena.isEnemy(position)){
+            if (agent.getPowerUp() != null && agent.getPowerUp() instanceof Shield && agent.getPowerUp().isEnabled())
+            {
+                //optei por n matar o monstro e apenas partir o shield
+                agent.setPowerUp(null);
+                game.setPowerUp(agent.getPowerUp());
+                game.switchIsPowerUpActive();
+                return;
+            }
+            game.decreaseLives();
+            if (game.isGameOver()) {
+                game.showStartMenu();
+                agent.setPowerUp(null);
+                game.setPowerUp(agent.getPowerUp());
+                game.switchIsPowerUpActive();
             }
             agent.setPosition(agent.getInitialPosition());
         } else if (arena.isExit(position)) {

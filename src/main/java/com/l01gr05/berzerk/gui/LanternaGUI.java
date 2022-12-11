@@ -199,7 +199,7 @@ public class LanternaGUI implements GUI {
 
         textGraphics.putString(getWidth() - 20, getHeight() + 1, "P Up: ");
         textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.YELLOW_BRIGHT);
-        textGraphics.putString(getWidth() - 14, getHeight() + 1, game.getPowerUp());
+        textGraphics.putString(getWidth() - 14, getHeight() + 1, (game.getPowerUp() == null) ? "-" : game.getPowerUp().getType().substring(0,1));
 
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         StringBuilder lives = new StringBuilder();
