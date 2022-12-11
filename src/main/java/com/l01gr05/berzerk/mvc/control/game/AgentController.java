@@ -7,8 +7,6 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
-import com.l01gr05.berzerk.mvc.model.elements.Bullet;
-import com.l01gr05.berzerk.mvc.model.elements.Exit;
 
 import java.io.IOException;
 
@@ -49,7 +47,7 @@ public class AgentController extends Controller<Arena> {
 
     private void shoot() {
         AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
-        getModel().addBullet(bullet);
+        getModel().addElement(bullet);
     }
 
     private void move(Position position, Game game) throws IOException {

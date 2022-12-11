@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arena {
-    private int width;
-    private int height;
-    private int level;
-
     private Game game;
     private Agent agent;
     private List<Exit> exits;
@@ -21,20 +17,13 @@ public class Arena {
     private List<Tower> towers;
     private Key key = null;
 
-    public Arena(int width, int height, Game game) {
-        this.width = width;
-        this.height = height;
+    public Arena(Game game) {
         this.game = game;
         this.enemies = new ArrayList<>();
         this.walls = new ArrayList<>();
         this.bullets = new ArrayList<>();
         this.exits = new ArrayList<>();
         this.towers = new ArrayList<>();
-    }
-
-    public Arena(int width, int height, int level, Game game) {
-        this(width, height, game);
-        this.level = level;
     }
 
     public Game getGame() {
@@ -48,11 +37,6 @@ public class Arena {
 
     public List<Tower> getTowers() {return towers;}
 
-    // set level
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     // Removes enemy on position
     public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
@@ -63,9 +47,8 @@ public class Arena {
     }
 
     public Wall getWall(Position position) {
-        for (Wall wall : walls) {
+        for (Wall wall : walls)
             if (wall.getPosition().equals(position)) return wall;
-        }
         return null;
     }
 
@@ -80,17 +63,16 @@ public class Arena {
             exits.add((Exit) element);
         } else if (element instanceof Enemy) {
             enemies.add((Enemy) element);
-        } else if (element instanceof Wall) {
+        } else if (element instanceof Bullet) {
+            bullets.add((Bullet) element);
+        }
+        else if (element instanceof Wall) {
             walls.add((Wall) element);
         } else if (element instanceof Tower) {
             towers.add((Tower) element);
         } else if (element instanceof Key) {
             key = (Key) element;
         }
-    }
-
-    public void addBullet(Bullet bullet) {
-        bullets.add(bullet);
     }
 
     public List<Element> getElements() {
@@ -133,11 +115,8 @@ public class Arena {
     }
 
     public boolean isTower(Position position) {
-        for (Tower tower : towers) {
-            if (tower.getPosition().equals(position)) {
-                return true;
-            }
-        }
+        for (Tower tower : towers)
+            if (tower.getPosition().equals(position)) return true;
         return false;
     }
 

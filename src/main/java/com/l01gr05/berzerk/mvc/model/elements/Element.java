@@ -7,8 +7,6 @@ import com.l01gr05.berzerk.mvc.view.game.ElementViewer;
 
 public abstract class Element {
     private Position position;
-    private Viewer<Element> viewer;
-
     public Element(Position p) {
         this.position = p;
     }

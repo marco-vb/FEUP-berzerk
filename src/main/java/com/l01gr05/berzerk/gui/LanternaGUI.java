@@ -23,20 +23,20 @@ import java.net.URL;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
-    private final int width;
-    private final int height;
-    private final Game game;
 
-    public LanternaGUI(int width, int height, Game game) throws IOException, URISyntaxException, FontFormatException {
-        this.width = width;
-        this.height = height;
-        this.game = game;
+    public LanternaGUI(Screen screen) { //Only created for testing purposes
+        this.screen = screen;
+    }
+
+    public LanternaGUI() throws IOException, URISyntaxException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(fontConfig);
         this.screen = createScreen(terminal);
     }
 
-    private Screen createScreen(Terminal terminal) throws IOException {
+
+
+    public Screen createScreen(Terminal terminal) throws IOException {
         final Screen screen;
         screen = new TerminalScreen(terminal);
 
@@ -46,15 +46,15 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
-    private Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException {
-        TerminalSize terminalSize = new TerminalSize(width, height + 2);
+    public Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException {
+        TerminalSize terminalSize = new TerminalSize(Game.WIDTH, Game.HEIGHT + 2);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         return terminalFactory.createTerminal();
     }
 
-    private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, IOException, FontFormatException {
+    public AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, IOException, FontFormatException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         assert resource != null;
         File fontFile = new File(resource.toURI());
@@ -65,14 +65,6 @@ public class LanternaGUI implements GUI {
 
         Font loadedFont = font.deriveFont(Font.PLAIN, 25);
         return AWTTerminalFontConfiguration.newInstance(loadedFont);
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     @Override
@@ -165,8 +157,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawMenu(Menu menu) {
-        int x = getWidth() / 2 - menu.getTitle().length() / 2 - 1;
-        int y = getHeight() / 2 - menu.getOptions().size() / 2 - 1;
+        int x = Game.WIDTH / 2 - menu.getTitle().length() / 2 - 1;
+        int y = Game.HEIGHT / 2 - menu.getOptions().size() / 2 - 1;
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         textGraphics.putString(x, y, menu.getTitle());
@@ -184,13 +176,13 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawStats(Arena model) {
+    public void drawStats(Arena model, Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        textGraphics.putString(0, getHeight() + 1, "Score: " + game.getScore());
+        textGraphics.putString(0, Game.HEIGHT + 1, "Score: " + game.getScore());
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < game.getLives(); i++)
             lives.append("A");
-        textGraphics.putString(getWidth() - 10, getHeight() + 1, "Lives: " + lives);
+        textGraphics.putString(Game.WIDTH - 10, Game.HEIGHT + 1, "Lives: " + lives);
     }
 }

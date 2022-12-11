@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.mvc.view;
 
+import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 
 import java.io.IOException;
@@ -15,5 +16,5 @@ public abstract class Viewer<Model> {
         return model;
     }
 
-    public abstract void draw(GUI gui) throws IOException;
+    public abstract void draw(GUI gui, Game game) throws IOException;
 }
