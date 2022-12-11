@@ -20,4 +20,8 @@ public class GameState extends State<Arena> {
     protected Viewer<Arena> getViewer() {
         return new ArenaViewer(getModel());
     }
+
+    public GameState(Arena arena, ArenaController arenaController, ArenaViewer arenaViewer) { // For testing purposes
+        super(arena, arenaController, arenaViewer);
+    }
 }

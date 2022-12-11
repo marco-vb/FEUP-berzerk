@@ -5,6 +5,7 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Arena {
@@ -143,5 +144,13 @@ public class Arena {
 
     public boolean isAgent(Position position) {
         return agent.getPosition().equals(position);
+    }
+
+    public List<Wall> getWalls() {
+        return walls;
+    }
+
+    public List<Exit> getExits() {
+        return exits;
     }
 }
