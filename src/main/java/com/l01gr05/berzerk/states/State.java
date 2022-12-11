@@ -30,4 +30,10 @@ public abstract class State<Model> {
         controller.update(game, action);
         viewer.draw(gui, game);
     }
+
+    public State(Model model, Controller<Model> controller, Viewer<Model> viewer) { // For testing purposes
+        this.model = model;
+        this.controller = controller;
+        this.viewer = viewer;
+    }
 }

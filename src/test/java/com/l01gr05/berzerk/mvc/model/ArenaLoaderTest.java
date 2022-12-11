@@ -28,15 +28,13 @@ public class ArenaLoaderTest {
     void testLoadArena() throws IOException {
         arenaLoader = new ArenaLoader(level, game);
         Arena arena = arenaLoader.load();
-        Assertions.assertNotNull(arena);
-    }
-
-    @Test
-    void testLevelReader() throws IOException {
-        arenaLoader = new ArenaLoader(level, game);
-        List<String> lines = arenaLoader.readArenaFile(level);
-        boolean height = lines.size() == Game.HEIGHT;
-        boolean width = lines.get(0).length() == Game.WIDTH;
-        Assertions.assertTrue(height && width);
+        boolean isArenaLoaded = arena != null;
+        boolean arenaHasAgent = arena.getAgent() != null;
+        boolean arenaHasEnemies = arena.getEnemies().size() > 0;
+        boolean arenaHasWalls = arena.getWalls().size() > 0;
+        boolean arenaHasExits = arena.getExits().size() > 0;
+        boolean arenaHasKey = arena.getKey() != null;
+        boolean arenaHasTower = arena.getTowers().size() > 0;
+        Assertions.assertTrue(isArenaLoaded && arenaHasAgent && arenaHasEnemies && arenaHasWalls && arenaHasExits && arenaHasKey && arenaHasTower);
     }
 }

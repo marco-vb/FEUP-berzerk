@@ -20,7 +20,6 @@ public class Game {
     private int lives;
     private final LanternaGUI gui;
     private State state;
-
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI();
         this.state = new MenuState(new MenuStart());
@@ -110,6 +109,22 @@ public class Game {
 
     public void toggleSound() {
         // TODO
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Game(LanternaGUI gui) {  // For testing purposes
+        this.gui = gui;
+        this.level = 1;
+        this.score = 0;
+        this.lives = 3;
+        this.state = new MenuState(new MenuStart());
     }
 }
 
