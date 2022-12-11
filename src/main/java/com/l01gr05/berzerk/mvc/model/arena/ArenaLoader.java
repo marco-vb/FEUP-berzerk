@@ -28,14 +28,14 @@ public class ArenaLoader {
         setArenaElements(arena, lines);
         return arena;
     }
-    private List<String> readArenaFile(int level) throws IOException {
+    public List<String> readArenaFile(int level) throws IOException {
         createRandomLevel(level);
         URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
         BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
         return level_reader.lines().collect(Collectors.toList());
     }
-    private void createRandomLevel(int level) throws IOException {
+    public void createRandomLevel(int level) throws IOException {
         URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
         BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
@@ -58,7 +58,7 @@ public class ArenaLoader {
         }
         level_writer.close();
     }
-    private void createWalls(char[][] grid, int dx[], int dy[]) {
+    public void createWalls(char[][] grid, int dx[], int dy[]) {
         for (int i = 0; i < Game.HEIGHT; i++) {
             for (int j = 0; j < Game.WIDTH; j++) {
                 if (i == 0 || i == 18 || j == 0 || j == 30) grid[i][j] = '#';
@@ -70,7 +70,7 @@ public class ArenaLoader {
 
         createRandomWalls(grid, dx, dy);
     }
-    private void createRandomWalls(char[][] grid, int[] dx, int[] dy) {
+    public void createRandomWalls(char[][] grid, int[] dx, int[] dy) {
         for (int i = 0; i < dx.length; i++) {
             int x = dx[i];
             int y = dy[i];
@@ -90,7 +90,7 @@ public class ArenaLoader {
             }
         }
     }
-    private void createExit(char[][] grid, int[] dx, int[] dy) {
+    public void createExit(char[][] grid, int[] dx, int[] dy) {
         Random random = new Random();
         int wall = random.nextInt(4);
         int x = 0, y = 0;
@@ -115,15 +115,15 @@ public class ArenaLoader {
         }
         this.exit = new Position(x, y);
     }
-    private void createTowers(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
+    public void createTowers(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
         int number_of_towers = level / 4;
         place(grid, distances_from_exit, number_of_towers, 'T', agent_x, agent_y);
     }
-    private void createKeys(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
+    public void createKeys(char[][] grid, int[][] distances_from_exit, int agent_x, int agent_y) {
         int number_of_keys = 1;
         place(grid, distances_from_exit, number_of_keys, 'K', agent_x, agent_y);
     }
-    private Position spawnPlayer(char[][] grid, int[][] distances_from_exit) {
+    public Position spawnPlayer(char[][] grid, int[][] distances_from_exit) {
         Position p = bfs_distances(distances_from_exit, grid, exit.getX(), exit.getY());
         int x = p.getX(), y = p.getY();
         if (grid[y][x-1] == '#') x++; if (grid[y][x+1] == '#') x--;
@@ -132,11 +132,11 @@ public class ArenaLoader {
         grid[y][x] = 'A';
         return new Position(x, y);
     }
-    private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
+    public void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
         int num_enemies = min(10, level);
         place(grid, distances_from_exit, num_enemies, 'E', agent_x, agent_y);
     }
-    private Element createElement(char element, int x, int y) {
+    public Element createElement(char element, int x, int y) {
         switch (element) {
             case 'A': return new Agent(new Position(x, y));
             case 'X': return new Exit(new Position(x, y));
@@ -147,7 +147,7 @@ public class ArenaLoader {
         }
         return null;
     }
-    private void setArenaElements(Arena arena, List<String> lines) {
+    public void setArenaElements(Arena arena, List<String> lines) {
         for (int i = 0; i < lines.size(); i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
                 char c = lines.get(i).charAt(j);
@@ -158,7 +158,7 @@ public class ArenaLoader {
             }
         }
     }
-    private void place(char[][] grid, int[][] distances_from_exit, int n, char c, int agent_x, int agent_y) {
+    public void place(char[][] grid, int[][] distances_from_exit, int n, char c, int agent_x, int agent_y) {
         for (int i = 0; i < n; i++) {
             do {
                 Random random = new Random();
@@ -173,7 +173,7 @@ public class ArenaLoader {
             } while (true);
         }
     }
-    private Position bfs_distances(int[][] distances_from_exit, char[][] grid, int x, int y) {
+    public Position bfs_distances(int[][] distances_from_exit, char[][] grid, int x, int y) {
         int dx[] = new int[]{-1, 0, 1, 0};
         int dy[] = new int[]{0, -1, 0, 1};
         int queue[][] = new int[Game.HEIGHT * Game.WIDTH][2];
@@ -203,7 +203,7 @@ public class ArenaLoader {
         }
         return new Position(x, y);
     }
-    private void setup_arrays(int[] dx, int[] dy, int[][] distances_from_exit) {
+    public void setup_arrays(int[] dx, int[] dy, int[][] distances_from_exit) {
         int x_offset = (Game.WIDTH - 6) / 5;
         int y_offset = (Game.HEIGHT - 4) / 3;
         for (int i = 0; i < 8; i++) {
