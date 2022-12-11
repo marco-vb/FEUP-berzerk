@@ -30,4 +30,11 @@ public class Agent extends Element {
         return initialPosition;
     }
 
+    public PowerUp getPowerUp() {
+        return powerUp;
+    }
+
+    public void setPowerUp(PowerUp powerUp) {
+        this.powerUp = powerUp;
+    }
 }

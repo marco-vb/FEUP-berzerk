@@ -158,7 +158,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawShield(Element model) {
-            draw(model.getPosition().getX(), model.getPosition().getY(), 'S', TextColor.ANSI.BLUE_BRIGHT);
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'S', TextColor.ANSI.BLUE_BRIGHT);
     }
 
     @Override

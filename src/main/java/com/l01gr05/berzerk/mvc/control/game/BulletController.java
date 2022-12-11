@@ -8,6 +8,7 @@ import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
 public class BulletController extends Controller<Arena> {
+
     public BulletController(Arena arena) {
         super(arena);
     }
@@ -24,6 +25,7 @@ public class BulletController extends Controller<Arena> {
     }
 
     private void move(Bullet bullet, Position position, Game game) {
+        int random = 0;//(int) (Math.random() * 10);
         if (getModel().isWall(position) || getModel().isTower(position)) {
             getModel().removeBullet(bullet);
         }
@@ -32,7 +34,11 @@ public class BulletController extends Controller<Arena> {
             getModel().removeBullet(bullet);
             for (int i = 0; i < getModel().getEnemies().size(); i++) {
                 if (getModel().getEnemies().get(i).getPosition().equals(position)) {
+                    if (random == 0) {
+                        getModel().addPowerUp(new Shield(getModel().getEnemies().get(i).getPosition()));
+                    }
                     getModel().removeEnemy(getModel().getEnemies().get(i));
+
                 }
             }
             game.setScore(game.getScore() + 10);

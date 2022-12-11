@@ -11,7 +11,7 @@ public class Shield extends PowerUp {
 
     @Override
     public ShieldViewer getViewer() {
-        return null;
+        return new ShieldViewer(this);
     }
 }
 

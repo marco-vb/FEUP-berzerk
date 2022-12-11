@@ -13,6 +13,7 @@ public class ArenaController extends Controller<Arena> {
     private final BulletController bulletController;
 
     private final TowerController towerController;
+    private final ShieldController shieldController;
 
     public ArenaController(Arena arena) {
         super(arena);
@@ -20,6 +21,7 @@ public class ArenaController extends Controller<Arena> {
         this.agentController = new AgentController(arena);
         this.enemyController = new EnemyController(arena);
         this.bulletController = new BulletController(arena);
+        this.shieldController = new ShieldController(arena);
         this.towerController = new TowerController(arena);
     }
 
@@ -32,6 +34,7 @@ public class ArenaController extends Controller<Arena> {
             agentController.update(game, action);
             enemyController.update(game, action);
             bulletController.update(game, action);
+            shieldController.update(game, action);
             towerController.update(game, action);
         }
     }
