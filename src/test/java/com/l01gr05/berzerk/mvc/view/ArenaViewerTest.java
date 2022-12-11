@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 public class ArenaViewerTest {
+    private Game game;
     private ArenaViewer arenaViewer;
     private GUI gui;
     private Arena arena;
@@ -24,7 +25,7 @@ public class ArenaViewerTest {
 
     @BeforeEach
     void setUp()  {
-        Game game = Mockito.mock(Game.class);
+        game = Mockito.mock(Game.class);
         this.arena = new Arena(game);
         agent = new Agent(new Position(1, 1));
         enemy = new Enemy(new Position(1, 1));

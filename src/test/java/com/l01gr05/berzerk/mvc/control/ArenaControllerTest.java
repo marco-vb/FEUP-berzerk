@@ -47,7 +47,7 @@ public class ArenaControllerTest {
     @Test
     void testUpdateWithQuit() throws IOException {
         arenaController.update(game, GUI.INPUT.QUIT);
-        Mockito.verify(game).setState(null);
+        Mockito.verify(game).showStartMenu();
     }
 
     @Test

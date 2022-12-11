@@ -24,7 +24,7 @@ import java.net.URL;
 public class LanternaGUI implements GUI {
     private final Screen screen;
 
-    public LanternaGUI(Screen screen) {
+    public LanternaGUI(Screen screen) { //Only created for testing purposes
         this.screen = screen;
     }
 
