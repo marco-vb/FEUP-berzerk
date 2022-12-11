@@ -1,8 +1,6 @@
 package com.l01gr05.berzerk.mvc.view;
 
-import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.mvc.control.menu.MenuController;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import com.l01gr05.berzerk.mvc.view.menu.MenuViewer;
@@ -24,7 +22,7 @@ public class MenuViewerTest {
     void testMenuDraw() throws IOException {
         menu = new MenuStart();
         MenuViewer menuViewer = new MenuViewer(menu);
-        menuViewer.draw(gui);
+        menuViewer.draw(gui, game);
         Mockito.verify(gui, Mockito.times(1)).clear();
         Mockito.verify(gui, Mockito.times(1)).drawMenu(menu);
         Mockito.verify(gui, Mockito.times(1)).refresh();

@@ -38,7 +38,7 @@ public class ArenaViewerTest {
 
     @Test
     public void testDraw() throws IOException {
-        arenaViewer.draw(gui);
+        arenaViewer.draw(gui, game);
         Mockito.verify(gui, Mockito.times(1)).drawAgent(agent);
         Mockito.verify(gui, Mockito.times(1)).drawEnemy(enemy);
         Mockito.verify(gui, Mockito.times(1)).drawExit(exit);
@@ -46,7 +46,7 @@ public class ArenaViewerTest {
 
     @Test
     public void clearAndRefresh() throws IOException {
-        arenaViewer.draw(gui);
+        arenaViewer.draw(gui, game);
         Mockito.verify(gui, Mockito.times(1)).clear();
         Mockito.verify(gui, Mockito.times(1)).refresh();
     }
