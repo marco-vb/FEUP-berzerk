@@ -8,7 +8,9 @@ import com.l01gr05.berzerk.states.GameState;
 import com.l01gr05.berzerk.states.MenuState;
 import com.l01gr05.berzerk.states.State;
 
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -20,15 +22,19 @@ public class Game {
     private int lives;
     private final LanternaGUI gui;
     private State state;
-    public Game() throws IOException, URISyntaxException, FontFormatException {
+    private AudioInputStream inputStream;
+    private Clip clip;
+    public Game() throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         this.gui = new LanternaGUI();
         this.state = new MenuState(new MenuStart());
         this.level = 1;
         this.score = 0;
         this.lives = 3;
+        this.inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/music.wav"));
+        this.clip = AudioSystem.getClip();
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         Game game = new Game();
         game.run();
     }
@@ -61,6 +67,7 @@ public class Game {
         int FPS = 10;
         long frameDuration = 1000 / FPS;
 
+        playMusic();
         while (state != null) {
             long start = System.currentTimeMillis();
             state.update(this, gui);
@@ -104,7 +111,11 @@ public class Game {
     }
 
     public void toggleMusic() {
-        // TODO
+        if (clip.isRunning()) {
+            clip.stop();
+        } else {
+            clip.start();
+        }
     }
 
     public void toggleSound() {
@@ -125,6 +136,15 @@ public class Game {
         this.score = 0;
         this.lives = 3;
         this.state = new MenuState(new MenuStart());
+    }
+
+    public void playMusic() {
+        try {
+            clip.open(inputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
