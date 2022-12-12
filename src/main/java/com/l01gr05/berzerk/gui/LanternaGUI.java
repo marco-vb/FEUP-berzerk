@@ -1,5 +1,6 @@
 package com.l01gr05.berzerk.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -137,25 +138,24 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawWall(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '#', TextColor.ANSI.GREEN_BRIGHT);
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#', TextColor.ANSI.BLUE);
     }
 
     @Override
     public void drawEnemy(Element model) {
-        TextColor color = model instanceof DumbEnemy ? TextColor.ANSI.RED_BRIGHT : TextColor.ANSI.RED;
-        if (model instanceof DumbEnemy) draw(model.getPosition().getX(), model.getPosition().getY(), '+', color);
-        else draw(model.getPosition().getX(), model.getPosition().getY(), ')', color);
+        if (model instanceof DumbEnemy) draw(model.getPosition().getX(), model.getPosition().getY(), '+', TextColor.ANSI.RED_BRIGHT);
+        else draw(model.getPosition().getX(), model.getPosition().getY(), ')', TextColor.ANSI.RED_BRIGHT);
     }
 
     @Override
     public void drawBullet(Element model) {
-        TextColor color = model instanceof AgentBullet ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.RED;
+        TextColor color = model instanceof AgentBullet ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.RED_BRIGHT;
         draw(model.getPosition().getX(), model.getPosition().getY(), '.', color);
     }
 
     @Override
     public void drawKey(Element model) {
-        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '*', TextColor.ANSI.CYAN_BRIGHT);
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '*', TextColor.ANSI.YELLOW);
     }
 
     @Override
