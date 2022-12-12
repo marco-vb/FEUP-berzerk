@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ArenaControllerTest {
     private Game game;
@@ -59,7 +60,7 @@ public class ArenaControllerTest {
     @Test
     void testUpdateWithBulletController() throws IOException {
         arenaController.update(game, GUI.INPUT.SHOOT);
-        assertEquals(1, arena.getBullets().size());
+        assertNotEquals(0, arena.getBullets().size());
     }
 
     @Test
