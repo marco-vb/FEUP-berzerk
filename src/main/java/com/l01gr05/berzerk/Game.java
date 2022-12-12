@@ -136,13 +136,12 @@ public class Game {
     public void setIsPowerUpActive(boolean state) {
         isPowerUpActive = state;
     }
-        public State getState () {
+    public State getState () {
             return state;
         }
-
-        public int getLevel () {
-            return level;
-        }
+    public int getLevel () {
+        return level;
+    }
 
     public Game(LanternaGUI gui) {  // For testing purposes
             this.gui = gui;
