@@ -13,6 +13,11 @@ public abstract class PowerUp extends Element {
         return type;
     }
 
+    public void setEnabled(boolean state) {
+        this.enabled = state;
+    }
+
+
     public void switchPowerUp(Agent agent) { enabled = !enabled; };
 
     public boolean isEnabled() {

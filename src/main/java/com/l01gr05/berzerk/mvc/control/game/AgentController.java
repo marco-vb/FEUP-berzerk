@@ -118,6 +118,8 @@ public class AgentController extends Controller<Arena> {
             agent.setPosition(agent.getInitialPosition());
         } else if (arena.isExit(position)) {
             game.nextLevel();
+            getModel().getAgent().setPowerUp(game.getPowerUp());
+            getModel().getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
         } else if (arena.isKey(position)) {
             arena.removeKey();
             arena.setOpen();
