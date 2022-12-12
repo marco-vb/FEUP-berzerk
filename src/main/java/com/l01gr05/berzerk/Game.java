@@ -30,6 +30,7 @@ public class Game {
         this.level = 1;
         this.score = 0;
         this.lives = 3;
+        this.powerUp = null;
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
@@ -86,6 +87,7 @@ public class Game {
         this.score = 0;
         this.lives = 3;
         this.level = 1;
+        this.powerUp = null;
         this.state = new GameState(new ArenaLoader(1, this).load());
     }
 
@@ -127,8 +129,8 @@ public class Game {
         return (powerUp == null) ? false : powerUp.isEnabled();
     }
 
-    public void switchIsPowerUpActive() {
-        isPowerUpActive = !isPowerUpActive;
+    public void setIsPowerUpActive(boolean state) {
+        isPowerUpActive = state;
     }
 }
 

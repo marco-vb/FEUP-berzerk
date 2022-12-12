@@ -14,9 +14,5 @@ public class Shield extends PowerUp {
         return new ShieldViewer(this);
     }
 
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 }
 

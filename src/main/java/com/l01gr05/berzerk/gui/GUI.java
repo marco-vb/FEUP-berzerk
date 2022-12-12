@@ -31,6 +31,8 @@ public interface GUI {
 
     void drawShield(Element model);
 
+    void drawLazer(Element model);
+
     void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);

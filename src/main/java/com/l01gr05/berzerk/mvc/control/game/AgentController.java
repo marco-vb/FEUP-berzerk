@@ -7,6 +7,7 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
+import com.l01gr05.berzerk.mvc.model.elements.Lazer;
 import com.l01gr05.berzerk.mvc.model.elements.Shield;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class AgentController extends Controller<Arena> {
         if (action == GUI.INPUT.DOWN) moveDown(game);
         if (action == GUI.INPUT.LEFT) moveLeft(game);
         if (action == GUI.INPUT.RIGHT) moveRight(game);
-        if (action == GUI.INPUT.SHOOT) shoot();
+        if (action == GUI.INPUT.SHOOT) shoot(game);
         if (action == GUI.INPUT.ACTIVATE) switchPowerUp(game);
         if (action == GUI.INPUT.NONE) move(getModel().getAgent().getPosition(), game);
 
@@ -48,16 +49,33 @@ public class AgentController extends Controller<Arena> {
         getModel().getAgent().setDirection('E');
     }
 
-    private void shoot() {
-        AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
-        getModel().addBullet(bullet);
+    private void shoot(Game game) {
+        if (getModel().getAgent().getPowerUp() instanceof Lazer && getModel().getAgent().getPowerUp().isEnabled()) {
+            Agent agent = getModel().getAgent();
+            AgentBullet northBullet = new AgentBullet(agent.getPosition(), 'N');
+            AgentBullet southBullet = new AgentBullet(agent.getPosition(), 'S');
+            AgentBullet eastBullet = new AgentBullet(agent.getPosition(), 'E');
+            AgentBullet westBullet = new AgentBullet(agent.getPosition(), 'W');
+            getModel().addBullet(northBullet);
+            getModel().addBullet(southBullet);
+            getModel().addBullet(eastBullet);
+            getModel().addBullet(westBullet);
+            agent.setPowerUp(null);
+            game.setPowerUp(null);
+            game.setIsPowerUpActive(false);
+        }
+        else {
+            AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
+            getModel().addBullet(bullet);
+        }
+
     }
 
     private void switchPowerUp(Game game) {
         if (getModel().getAgent().getPowerUp() != null) {
             getModel().getAgent().getPowerUp().switchPowerUp(getModel().getAgent());
             game.setPowerUp(getModel().getAgent().getPowerUp());
-            game.switchIsPowerUpActive();
+            game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
         }
     }
     private void move(Position position, Game game) throws IOException {
@@ -70,7 +88,7 @@ public class AgentController extends Controller<Arena> {
                 game.showStartMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.switchIsPowerUpActive();
+                game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
             }
             agent.setPosition(agent.getInitialPosition());
         } else if (arena.isEnemy(position)){
@@ -79,7 +97,7 @@ public class AgentController extends Controller<Arena> {
                 //optei por n matar o monstro e apenas partir o shield
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.switchIsPowerUpActive();
+                game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
                 return;
             }
             game.decreaseLives();
@@ -87,7 +105,7 @@ public class AgentController extends Controller<Arena> {
                 game.showStartMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.switchIsPowerUpActive();
+                game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
             }
             agent.setPosition(agent.getInitialPosition());
         } else if (arena.isExit(position)) {
