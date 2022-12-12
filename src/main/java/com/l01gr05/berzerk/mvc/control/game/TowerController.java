@@ -22,7 +22,7 @@ public class TowerController extends Controller<Arena> {
                 char[] directions = {'N', 'S', 'E', 'W'};
                 int random = (int) (Math.random() * directions.length);
                 char direction = directions[random];
-                getModel().addBullet(new EnemyBullet(tower.getPosition(), direction));
+                getModel().addElement(new EnemyBullet(tower.getPosition(), direction));
             }
         }
     }

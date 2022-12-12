@@ -77,7 +77,6 @@ public class AgentController extends Controller<Arena> {
             AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
             getModel().addBullet(bullet);
         }
-
     }
 
     private void switchPowerUp(Game game) {

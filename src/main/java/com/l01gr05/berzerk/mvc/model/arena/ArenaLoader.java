@@ -23,8 +23,7 @@ public class ArenaLoader {
         this.exit = new Position(0, 0);
     }
     public Arena load() throws IOException {
-        Arena arena = new Arena(Game.WIDTH, Game.HEIGHT, level, game);
-        arena.setLevel(level);
+        Arena arena = new Arena(game);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
         if (level > 1 ) {
@@ -145,7 +144,7 @@ public class ArenaLoader {
         switch (element) {
             case 'A': return new Agent(new Position(x, y));
             case 'X': return new Exit(new Position(x, y));
-            case 'E': return new Enemy(new Position(x, y));
+            case 'E': return Math.random() > level * 0.1 ? new DumbEnemy(new Position(x, y)) : new SmartEnemy(new Position(x, y));
             case '#': return new Wall(new Position(x, y));
             case 'S': return new Shield(new Position(x, y));
             case 'C': return new Canon(new Position(x, y));

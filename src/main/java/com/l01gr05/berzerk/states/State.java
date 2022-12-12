@@ -28,6 +28,12 @@ public abstract class State<Model> {
     public void update(Game game, GUI gui) throws IOException {
         GUI.INPUT action = gui.getInput();
         controller.update(game, action);
-        viewer.draw(gui);
+        viewer.draw(gui, game);
+    }
+
+    public State(Model model, Controller<Model> controller, Viewer<Model> viewer) { // For testing purposes
+        this.model = model;
+        this.controller = controller;
+        this.viewer = viewer;
     }
 }

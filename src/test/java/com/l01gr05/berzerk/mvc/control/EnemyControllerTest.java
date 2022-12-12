@@ -2,7 +2,6 @@ package com.l01gr05.berzerk.mvc.control;
 
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.mvc.control.game.AgentController;
 import com.l01gr05.berzerk.mvc.control.game.EnemyController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
@@ -29,7 +28,7 @@ public class EnemyControllerTest {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
         enemy = new Enemy(new Position(1, 1));
-        arena = new Arena(10, 10, game);
+        arena = new Arena(game);
         exit = new Exit(new Position(9, 9));
         arena.addElement(enemy);
         arena.addElement(agent);
@@ -42,5 +41,11 @@ public class EnemyControllerTest {
         startingPos = enemy.getPosition();
         enemyController.update(game, GUI.INPUT.UP);
         assertNotEquals(startingPos, enemy.getPosition());
+    }
+
+    @Test
+    void testEnemyShoots() {    // Tests in if at least one bullet is added to the arena in 1000 iterations
+        for (int i = 0; i < 1000; i++) enemyController.update(game, GUI.INPUT.UP);
+        assertNotEquals(0, arena.getBullets().size());
     }
 }
