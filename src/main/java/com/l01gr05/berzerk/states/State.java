@@ -5,6 +5,8 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.view.Viewer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public abstract class State<Model> {
@@ -25,7 +27,7 @@ public abstract class State<Model> {
         return model;
     }
 
-    public void update(Game game, GUI gui) throws IOException {
+    public void update(Game game, GUI gui) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GUI.INPUT action = gui.getInput();
         controller.update(game, action);
         viewer.draw(gui, game);

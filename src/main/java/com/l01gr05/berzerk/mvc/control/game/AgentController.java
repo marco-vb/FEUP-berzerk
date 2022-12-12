@@ -61,6 +61,7 @@ public class AgentController extends Controller<Arena> {
             game.setPowerUp(null);
             game.setIsPowerUpActive(false);
         } else if (agent.getPowerUp() instanceof Lazer && agent.getPowerUp().isEnabled()) {
+            game.playLaserSound();
             char direction = agent.getDirection();
             Position position = agent.getPosition();
             while (!getModel().isWall(position)){
@@ -74,6 +75,7 @@ public class AgentController extends Controller<Arena> {
             game.setPowerUp(null);
             game.setIsPowerUpActive(false);
         } else {
+            game.playShootSound();
             AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
             getModel().addElement(bullet);
         }
