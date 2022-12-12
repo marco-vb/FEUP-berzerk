@@ -140,7 +140,7 @@ public class ArenaLoader {
         switch (element) {
             case 'A': return new Agent(new Position(x, y));
             case 'X': return new Exit(new Position(x, y));
-            case 'E': return new Enemy(new Position(x, y));
+            case 'E': return Math.random() > level * 0.1 ? new DumbEnemy(new Position(x, y)) : new SmartEnemy(new Position(x, y));
             case '#': return new Wall(new Position(x, y));
             case 'T': return new Tower(new Position(x, y));
             case 'K': return new Key(new Position(x, y));

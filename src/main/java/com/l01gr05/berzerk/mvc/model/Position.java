@@ -48,6 +48,23 @@ public class Position {
         return new Position(new_x, new_y);
     }
 
+    public Position getClosest(Position position) {
+        int new_x = x;
+        int new_y = y;
+        if (position.getX() > x) {
+            new_x++;
+        } else if (position.getX() < x) {
+            new_x--;
+        }
+        if (position.getY() > y) {
+            new_y++;
+        } else if (position.getY() < y) {
+            new_y--;
+        }
+
+        return new Position(new_x, new_y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
