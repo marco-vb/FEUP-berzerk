@@ -90,6 +90,8 @@ public class Arena {
             powerUps.add((Shield) element);
         } else if (element instanceof Canon) {
             powerUps.add((Canon) element);
+        } else if (element instanceof Lazer) {
+            powerUps.add((Lazer) element);
         } else if (element instanceof Key) {
             key = (Key) element;
         }

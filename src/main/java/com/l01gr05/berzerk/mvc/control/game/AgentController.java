@@ -5,10 +5,7 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.Controller;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Agent;
-import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
-import com.l01gr05.berzerk.mvc.model.elements.Canon;
-import com.l01gr05.berzerk.mvc.model.elements.Shield;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.io.IOException;
 
@@ -50,8 +47,8 @@ public class AgentController extends Controller<Arena> {
     }
 
     private void shoot(Game game) {
-        if (getModel().getAgent().getPowerUp() instanceof Canon && getModel().getAgent().getPowerUp().isEnabled()) {
-            Agent agent = getModel().getAgent();
+        Agent agent = getModel().getAgent();
+        if (agent.getPowerUp() instanceof Canon && agent.getPowerUp().isEnabled()) {
             AgentBullet northBullet = new AgentBullet(agent.getPosition(), 'N');
             AgentBullet southBullet = new AgentBullet(agent.getPosition(), 'S');
             AgentBullet eastBullet = new AgentBullet(agent.getPosition(), 'E');
@@ -63,8 +60,20 @@ public class AgentController extends Controller<Arena> {
             agent.setPowerUp(null);
             game.setPowerUp(null);
             game.setIsPowerUpActive(false);
-        }
-        else {
+        } else if (agent.getPowerUp() instanceof Lazer && agent.getPowerUp().isEnabled()) {
+            char direction = agent.getDirection();
+            Position position = agent.getPosition();
+            while (!getModel().isWall(position)){
+                getModel().addBullet(new AgentBullet(position, direction));
+                if (direction == 'N') position = position.getUp();
+                if (direction == 'S') position = position.getDown();
+                if (direction == 'E') position = position.getRight();
+                if (direction == 'W') position = position.getLeft();
+            }
+            agent.setPowerUp(null);
+            game.setPowerUp(null);
+            game.setIsPowerUpActive(false);
+        } else {
             AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
             getModel().addBullet(bullet);
         }

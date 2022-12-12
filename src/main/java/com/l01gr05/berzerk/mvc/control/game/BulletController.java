@@ -40,8 +40,10 @@ public class BulletController extends Controller<Arena> {
                     else if (random == 1) {//... para droppar o power up desejado
                         getModel().addPowerUp(new Canon(getModel().getEnemies().get(i).getPosition()));
                     }
+                    else if (random == 2){
+                        getModel().addPowerUp(new Lazer(getModel().getEnemies().get(i).getPosition()));
+                    }
                     getModel().removeEnemy(getModel().getEnemies().get(i));
-
                 }
             }
             game.setScore(game.getScore() + 10);

@@ -145,6 +145,7 @@ public class ArenaLoader {
             case '#': return new Wall(new Position(x, y));
             case 'S': return new Shield(new Position(x, y));
             case 'C': return new Canon(new Position(x, y));
+            case 'L': return new Canon(new Position(x, y));
             case 'T': return new Tower(new Position(x, y));
             case 'K': return new Key(new Position(x, y));
         }
