@@ -9,7 +9,9 @@ import com.l01gr05.berzerk.states.GameState;
 import com.l01gr05.berzerk.states.MenuState;
 import com.l01gr05.berzerk.states.State;
 
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -26,17 +28,21 @@ public class Game {
     private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
-
-    public Game() throws IOException, URISyntaxException, FontFormatException {
+    private AudioInputStream inputStream;
+    private Clip clip;
+    boolean soundsOn = true;
+    public Game() throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         this.gui = new LanternaGUI();
         this.state = new MenuState(new MenuStart());
         this.level = 1;
         this.score = 0;
         this.lives = 3;
+        this.inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/music.wav"));
+        this.clip = AudioSystem.getClip();
         this.powerUp = null;
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         Game game = new Game();
         game.run();
     }
@@ -65,10 +71,11 @@ public class Game {
         return lives == 0;
     }
 
-    private void run() throws IOException {
+    private void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         int FPS = 10;
         long frameDuration = 1000 / FPS;
 
+        playMusic();
         while (state != null) {
             long start = System.currentTimeMillis();
             state.update(this, gui);
@@ -114,11 +121,24 @@ public class Game {
     }
 
     public void toggleMusic() {
-        // TODO
+        if (clip.isRunning()) {
+            clip.stop();
+        } else {
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     public void toggleSound() {
-        // TODO
+        if (soundsOn) {
+            soundsOn = false;
+        } else {
+            soundsOn = true;
+        }
+    }
+
+    public boolean isSoundOn() {
+        return soundsOn;
     }
 
     public PowerUp getPowerUp() {
@@ -144,10 +164,59 @@ public class Game {
     }
 
     public Game(LanternaGUI gui) {  // For testing purposes
-            this.gui = gui;
-            this.level = 1;
-            this.score = 0;
-            this.lives = 3;
-            this.state = new MenuState(new MenuStart());
+        this.gui = gui;
+        this.level = 1;
+        this.score = 0;
+        this.lives = 3;
+        this.state = new MenuState(new MenuStart());
+    }
+
+    public void playMusic() {
+        try {
+            clip.open(inputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (LineUnavailableException | IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void playShootSound() {
+        if (soundsOn) {
+            try {
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/shot.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(inputStream);
+                clip.start();
+            } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void playLaserSound() {
+        if (soundsOn) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/laser.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void playCannonSound() {
+        if (soundsOn) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/cannon.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
