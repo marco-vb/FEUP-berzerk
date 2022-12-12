@@ -128,7 +128,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawEnemy(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), 'E', TextColor.ANSI.RED_BRIGHT);
+        TextColor color = model instanceof DumbEnemy ? TextColor.ANSI.RED_BRIGHT : TextColor.ANSI.RED;
+        draw(model.getPosition().getX(), model.getPosition().getY(), 'E', color);
     }
 
     @Override
