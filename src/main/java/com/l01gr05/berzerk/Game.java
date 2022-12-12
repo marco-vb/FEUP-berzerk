@@ -18,6 +18,9 @@ import java.net.URISyntaxException;
 public class Game {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 19;
+    public static final int STATS_WIDTH = 15;
+
+    public static final String BACKGROUND_COLOR = "#180030";
     private int level;
     private int score;
     private int lives;
@@ -153,13 +156,12 @@ public class Game {
     public void setIsPowerUpActive(boolean state) {
         isPowerUpActive = state;
     }
-        public State getState () {
+    public State getState () {
             return state;
         }
-
-        public int getLevel () {
-            return level;
-        }
+    public int getLevel () {
+        return level;
+    }
 
     public Game(LanternaGUI gui) {  // For testing purposes
         this.gui = gui;

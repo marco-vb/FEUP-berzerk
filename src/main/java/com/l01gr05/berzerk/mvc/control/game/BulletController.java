@@ -25,7 +25,8 @@ public class BulletController extends Controller<Arena> {
     }
 
     private void move(Bullet bullet, Position position, Game game) {
-        int random = (int) (Math.random() * 2);
+        // make random number between 0, 1, 2
+        int random = (int) (Math.random() * 3);
         if (getModel().isWall(position) || getModel().isTower(position)) {
             getModel().removeBullet(bullet);
         }
