@@ -164,8 +164,8 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawLazer(Element model) {
-        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'L', TextColor.ANSI.BLUE_BRIGHT);
+    public void drawCanon(Element model) {
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'C', TextColor.ANSI.BLUE_BRIGHT);
     }
 
     @Override

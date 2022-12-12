@@ -88,6 +88,8 @@ public class Arena {
             towers.add((Tower) element);
         } else if (element instanceof Shield) {
             powerUps.add((Shield) element);
+        } else if (element instanceof Canon) {
+            powerUps.add((Canon) element);
         } else if (element instanceof Key) {
             key = (Key) element;
         }

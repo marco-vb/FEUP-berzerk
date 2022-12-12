@@ -25,7 +25,7 @@ public class BulletController extends Controller<Arena> {
     }
 
     private void move(Bullet bullet, Position position, Game game) {
-        int random = 1;//(int) (Math.random() * 10);
+        int random = (int) (Math.random() * 2);
         if (getModel().isWall(position) || getModel().isTower(position)) {
             getModel().removeBullet(bullet);
         }
@@ -38,7 +38,7 @@ public class BulletController extends Controller<Arena> {
                         getModel().addPowerUp(new Shield(getModel().getEnemies().get(i).getPosition()));
                     }
                     else if (random == 1) {//... para droppar o power up desejado
-                        getModel().addPowerUp(new Lazer(getModel().getEnemies().get(i).getPosition()));
+                        getModel().addPowerUp(new Canon(getModel().getEnemies().get(i).getPosition()));
                     }
                     getModel().removeEnemy(getModel().getEnemies().get(i));
 
