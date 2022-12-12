@@ -27,9 +27,9 @@ public class ArenaLoader {
         arena.setLevel(level);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
-        if (level >1 ) {
+        if (level > 1 ) {
             arena.getAgent().setPowerUp(game.getPowerUp());
-            arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
+            if (arena.getAgent().getPowerUp() != null )arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
         }
         return arena;
     }

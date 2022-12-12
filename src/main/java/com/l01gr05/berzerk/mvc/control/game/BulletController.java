@@ -55,7 +55,7 @@ public class BulletController extends Controller<Arena> {
                 getModel().removeBullet(bullet);
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
+                game.setIsPowerUpActive(false);
                 return;
             } else {
                 getModel().removeBullet(bullet);
@@ -66,7 +66,7 @@ public class BulletController extends Controller<Arena> {
                 game.showStartMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.setIsPowerUpActive(getModel().getAgent().getPowerUp().isEnabled());
+                game.setIsPowerUpActive(false);
             };
             agent.setPosition(agent.getInitialPosition());
         }
