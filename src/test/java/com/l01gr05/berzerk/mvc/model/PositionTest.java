@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 public class PositionTest {
     private Position position;
 
@@ -40,11 +42,26 @@ public class PositionTest {
 
     @Test
     public void testEquals() {
-        Assertions.assertEquals(new Position(1, 1), position);
+        Assertions.assertTrue(position.equals(new Position(1, 1)));
+    }
+
+    @Test
+    public void testEqualsNull() {
+        Assertions.assertFalse(position.equals(null));
     }
 
     @Test
     public void random() {
-        Assertions.assertNotEquals(new Position(1, 1), position.getRandom());
+        Position random = position.getRandom();
+        boolean xIsDifferent = random.getX() != position.getX();
+        boolean xIsInRange = random.getX() >= 0 && random.getX() < 3;
+        boolean yIsDifferent = random.getY() != position.getY();
+        boolean yIsInRange = random.getY() >= 0 && random.getY() < 3;
+        Assertions.assertTrue(xIsDifferent && xIsInRange && yIsDifferent && yIsInRange);
+    }
+
+    @Test
+    public void testHashCode() {
+        Assertions.assertEquals(Objects.hash(1, 1), position.hashCode());
     }
 }

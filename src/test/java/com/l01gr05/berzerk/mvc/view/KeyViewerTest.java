@@ -20,7 +20,7 @@ public class KeyViewerTest {
     @BeforeEach
     void setUp()  {
         this.key = new Key(new Position(10,10));
-        keyViewer = new KeyViewer(key);
+        keyViewer = key.getViewer();
         gui = Mockito.mock(GUI.class);
     }
 

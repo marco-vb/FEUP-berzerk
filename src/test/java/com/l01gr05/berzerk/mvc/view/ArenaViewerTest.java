@@ -10,6 +10,7 @@ import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import com.l01gr05.berzerk.mvc.view.game.ArenaViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.IOException;
@@ -50,5 +51,11 @@ public class ArenaViewerTest {
         arenaViewer.draw(gui, game);
         Mockito.verify(gui, Mockito.times(1)).clear();
         Mockito.verify(gui, Mockito.times(1)).refresh();
+    }
+
+    @Test
+    public void testDrawStats() throws IOException {
+        arenaViewer.drawStats(gui, game);
+        Mockito.verify(gui, Mockito.times(1)).drawStats(arena, game);
     }
 }
