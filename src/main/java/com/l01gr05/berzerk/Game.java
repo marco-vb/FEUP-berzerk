@@ -14,17 +14,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Game {
-    public static final int WIDTH = 31;
-    public static final int HEIGHT = 19;
-    public static final int STATS_WIDTH = 15;
-
+    public static final int WIDTH = 31, HEIGHT = 19, STATS_WIDTH = 15;
     public static final String BACKGROUND_COLOR = "#180030";
-    private int level;
-    private int score;
-    private int lives;
-    private PowerUp powerUp;
-    private boolean isPowerUpActive;
     private final LanternaGUI gui;
+    private int level, score, lives;
+    private PowerUp powerUp;
     private State state;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
@@ -35,36 +29,28 @@ public class Game {
         this.lives = 3;
         this.powerUp = null;
     }
-
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         Game game = new Game();
         game.run();
     }
-
     public void setState(State state) {
         this.state = state;
     }
-
     public void setScore(int score) {
         this.score = score;
     }
-
     public void decreaseLives() {
         this.lives--;
     }
-
     public int getScore() {
         return score;
     }
-
     public int getLives() {
         return lives;
     }
-
     public boolean isGameOver() {
         return lives == 0;
     }
-
     private void run() throws IOException {
         int FPS = 10;
         long frameDuration = 1000 / FPS;
@@ -94,47 +80,37 @@ public class Game {
         this.powerUp = null;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
-
     public void nextLevel() throws IOException {
         this.level++;
         this.score += 100;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
-
     public void showStartMenu() {
         this.state = new MenuState(new MenuStart());
     }
-
     public void showSettings() {
         this.state = new MenuState(new MenuSettings());
     }
-
     public void exit() {
         this.state = null;
     }
-
     public void toggleMusic() {
         // TODO
     }
-
     public void toggleSound() {
         // TODO
     }
-
     public PowerUp getPowerUp() {
         return powerUp;
     }
-
     public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
-
     public boolean isPowerUpActive() {
         return (powerUp == null) ? false : powerUp.isEnabled();
     }
-
     public void setIsPowerUpActive(boolean state) {
-        isPowerUpActive = state;
+
     }
     public State getState () {
             return state;
@@ -142,7 +118,6 @@ public class Game {
     public int getLevel () {
         return level;
     }
-
     public Game(LanternaGUI gui) {  // For testing purposes
             this.gui = gui;
             this.level = 1;
