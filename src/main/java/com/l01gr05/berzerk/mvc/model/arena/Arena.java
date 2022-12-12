@@ -17,6 +17,7 @@ public class Arena {
     private List<Bullet> bullets;
     private List<Tower> towers;
     private Key key = null;
+    private List<PowerUp> powerUps;
 
     public Arena(Game game) {
         this.game = game;
@@ -25,6 +26,7 @@ public class Arena {
         this.bullets = new ArrayList<>();
         this.exits = new ArrayList<>();
         this.towers = new ArrayList<>();
+        this.powerUps = new ArrayList<>();
     }
 
     public Game getGame() {
@@ -71,6 +73,12 @@ public class Arena {
             walls.add((Wall) element);
         } else if (element instanceof Tower) {
             towers.add((Tower) element);
+        } else if (element instanceof Shield) {
+            powerUps.add((Shield) element);
+        } else if (element instanceof Canon) {
+            powerUps.add((Canon) element);
+        } else if (element instanceof Lazer) {
+            powerUps.add((Lazer) element);
         } else if (element instanceof Key) {
             key = (Key) element;
         }
@@ -83,6 +91,7 @@ public class Arena {
         elements.addAll(bullets);
         elements.addAll(enemies);
         elements.addAll(walls);
+        if (powerUps != null) elements.addAll(powerUps);
         elements.addAll(towers);
         if (key != null) elements.add(key);
         return elements;
@@ -146,6 +155,10 @@ public class Arena {
         return agent.getPosition().equals(position);
     }
 
+    public List<PowerUp> getPowerUps() { return powerUps; }
+
+    public void addPowerUp(PowerUp powerUp) { powerUps.add(powerUp); }
+    
     public List<Wall> getWalls() {
         return walls;
     }

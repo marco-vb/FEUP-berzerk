@@ -18,7 +18,7 @@ public class EnemyController extends Controller<Arena> {
     @Override
     public void update(Game game, GUI.INPUT action) {
         for (Enemy enemy : getModel().getEnemies()) {
-            move(enemy, enemy.getPosition().getRandom(), game);
+            enemy.move(getModel());
         }
         double shooting_probability = 0.1;
         for (Enemy enemy : getModel().getEnemies()) {
@@ -30,9 +30,9 @@ public class EnemyController extends Controller<Arena> {
             }
         }
     }
-
+    
     private void move(Enemy enemy, Position position, Game game) {
-        if (!(getModel().isWall(position)|| getModel().isEnemy(position) || getModel().isExit(position))) {
+        if (!(getModel().isWall(position) || getModel().isEnemy(position) || getModel().isExit(position))) {
             enemy.setPosition(position);
         }
     }

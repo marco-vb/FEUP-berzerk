@@ -26,6 +26,10 @@ public class ArenaLoader {
         Arena arena = new Arena(game);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
+        if (level > 1 ) {
+            arena.getAgent().setPowerUp(game.getPowerUp());
+            if (arena.getAgent().getPowerUp() != null )arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
+        }
         return arena;
     }
     private List<String> readArenaFile(int level) throws IOException {
@@ -133,15 +137,18 @@ public class ArenaLoader {
         return new Position(x, y);
     }
     private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
-        int num_enemies = min(10, level);
+        int num_enemies = min(8, level/2);
         place(grid, distances_from_exit, num_enemies, 'E', agent_x, agent_y);
     }
     private Element createElement(char element, int x, int y) {
         switch (element) {
             case 'A': return new Agent(new Position(x, y));
             case 'X': return new Exit(new Position(x, y));
-            case 'E': return new Enemy(new Position(x, y));
+            case 'E': return Math.random() > level * 0.1 ? new DumbEnemy(new Position(x, y)) : new SmartEnemy(new Position(x, y));
             case '#': return new Wall(new Position(x, y));
+            case 'S': return new Shield(new Position(x, y));
+            case 'C': return new Canon(new Position(x, y));
+            case 'L': return new Canon(new Position(x, y));
             case 'T': return new Tower(new Position(x, y));
             case 'K': return new Key(new Position(x, y));
         }

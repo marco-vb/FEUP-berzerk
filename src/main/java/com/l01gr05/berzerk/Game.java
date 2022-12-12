@@ -2,6 +2,7 @@ package com.l01gr05.berzerk;
 
 import com.l01gr05.berzerk.gui.LanternaGUI;
 import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
+import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import com.l01gr05.berzerk.states.GameState;
@@ -20,6 +21,8 @@ public class Game {
     private int level;
     private int score;
     private int lives;
+    private PowerUp powerUp;
+    private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
     private AudioInputStream inputStream;
@@ -32,6 +35,7 @@ public class Game {
         this.lives = 3;
         this.inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/music.wav"));
         this.clip = AudioSystem.getClip();
+        this.powerUp = null;
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
@@ -89,6 +93,8 @@ public class Game {
         this.score = 0;
         this.lives = 3;
         this.level = 1;
+
+        this.powerUp = null;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
 
@@ -122,13 +128,28 @@ public class Game {
         // TODO
     }
 
-    public State getState() {
-        return state;
+    public PowerUp getPowerUp() {
+        return powerUp;
     }
 
-    public int getLevel() {
-        return level;
+    public void setPowerUp(PowerUp powerUp) {
+        this.powerUp = powerUp;
     }
+
+    public boolean isPowerUpActive() {
+        return (powerUp == null) ? false : powerUp.isEnabled();
+    }
+
+    public void setIsPowerUpActive(boolean state) {
+        isPowerUpActive = state;
+    }
+        public State getState () {
+            return state;
+        }
+
+        public int getLevel () {
+            return level;
+        }
 
     public Game(LanternaGUI gui) {  // For testing purposes
         this.gui = gui;
@@ -147,4 +168,3 @@ public class Game {
         }
     }
 }
-
