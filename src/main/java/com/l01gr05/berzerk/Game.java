@@ -206,4 +206,17 @@ public class Game {
         }
     }
 
+    public void playCannonSound() {
+        if (soundsOn) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/cannon.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

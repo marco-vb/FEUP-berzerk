@@ -49,6 +49,7 @@ public class AgentController extends Controller<Arena> {
     private void shoot(Game game) {
         Agent agent = getModel().getAgent();
         if (agent.getPowerUp() instanceof Canon && agent.getPowerUp().isEnabled()) {
+            game.playCannonSound();
             AgentBullet northBullet = new AgentBullet(agent.getPosition(), 'N');
             AgentBullet southBullet = new AgentBullet(agent.getPosition(), 'S');
             AgentBullet eastBullet = new AgentBullet(agent.getPosition(), 'E');
