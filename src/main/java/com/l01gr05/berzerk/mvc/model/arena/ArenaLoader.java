@@ -137,7 +137,7 @@ public class ArenaLoader {
         return new Position(x, y);
     }
     private void createRandomEnemies(int[][] distances_from_exit, char[][] grid, int agent_x, int agent_y, int level) {
-        int num_enemies = min(10, level);
+        int num_enemies = min(8, level/2);
         place(grid, distances_from_exit, num_enemies, 'E', agent_x, agent_y);
     }
     private Element createElement(char element, int x, int y) {
