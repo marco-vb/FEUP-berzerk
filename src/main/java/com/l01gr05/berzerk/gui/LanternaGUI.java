@@ -112,7 +112,7 @@ public class LanternaGUI implements GUI {
     private void drawSpace() {
         TextGraphics graphics = screen.newTextGraphics();
         graphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Game.WIDTH, Game.HEIGHT), ' ');
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Game.WIDTH + Game.STATS_WIDTH, Game.HEIGHT), ' ');
     }
     @Override
     public void draw(int x, int y, char c, TextColor color) {
@@ -173,9 +173,10 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawMenu(Menu menu) {
-        int x = Game.WIDTH / 2 - menu.getTitle().length() / 2 - 1;
+        int x = (Game.WIDTH + Game.STATS_WIDTH) / 2 - menu.getTitle().length() / 2 - 1;
         int y = Game.HEIGHT / 2 - menu.getOptions().size() / 2 - 1;
         TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
         textGraphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         textGraphics.putString(x, y, menu.getTitle());
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -193,18 +194,17 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawStats(Arena model, Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
+        textGraphics.putString(Game.WIDTH + 2, 7, "Score: " + String.format("%03d", game.getScore()));
+        textGraphics.putString(Game.WIDTH + 2, 9, "Power: ");
+        textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.WHITE_BRIGHT);
+        textGraphics.putString(Game.WIDTH + 11, 9, (game.getPowerUp() == null) ? " " : game.getPowerUp().getType().substring(0,1));
 
-        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        textGraphics.putString(0, Game.HEIGHT + 1, "Score: " + game.getScore());
-
-        textGraphics.putString(Game.WIDTH - 20, Game.HEIGHT + 1, "P Up: ");
-        textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.YELLOW_BRIGHT);
-        textGraphics.putString(Game.WIDTH - 14, Game.HEIGHT + 1, (game.getPowerUp() == null) ? "-" : game.getPowerUp().getType().substring(0,1));
-
-        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < game.getLives(); i++)
-            lives.append("A");
-        textGraphics.putString(Game.WIDTH - 10, Game.HEIGHT + 1, "Lives: " + lives);
+            lives.append("%");
+        textGraphics.putString(Game.WIDTH + 2, 11, "Lives: " + lives);
     }
 }

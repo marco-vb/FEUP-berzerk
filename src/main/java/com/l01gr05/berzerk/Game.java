@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 public class Game {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 19;
-    public static final int STATS_WIDTH = 20;
+    public static final int STATS_WIDTH = 15;
 
     public static final String BACKGROUND_COLOR = "#180030";
     private int level;
