@@ -102,6 +102,8 @@ public class LanternaGUI implements GUI {
                 return INPUT.QUIT;
             case Enter:
                 return INPUT.ENTER;
+            case Tab:
+                return INPUT.ACTIVATE;
             case Character:
                 if (keyStroke.getCharacter() == ' ') {
                     return INPUT.SHOOT;
@@ -150,6 +152,21 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public void drawShield(Element model) {
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'S', TextColor.ANSI.BLUE_BRIGHT);
+    }
+
+    @Override
+    public void drawCanon(Element model) {
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'C', TextColor.ANSI.BLUE_BRIGHT);
+    }
+
+    @Override
+    public void drawLazer(Element model){
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'L', TextColor.ANSI.BLUE_BRIGHT);
+    }
+
+    @Override
     public void draw(int x, int y, char c, TextColor color) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(color);
@@ -179,8 +196,15 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawStats(Arena model, Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
+
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         textGraphics.putString(0, Game.HEIGHT + 1, "Score: " + game.getScore());
+
+        textGraphics.putString(Game.WIDTH - 20, Game.HEIGHT + 1, "P Up: ");
+        textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.YELLOW_BRIGHT);
+        textGraphics.putString(Game.WIDTH - 14, Game.HEIGHT + 1, (game.getPowerUp() == null) ? "-" : game.getPowerUp().getType().substring(0,1));
+
+        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < game.getLives(); i++)
             lives.append("A");

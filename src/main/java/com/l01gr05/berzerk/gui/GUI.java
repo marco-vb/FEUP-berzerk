@@ -29,11 +29,17 @@ public interface GUI {
 
     void drawTower(Element model);
 
+    void drawShield(Element model);
+
+    void drawCanon(Element model);
+
+    void drawLazer(Element model);
+
     void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);
 
     void drawStats(Arena model, Game game);
 
-    enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, SHOOT};
+    enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, ACTIVATE, SHOOT};
 }
