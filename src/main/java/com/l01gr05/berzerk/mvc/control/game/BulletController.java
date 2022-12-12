@@ -32,6 +32,7 @@ public class BulletController extends Controller<Arena> {
         }
 
         if (getModel().isEnemy(position)) {
+            game.playDeathSound();
             getModel().removeBullet(bullet);
             for (int i = 0; i < getModel().getEnemies().size(); i++) {
                 if (getModel().getEnemies().get(i).getPosition().equals(position)) {
