@@ -21,6 +21,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Map;
+
+import static com.l01gr05.berzerk.Game.BACKGROUND_COLOR;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
@@ -28,15 +31,11 @@ public class LanternaGUI implements GUI {
     public LanternaGUI(Screen screen) { //Only created for testing purposes
         this.screen = screen;
     }
-
     public LanternaGUI() throws IOException, URISyntaxException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(fontConfig);
         this.screen = createScreen(terminal);
     }
-
-
-
     public Screen createScreen(Terminal terminal) throws IOException {
         final Screen screen;
         screen = new TerminalScreen(terminal);
@@ -46,15 +45,14 @@ public class LanternaGUI implements GUI {
         screen.doResizeIfNecessary();
         return screen;
     }
-
     public Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException {
-        TerminalSize terminalSize = new TerminalSize(Game.WIDTH, Game.HEIGHT + 2);
+        TerminalSize terminalSize = new TerminalSize(Game.WIDTH + Game.STATS_WIDTH, Game.HEIGHT);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+        terminalFactory.setTerminalEmulatorTitle("Berzerk");
         return terminalFactory.createTerminal();
     }
-
     public AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, IOException, FontFormatException {
         URL resource = getClass().getClassLoader().getResource("fonts/Square-Regular.ttf");
         assert resource != null;
@@ -71,18 +69,16 @@ public class LanternaGUI implements GUI {
     @Override
     public void clear() {
         screen.clear();
+        drawSpace();
     }
-
     @Override
     public void refresh() throws IOException {
         screen.refresh();
     }
-
     @Override
     public void close() throws IOException {
         screen.close();
     }
-
     public INPUT getInput() throws IOException {
         KeyStroke keyStroke = screen.pollInput();
         if (keyStroke == null) {
@@ -113,56 +109,51 @@ public class LanternaGUI implements GUI {
                 return INPUT.NONE;
         }
     }
-
+    private void drawSpace() {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Game.WIDTH, Game.HEIGHT), ' ');
+    }
+    @Override
+    public void draw(int x, int y, char c, TextColor color) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
+        textGraphics.setForegroundColor(color);
+        textGraphics.putString(x, y, String.valueOf(c));
+    }
     @Override
     public void drawAgent(Element model) {
         Agent agent = (Agent) model;
-        switch (agent.getDirection()) {
-            case 'N':
-                draw(model.getPosition().getX(), model.getPosition().getY(), '%', TextColor.ANSI.MAGENTA_BRIGHT);
-                break;
-            case 'S':
-                draw(model.getPosition().getX(), model.getPosition().getY(), '!', TextColor.ANSI.MAGENTA_BRIGHT);
-                break;
-            case 'E':
-                draw(model.getPosition().getX(), model.getPosition().getY(), '$', TextColor.ANSI.MAGENTA_BRIGHT);
-                break;
-            default:
-                draw(model.getPosition().getX(), model.getPosition().getY(), '&', TextColor.ANSI.MAGENTA_BRIGHT);
-                break;
-        }
+        Map<Character, Character> directionToChar = Map.of('N', '%','S', '!','E', '$','W', '&');
+        char c = directionToChar.get(agent.getDirection());
+        draw(model.getPosition().getX(), model.getPosition().getY(), c, TextColor.Factory.fromString("#E22B5E"));
     }
-
     @Override
     public void drawExit(Element model) {
         draw(model.getPosition().getX(), model.getPosition().getY(), ' ', TextColor.ANSI.WHITE);
     }
-
     @Override
     public void drawWall(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '#', TextColor.ANSI.BLUE);
+        draw(model.getPosition().getX(), model.getPosition().getY(), '#', TextColor.Factory.fromString("#820328"));
     }
-
     @Override
     public void drawEnemy(Element model) {
-        if (model instanceof DumbEnemy) draw(model.getPosition().getX(), model.getPosition().getY(), '+', TextColor.ANSI.RED_BRIGHT);
-        else draw(model.getPosition().getX(), model.getPosition().getY(), ')', TextColor.ANSI.RED_BRIGHT);
+        if (model instanceof DumbEnemy) draw(model.getPosition().getX(), model.getPosition().getY(), '+', TextColor.Factory.fromString("#8158BD"));
+        else draw(model.getPosition().getX(), model.getPosition().getY(), ')', TextColor.Factory.fromString("#8158BD"));
     }
-
     @Override
     public void drawBullet(Element model) {
-        TextColor color = model instanceof AgentBullet ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.RED_BRIGHT;
+        TextColor color = model instanceof AgentBullet ?
+                TextColor.Factory.fromString("#E22B5E") : TextColor.Factory.fromString("#8158BD");
         draw(model.getPosition().getX(), model.getPosition().getY(), '.', color);
     }
-
     @Override
     public void drawKey(Element model) {
-        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '*', TextColor.ANSI.YELLOW);
+        if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '*', TextColor.ANSI.YELLOW_BRIGHT);
     }
-
     @Override
     public void drawTower(Element model) {
-        draw(model.getPosition().getX(), model.getPosition().getY(), '(', TextColor.ANSI.RED);
+        draw(model.getPosition().getX(), model.getPosition().getY(), '(', TextColor.Factory.fromString("#F2582A"));
     }
 
     @Override
@@ -178,13 +169,6 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawLazer(Element model){
         if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), 'L', TextColor.ANSI.BLUE_BRIGHT);
-    }
-
-    @Override
-    public void draw(int x, int y, char c, TextColor color) {
-        TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.setForegroundColor(color);
-        textGraphics.putString(x, y, String.valueOf(c));
     }
 
     @Override
@@ -206,7 +190,6 @@ public class LanternaGUI implements GUI {
             }
         }
     }
-
     @Override
     public void drawStats(Arena model, Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
