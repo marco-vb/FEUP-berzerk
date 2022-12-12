@@ -53,10 +53,10 @@ public class AgentController extends Controller<Arena> {
             AgentBullet southBullet = new AgentBullet(agent.getPosition(), 'S');
             AgentBullet eastBullet = new AgentBullet(agent.getPosition(), 'E');
             AgentBullet westBullet = new AgentBullet(agent.getPosition(), 'W');
-            getModel().addBullet(northBullet);
-            getModel().addBullet(southBullet);
-            getModel().addBullet(eastBullet);
-            getModel().addBullet(westBullet);
+            getModel().addElement(northBullet);
+            getModel().addElement(southBullet);
+            getModel().addElement(eastBullet);
+            getModel().addElement(westBullet);
             agent.setPowerUp(null);
             game.setPowerUp(null);
             game.setIsPowerUpActive(false);
@@ -64,7 +64,7 @@ public class AgentController extends Controller<Arena> {
             char direction = agent.getDirection();
             Position position = agent.getPosition();
             while (!getModel().isWall(position)){
-                getModel().addBullet(new AgentBullet(position, direction));
+                getModel().addElement(new AgentBullet(position, direction));
                 if (direction == 'N') position = position.getUp();
                 if (direction == 'S') position = position.getDown();
                 if (direction == 'E') position = position.getRight();
@@ -75,7 +75,7 @@ public class AgentController extends Controller<Arena> {
             game.setIsPowerUpActive(false);
         } else {
             AgentBullet bullet = new AgentBullet(getModel().getAgent().getPosition(), getModel().getAgent().getDirection());
-            getModel().addBullet(bullet);
+            getModel().addElement(bullet);
         }
     }
 

@@ -23,6 +23,7 @@ public class Game {
     private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
+
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI();
         this.state = new MenuState(new MenuStart());
@@ -131,21 +132,20 @@ public class Game {
 
     public void setIsPowerUpActive(boolean state) {
         isPowerUpActive = state;
-        
-    public State getState() {
-        return state;
     }
+        public State getState () {
+            return state;
+        }
 
-    public int getLevel() {
-        return level;
-    }
+        public int getLevel () {
+            return level;
+        }
 
     public Game(LanternaGUI gui) {  // For testing purposes
-        this.gui = gui;
-        this.level = 1;
-        this.score = 0;
-        this.lives = 3;
-        this.state = new MenuState(new MenuStart());
-    }
+            this.gui = gui;
+            this.level = 1;
+            this.score = 0;
+            this.lives = 3;
+            this.state = new MenuState(new MenuStart());
+        }
 }
-
