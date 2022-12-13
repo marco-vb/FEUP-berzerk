@@ -25,7 +25,7 @@ public class SmartStrategyTest {
         agent = new Agent(new Position(1, 1));
         arena = new Arena(game);
         exit = new Exit(new Position(1, 3));
-        enemy = new DumbEnemy(new Position(1, 2));
+        enemy = new SmartEnemy(new Position(1, 2));
         arena.addElement(agent);
         arena.addElement(exit);
         arena.addElement(new Key(new Position(2, 1)));
@@ -36,6 +36,7 @@ public class SmartStrategyTest {
     @Test
     void testMove() {
         enemyController.update(game, GUI.INPUT.UP);
+        Position startingPos = enemy.getPosition();
         Position upPos = enemy.getPosition().getUp();
         Position downPos = enemy.getPosition().getDown();
         Position leftPos = enemy.getPosition().getLeft();
@@ -61,6 +62,9 @@ public class SmartStrategyTest {
         } else if (enemy.getPosition().equals(downRightPos)) {
             movedCorrectly = true;
         } else if (enemy.getPosition().equals(downLeftPos)) {
+            movedCorrectly = true;
+        }
+        else if (enemy.getPosition() == startingPos.getClosest(agent.getPosition())) {
             movedCorrectly = true;
         }
         assertTrue(movedCorrectly);
