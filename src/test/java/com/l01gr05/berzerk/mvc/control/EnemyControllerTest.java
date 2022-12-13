@@ -6,6 +6,7 @@ import com.l01gr05.berzerk.mvc.control.game.EnemyController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.DumbEnemy;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class EnemyControllerTest {
     void setUp() {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
-        enemy = new Enemy(new Position(1, 1));
+        enemy = new DumbEnemy(new Position(1, 1));
         arena = new Arena(game);
         exit = new Exit(new Position(9, 9));
         arena.addElement(enemy);

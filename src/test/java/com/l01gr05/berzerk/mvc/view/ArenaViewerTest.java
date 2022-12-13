@@ -5,6 +5,7 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.DumbEnemy;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import com.l01gr05.berzerk.mvc.view.game.ArenaViewer;
@@ -29,7 +30,7 @@ public class ArenaViewerTest {
         game = Mockito.mock(Game.class);
         this.arena = new Arena(game);
         agent = new Agent(new Position(1, 1));
-        enemy = new Enemy(new Position(1, 1));
+        enemy = new DumbEnemy(new Position(1, 1));
         exit = new Exit(new Position(9, 9));
         arena.addElement(enemy);
         arena.addElement(agent);
@@ -56,6 +57,6 @@ public class ArenaViewerTest {
     @Test
     public void testDrawStats() throws IOException {
         arenaViewer.drawStats(gui, game);
-        Mockito.verify(gui, Mockito.times(1)).drawStats(arena, game);
+        Mockito.verify(gui, Mockito.times(1)).drawStats(game);
     }
 }

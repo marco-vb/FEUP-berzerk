@@ -76,16 +76,16 @@ public class MenuTest {
     @Test
     void testMenuStart() {
         menu = new MenuStart();
-        boolean title = menu.getTitle().equals("Berzerk");
-        boolean options = menu.getOptions().equals(List.of("Start", "Settings", "Exit"));
+        boolean title = menu.getTitle().equals("BERZERK");
+        boolean options = menu.getOptions().equals(List.of("START", "SETTINGS", "EXIT"));
         Assertions.assertTrue(title && options);
     }
 
     @Test
     void testMenuSettings() {
         menu = new MenuSettings();
-        boolean title = menu.getTitle().equals("Settings");
-        boolean options = menu.getOptions().equals(List.of("Music", "Sound", "Back"));
+        boolean title = menu.getTitle().equals("SETTINGS");
+        boolean options = menu.getOptions().equals(List.of("MUSIC", "SOUND", "BACK"));
         Assertions.assertTrue(title && options);
     }
 }
