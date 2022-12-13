@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MenuStart extends Menu {
     public MenuStart() {
-        super("Berzerk", List.of("Start", "Settings", "Exit"));
+        super("BERZERK", List.of("START", "SETTINGS", "EXIT"));
     }
 
     @Override

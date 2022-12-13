@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MenuPause extends Menu {
     public MenuPause(Game game) {
-        super("Game Paused", List.of("Continue", "Main Menu", "Exit"));
+        super("GAME PAUSED", List.of("CONTINUE", "MAIN MENU", "EXIT"));
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MenuSettings extends Menu {
     public MenuSettings() {
-        super("Settings", List.of("Music", "Sound", "Back"));
+        super("SETTINGS", List.of("MUSIC", "SOUND", "BACK"));
     }
 
     @Override
