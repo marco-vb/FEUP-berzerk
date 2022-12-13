@@ -2,7 +2,6 @@ package com.l01gr05.berzerk.gui;
 
 import com.googlecode.lanterna.TextColor;
 import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Element;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
@@ -31,7 +30,7 @@ public interface GUI {
 
     void drawShield(Element model);
 
-    void drawCanon(Element model);
+    void drawCannon(Element model);
 
     void drawLaser(Element model);
 

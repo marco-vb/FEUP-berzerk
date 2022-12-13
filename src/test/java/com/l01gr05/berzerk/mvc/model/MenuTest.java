@@ -1,17 +1,7 @@
 package com.l01gr05.berzerk.mvc.model;
 
 import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.gui.*;
-import com.l01gr05.berzerk.mvc.control.*;
-import com.l01gr05.berzerk.mvc.control.menu.MenuController;
-import com.l01gr05.berzerk.mvc.model.*;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
-import com.l01gr05.berzerk.mvc.model.menu.Menu;
-import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
-import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
-import com.l01gr05.berzerk.mvc.view.*;
-import com.l01gr05.berzerk.mvc.view.menu.MenuViewer;
+import com.l01gr05.berzerk.mvc.model.menu.*;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
@@ -71,6 +61,52 @@ public class MenuTest {
         menu.setCurrentOption(2);
         menu.executeOption(game);
         Mockito.verify(game, Mockito.times(1)).showStartMenu();
+    }
+
+    @Test
+    void testPauseMenuExecute() throws IOException {
+        menu = new MenuPause(game);
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).resumeGame();
+    }
+
+    @Test
+    void testPauseMenuExecute2() throws IOException {
+        menu = new MenuPause(game);
+        menu.setCurrentOption(1);
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).showStartMenu();
+    }
+
+    @Test
+    void testPauseMenuExecute3() throws IOException {
+        menu = new MenuPause(game);
+        menu.setCurrentOption(2);
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).exit();
+    }
+
+    @Test
+    void testDeathMenuExecute() throws IOException {
+        menu = new MenuDeath();
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).startGame();
+    }
+
+    @Test
+    void testDeathMenuExecute2() throws IOException {
+        menu = new MenuDeath();
+        menu.setCurrentOption(1);
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).showStartMenu();
+    }
+
+    @Test
+    void testDeathMenuExecute3() throws IOException {
+        menu = new MenuDeath();
+        menu.setCurrentOption(2);
+        menu.executeOption(game);
+        Mockito.verify(game, Mockito.times(1)).exit();
     }
 
     @Test

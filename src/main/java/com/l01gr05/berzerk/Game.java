@@ -40,7 +40,6 @@ public class Game {
     }
     
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
-
         Game game = new Game();
         game.run();
     }
@@ -105,7 +104,6 @@ public class Game {
         this.state = new MenuState(new MenuSettings());
     }
 
-
     public void showDeathMenu() {
         this.state = new MenuState(new MenuDeath());
     }
@@ -113,7 +111,6 @@ public class Game {
     public void showPauseMenu() {
         this.state = new MenuState(new MenuPause(this));
     }
-
 
     public void exit() {
         this.state = null;
@@ -169,7 +166,14 @@ public class Game {
         this.lives = 3;
         this.state = new MenuState(new MenuStart());
     }
-
+    public Game(LanternaGUI gui, Clip clip) {  // For testing purposes
+        this.gui = gui;
+        this.level = 1;
+        this.score = 0;
+        this.lives = 3;
+        this.state = new MenuState(new MenuStart());
+        this.clip = clip;
+    }
     public void playMusic() {
         try {
             clip.open(inputStream);
@@ -178,7 +182,6 @@ public class Game {
             e.printStackTrace();
         }
     }
-
     public void playShootSound() {
         if (soundsOn) {
             try {
@@ -191,7 +194,6 @@ public class Game {
             }
         }
     }
-
     public void playLaserSound() {
         if (soundsOn) {
             try {
@@ -204,7 +206,6 @@ public class Game {
             }
         }
     }
-
     public void playCannonSound() {
         if (soundsOn) {
             try {
@@ -217,7 +218,6 @@ public class Game {
             }
         }
     }
-
     public void playDeathSound() {
         if (soundsOn) {
             try {
@@ -230,5 +230,4 @@ public class Game {
             }
         }
     }
-
 }

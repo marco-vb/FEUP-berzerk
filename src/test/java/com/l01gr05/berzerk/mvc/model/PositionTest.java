@@ -61,6 +61,30 @@ public class PositionTest {
     }
 
     @Test
+    public void closest1() {
+        Position closest = position.getClosest(new Position(2, 2));
+        Assertions.assertEquals(new Position(2, 2), closest);
+    }
+
+    @Test
+    public void closest2() {
+        Position closest = position.getClosest(new Position(0, 0));
+        Assertions.assertEquals(new Position(0, 0), closest);
+    }
+
+    @Test
+    public void closest3() {
+        Position closest = position.getClosest(new Position(2, 0));
+        Assertions.assertEquals(new Position(2, 0), closest);
+    }
+
+    @Test
+    public void closest4() {
+        Position closest = position.getClosest(new Position(0, 2));
+        Assertions.assertEquals(new Position(0, 2), closest);
+    }
+
+    @Test
     public void testHashCode() {
         Assertions.assertEquals(Objects.hash(1, 1), position.hashCode());
     }

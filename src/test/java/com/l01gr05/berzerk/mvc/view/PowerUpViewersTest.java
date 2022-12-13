@@ -3,7 +3,6 @@ package com.l01gr05.berzerk.mvc.view;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.Cannon;
-import com.l01gr05.berzerk.mvc.model.elements.Key;
 import com.l01gr05.berzerk.mvc.model.elements.Laser;
 import com.l01gr05.berzerk.mvc.model.elements.Shield;
 import com.l01gr05.berzerk.mvc.view.game.CannonViewer;
@@ -22,9 +21,11 @@ public class PowerUpViewersTest {
 
     @Test
     public void testDrawCannon() {
-        CannonViewer cannonViewer = new CannonViewer(new Cannon(new Position(10,10)));
+        Cannon cannon = Mockito.mock(Cannon.class);
+        CannonViewer cannonViewer = new CannonViewer(cannon);
+        Mockito.when(cannon.getViewer()).thenReturn(cannonViewer);
         cannonViewer.draw(gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCanon(cannonViewer.getModel());
+        Mockito.verify(gui, Mockito.times(1)).drawCannon(Mockito.any(Cannon.class));
     }
 
     @Test

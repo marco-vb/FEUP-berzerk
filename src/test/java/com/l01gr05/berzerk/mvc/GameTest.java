@@ -3,10 +3,14 @@ package com.l01gr05.berzerk.mvc;
 
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.LanternaGUI;
+import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 import com.l01gr05.berzerk.states.State;
 import org.junit.jupiter.api.*;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -85,5 +89,77 @@ public class GameTest {
     public void testExit() throws IOException {
         game.exit();
         Assertions.assertNull(game.getState());
+    }
+
+    @Test
+    public void testDeathMenu() throws IOException {
+        game.showDeathMenu();
+        Assertions.assertNotNull(game.getState());
+    }
+
+    @Test
+    public void testPauseMenu() throws IOException {
+        game.showPauseMenu();
+        Assertions.assertNotNull(game.getState());
+    }
+
+    @Test
+    public void testSoundOn() throws IOException {
+        Assertions.assertTrue(game.isSoundOn());
+    }
+
+    @Test
+    public void testSetPowerUp() {
+        PowerUp powerUp = Mockito.mock(PowerUp.class);
+        game.setPowerUp(powerUp);
+        Assertions.assertEquals(powerUp, game.getPowerUp());
+    }
+
+    @Test
+    public void testPowerUpActive() {
+        PowerUp powerUp = Mockito.mock(PowerUp.class);
+        Mockito.when(powerUp.isEnabled()).thenReturn(true);
+        game.setPowerUp(powerUp);
+        Assertions.assertTrue(game.isPowerUpActive());
+    }
+
+    @Test
+    public void testResumeGame() throws IOException {
+        game.resumeGame();
+        Assertions.assertNull(game.getState());
+    }
+
+    @Test
+    public void testPauseGame() throws IOException {
+        game.pauseGame();
+        Assertions.assertNotNull(game.getState());
+    }
+
+    @Test
+    public void testSounds() {
+        Clip clip = Mockito.mock(Clip.class);
+        game = new Game(gui, clip);
+        Mockito.when(clip.isRunning()).thenReturn(true, false);
+        game.toggleMusic();
+        Mockito.verify(clip, Mockito.times(1)).stop();
+        game.toggleMusic();
+        Mockito.verify(clip, Mockito.times(1)).start();
+        Mockito.verify(clip, Mockito.times(1)).loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    @Test
+    public void testToggleSound() {
+        Assertions.assertTrue(game.isSoundOn());
+        game.toggleSound();
+        Assertions.assertFalse(game.isSoundOn());
+    }
+
+    @Test
+    public void testPlayMusic() throws LineUnavailableException, IOException {
+        Clip clip = Mockito.mock(Clip.class);
+        game = new Game(gui, clip);
+        game.playMusic();
+        Mockito.verify(clip, Mockito.times(1)).open(Mockito.any());
+        Mockito.verify(clip, Mockito.times(1)).loop(Clip.LOOP_CONTINUOUSLY);
     }
 }
