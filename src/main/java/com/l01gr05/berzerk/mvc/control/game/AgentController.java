@@ -96,7 +96,7 @@ public class AgentController extends Controller<Arena> {
         if (arena.isWall(position)) {
             game.decreaseLives();
             if (game.isGameOver()) {
-                game.showStartMenu();
+                game.showDeathMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
                 game.setIsPowerUpActive(false);
@@ -112,7 +112,7 @@ public class AgentController extends Controller<Arena> {
             }
             game.decreaseLives();
             if (game.isGameOver()) {
-                game.showStartMenu();
+                game.showDeathMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
                 game.setIsPowerUpActive(false);

@@ -3,6 +3,8 @@ package com.l01gr05.berzerk;
 import com.l01gr05.berzerk.gui.LanternaGUI;
 import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
 import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
+import com.l01gr05.berzerk.mvc.model.menu.MenuDeath;
+import com.l01gr05.berzerk.mvc.model.menu.MenuPause;
 import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import com.l01gr05.berzerk.states.GameState;
@@ -28,6 +30,7 @@ public class Game {
     private boolean isPowerUpActive;
     private final LanternaGUI gui;
     private State state;
+    private State previousState;
     private AudioInputStream inputStream;
     private Clip clip;
     boolean soundsOn = true;
@@ -116,6 +119,14 @@ public class Game {
         this.state = new MenuState(new MenuSettings());
     }
 
+    public void showDeathMenu() {
+        this.state = new MenuState(new MenuDeath());
+    }
+
+    public void showPauseMenu() {
+        this.state = new MenuState(new MenuPause(this));
+    }
+
     public void exit() {
         this.state = null;
     }
@@ -161,6 +172,14 @@ public class Game {
         }
     public int getLevel () {
         return level;
+    }
+
+    public void resumeGame() throws IOException {
+        this.state = previousState;
+    }
+
+    public void pauseGame() throws IOException {
+        previousState = this.state;
     }
 
     public Game(LanternaGUI gui) {  // For testing purposes

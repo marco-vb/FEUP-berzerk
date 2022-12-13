@@ -64,8 +64,7 @@ public class BulletController extends Controller<Arena> {
                 game.decreaseLives();
             }
             if (game.isGameOver()) {
-                getModel().getGame().showStartMenu();
-                game.showStartMenu();
+                game.showDeathMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
                 game.setIsPowerUpActive(false);
