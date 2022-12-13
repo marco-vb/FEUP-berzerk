@@ -123,7 +123,7 @@ public class LanternaGUITest {
 
     @Test
     void testDrawEnemy() {
-        Enemy enemy = new Enemy(new Position(1, 1));
+        Enemy enemy = new DumbEnemy(new Position(1, 1));
         gui.drawEnemy(enemy);
         Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "E");
