@@ -11,6 +11,7 @@ import java.io.IOException;
 public class AgentNormal implements AgentState {
     @Override
     public void shoot(Game game, Arena arena) {
+        game.playShootSound();
         Agent agent = arena.getAgent();
         AgentBullet bullet = new AgentBullet(agent.getPosition(), agent.getDirection());
         arena.addElement(bullet);
