@@ -34,6 +34,6 @@ application {
 
 pitest {
     junit5PluginVersion = '0.15'
-    verbose = true
+    verbose = false
     pitestVersion = '1.6.7'
 }
