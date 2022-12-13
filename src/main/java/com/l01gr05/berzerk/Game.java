@@ -108,9 +108,6 @@ public class Game {
     public boolean isPowerUpActive() {
         return (powerUp == null) ? false : powerUp.isEnabled();
     }
-    public void setIsPowerUpActive(boolean state) {
-
-    }
     public State getState () {
             return state;
         }

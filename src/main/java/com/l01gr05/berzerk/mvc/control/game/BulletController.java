@@ -38,11 +38,11 @@ public class BulletController extends Controller<Arena> {
                     if (random == 0) {
                         getModel().addPowerUp(new Shield(getModel().getEnemies().get(i).getPosition()));
                     }
-                    else if (random == 1) {//... para droppar o power up desejado
-                        getModel().addPowerUp(new Canon(getModel().getEnemies().get(i).getPosition()));
+                    else if (random == 1) {
+                        getModel().addPowerUp(new Cannon(getModel().getEnemies().get(i).getPosition()));
                     }
                     else if (random == 2){
-                        getModel().addPowerUp(new Lazer(getModel().getEnemies().get(i).getPosition()));
+                        getModel().addPowerUp(new Laser(getModel().getEnemies().get(i).getPosition()));
                     }
                     getModel().removeEnemy(getModel().getEnemies().get(i));
                 }
@@ -56,7 +56,6 @@ public class BulletController extends Controller<Arena> {
                 getModel().removeBullet(bullet);
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.setIsPowerUpActive(false);
                 return;
             } else {
                 getModel().removeBullet(bullet);
@@ -67,7 +66,6 @@ public class BulletController extends Controller<Arena> {
                 game.showStartMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
-                game.setIsPowerUpActive(false);
             };
             agent.setPosition(agent.getInitialPosition());
         }

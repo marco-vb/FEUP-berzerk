@@ -21,6 +21,5 @@ public class AgentLaser implements AgentState {
         }
         agent.setPowerUp(null);
         game.setPowerUp(null);
-        game.setIsPowerUpActive(false);
     }
 }

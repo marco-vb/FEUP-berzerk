@@ -8,6 +8,7 @@ import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.Bullet;
 import com.l01gr05.berzerk.mvc.model.elements.EnemyBullet;
+import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,9 +27,32 @@ public class AgentController extends Controller<Arena> {
         if (action == GUI.INPUT.LEFT) moveLeft(game);
         if (action == GUI.INPUT.RIGHT) moveRight(game);
         if (action == GUI.INPUT.SHOOT) shoot(game);
-        if (action == GUI.INPUT.ACTIVATE) switchPowerUp();
+        if (action == GUI.INPUT.ACTIVATE) activatePowerUp(game);
         if (action == GUI.INPUT.NONE) move(getModel().getAgent().getPosition(), game);
     }
+
+    private void activatePowerUp(Game game) {
+        Agent agent = getModel().getAgent();
+        PowerUp p = agent.getPowerUp();
+        if (p == null) return;
+        p.switchPowerUp(agent);
+        game.setPowerUp(p);
+        if (!p.isEnabled()) {state = new AgentNormal(); return;}
+        switch (p.getType()) {
+            case "Laser":
+                getModel().getAgent().setPowerUp(p);
+                state = new AgentLaser(); break;
+            case "Shield":
+                getModel().getAgent().setPowerUp(p);
+                state = new AgentShield(); break;
+            case "Cannon":
+                getModel().getAgent().setPowerUp(p);
+                state = new AgentCannon(); break;
+            default:
+                state = new AgentNormal();
+        }
+    }
+
     private void moveUp(Game game) throws IOException {
         move(getModel().getAgent().getPosition().getUp(), game);
         getModel().getAgent().setDirection('N');
@@ -65,7 +89,6 @@ public class AgentController extends Controller<Arena> {
         }
         if (arena.isExit(position)) {
             game.nextLevel();
-            arena.getAgent().setPowerUp(game.getPowerUp());
             return;
         }
         if (arena.isKey(position)) {
@@ -73,8 +96,9 @@ public class AgentController extends Controller<Arena> {
             arena.setOpen();
         }
        if (arena.isPowerUp(position)) {
-            agent.setPowerUp(arena.getPowerUp(position));
-            game.setPowerUp(agent.getPowerUp());
+            PowerUp p = arena.getPowerUp(position);
+            agent.setPowerUp(p);
+            game.setPowerUp(p);
             arena.removePowerUp(position);
         }
        agent.setPosition(position);
@@ -84,18 +108,6 @@ public class AgentController extends Controller<Arena> {
         game.decreaseLives();
         if (game.isGameOver()) game.showStartMenu();
         agent.setPosition(agent.getInitialPosition());
-    }
-
-    private void switchPowerUp() {
-        switch (getModel().getAgent().getPowerUp().getType()) {
-            case "Laser":
-                state = new AgentLaser(); break;
-            case "Shield":
-                state = new AgentShield(); break;
-            case "Cannon":
-                state = new AgentCannon(); break;
-            default:
-                state = new AgentNormal(); break;
-        }
+        state = new AgentNormal();
     }
 }
