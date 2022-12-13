@@ -138,6 +138,7 @@ public class LanternaGUITest {
     }
 
     @Test
+
     void testDrawDumbEnemy() {
         Enemy enemy = new DumbEnemy(new Position(1, 1));
         gui.drawEnemy(enemy);
