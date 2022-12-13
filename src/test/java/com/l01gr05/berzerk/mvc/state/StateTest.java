@@ -11,6 +11,8 @@ import com.l01gr05.berzerk.states.State;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -40,7 +42,7 @@ public class StateTest {
     }
 
     @Test
-    public void testUpdate() throws IOException {
+    public void testUpdate() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         state.update(game, gui);
         Mockito.verify(arenaController).update(game, GUI.INPUT.NONE);
         Mockito.verify(arenaViewer).draw(gui, game);

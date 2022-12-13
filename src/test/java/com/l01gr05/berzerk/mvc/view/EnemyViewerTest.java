@@ -4,6 +4,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
+import com.l01gr05.berzerk.mvc.model.elements.DumbEnemy;
 import com.l01gr05.berzerk.mvc.model.elements.Enemy;
 import com.l01gr05.berzerk.mvc.view.game.AgentViewer;
 import com.l01gr05.berzerk.mvc.view.game.EnemyViewer;
@@ -18,7 +19,7 @@ public class EnemyViewerTest {
 
     @BeforeEach
     void setUp()  {
-        this.enemy = new Enemy(new Position(10,10));
+        this.enemy = new DumbEnemy(new Position(10,10));
         enemyViewer = new EnemyViewer(enemy);
         gui = Mockito.mock(GUI.class);
     }

@@ -80,7 +80,7 @@ public class BulletControllerTest {
 
     @Test
     void testShootEnemy() {
-        Enemy enemy = new Enemy(new Position(1, 1));
+        Enemy enemy = new DumbEnemy(new Position(1, 1));
         Agent agent = new Agent(new Position(1, 3));
         arena.addElement(agent);
         arena.addElement(enemy);
