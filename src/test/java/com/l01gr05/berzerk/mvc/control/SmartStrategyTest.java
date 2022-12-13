@@ -63,8 +63,9 @@ public class SmartStrategyTest {
             movedCorrectly = true;
         } else if (enemy.getPosition().equals(downLeftPos)) {
             movedCorrectly = true;
-        }
-        else if (enemy.getPosition() == startingPos.getClosest(agent.getPosition())) {
+        } else if (enemy.getPosition() == startingPos.getClosest(agent.getPosition())) {
+            movedCorrectly = true;
+        }else if (enemy.getPosition() == startingPos) {
             movedCorrectly = true;
         }
         assertTrue(movedCorrectly);
