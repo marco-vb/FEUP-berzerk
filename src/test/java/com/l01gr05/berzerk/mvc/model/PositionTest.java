@@ -53,11 +53,10 @@ public class PositionTest {
     @Test
     public void random() {
         Position random = position.getRandom();
-        boolean xIsDifferent = random.getX() != position.getX();
+        boolean different = random.getX() != position.getX() || random.getY() != position.getY();
         boolean xIsInRange = random.getX() >= 0 && random.getX() < 3;
-        boolean yIsDifferent = random.getY() != position.getY();
         boolean yIsInRange = random.getY() >= 0 && random.getY() < 3;
-        Assertions.assertTrue(xIsDifferent && xIsInRange && yIsDifferent && yIsInRange);
+        Assertions.assertTrue(different && xIsInRange && yIsInRange);
     }
 
     @Test

@@ -36,16 +36,19 @@ public class Position {
     }
 
     public Position getRandom() {
-        int new_x = x;
-        int new_y = y;
-        while (new_x == x) {
-            new_x += (int) (Math.random() * 3) - 1;
+        int random = (int) (Math.random() * 4);
+        switch (random) {
+            case 0:
+                return getUp();
+            case 1:
+                return getDown();
+            case 2:
+                return getLeft();
+            case 3:
+                return getRight();
+            default:
+                return this;
         }
-        while (new_y == y) {
-            new_y += (int) (Math.random() * 3) - 1;
-        }
-
-        return new Position(new_x, new_y);
     }
 
     public Position getClosest(Position position) {
