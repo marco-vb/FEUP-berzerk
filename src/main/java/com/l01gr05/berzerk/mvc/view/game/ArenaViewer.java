@@ -26,6 +26,6 @@ public class ArenaViewer extends Viewer<Arena> {
     }
 
     public void drawStats(GUI gui, Game game) throws IOException {
-        gui.drawStats(getModel(), game);
+        gui.drawStats(game);
     }
 }

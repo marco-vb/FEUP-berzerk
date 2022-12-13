@@ -39,7 +39,7 @@ public interface GUI {
 
     void drawMenu(Menu menu);
 
-    void drawStats(Arena model, Game game);
+    void drawStats(Game game);
 
     enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, ACTIVATE, SHOOT};
 }

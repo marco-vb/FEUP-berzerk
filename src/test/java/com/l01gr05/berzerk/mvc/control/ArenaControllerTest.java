@@ -30,7 +30,7 @@ public class ArenaControllerTest {
         game = Mockito.mock(Game.class);
         arena = new Arena(game);
         agent = new Agent(new Position(1, 1));
-        enemy = new Enemy(new Position(1, 2));
+        enemy = new SmartEnemy(new Position(1, 2));
         exit = new Exit(new Position(1, 3));
         key = new Key(new Position(2, 1));
         wall = new Wall(new Position(0, 1));
@@ -43,9 +43,9 @@ public class ArenaControllerTest {
     }
 
     @Test
-    void testUpdateWithQuit() throws IOException {
+    void testUpdateWithPause() throws IOException {
         arenaController.update(game, GUI.INPUT.QUIT);
-        Mockito.verify(game).showStartMenu();
+        Mockito.verify(game).pauseGame();
     }
 
     @Test
