@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MenuDeath extends Menu{
     public MenuDeath() {
-        super("You Lost!", List.of("Retry", "Main Menu", "Exit"));
+        super("You Lost", List.of("Retry", "Main Menu", "Exit"));
     }
 
     @Override
