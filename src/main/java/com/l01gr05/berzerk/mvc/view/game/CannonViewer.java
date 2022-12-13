@@ -8,6 +8,6 @@ public class CannonViewer extends ElementViewer {
 
     @Override
     public void draw(GUI gui) {
-        gui.drawCanon(getModel());
+        gui.drawCannon(getModel());
     }
 }

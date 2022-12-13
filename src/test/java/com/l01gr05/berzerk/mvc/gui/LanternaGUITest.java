@@ -65,9 +65,9 @@ public class LanternaGUITest {
     @Test
     void testGetInput() throws IOException {
         KeyStroke keyStroke = Mockito.mock(KeyStroke.class);
-        List<KeyType> keyTypes = List.of(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft,
+        List<KeyType> keyTypes = List.of(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft, KeyType.Tab,
                 KeyType.ArrowRight, KeyType.Enter, KeyType.Escape, KeyType.Character, KeyType.Character, KeyType.F2);
-        List<GUI.INPUT> inputs = List.of(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT,
+        List<GUI.INPUT> inputs = List.of(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT, GUI.INPUT.ACTIVATE,
                 GUI.INPUT.RIGHT, GUI.INPUT.ENTER, GUI.INPUT.QUIT, GUI.INPUT.SHOOT, GUI.INPUT.NONE, GUI.INPUT.NONE);
 
         boolean isEqual = true;
@@ -179,6 +179,30 @@ public class LanternaGUITest {
         gui.drawTower(tower);
         Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#F2582A"));
         Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "(");
+    }
+
+    @Test
+    void testDrawCannon() {
+        Cannon cannon = new Cannon(new Position(1, 1));
+        gui.drawCannon(cannon);
+        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
+        Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "?");
+    }
+
+    @Test
+    void testDrawLaser() {
+        Laser laser = new Laser(new Position(1, 1));
+        gui.drawLaser(laser);
+        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
+        Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "?");
+    }
+
+    @Test
+    void testDrawShield() {
+        Shield shield = new Shield(new Position(1, 1));
+        gui.drawShield(shield);
+        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
+        Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "?");
     }
 
     @Test
