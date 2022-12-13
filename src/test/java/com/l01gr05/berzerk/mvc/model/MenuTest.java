@@ -42,14 +42,14 @@ public class MenuTest {
 
     @Test
     void testSettingsMenuExecute() throws IOException {
-        menu = new MenuSettings();
+        menu = new MenuSettings(game);
         menu.executeOption(game);
         Mockito.verify(game, Mockito.times(1)).toggleMusic();
     }
 
     @Test
     void testSettingsMenuExecute2() throws IOException {
-        menu = new MenuSettings();
+        menu = new MenuSettings(game);
         menu.setCurrentOption(1);
         menu.executeOption(game);
         Mockito.verify(game, Mockito.times(1)).toggleSound();
@@ -57,7 +57,7 @@ public class MenuTest {
 
     @Test
     void testSettingsMenuExecute3() throws IOException {
-        menu = new MenuSettings();
+        menu = new MenuSettings(game);
         menu.setCurrentOption(2);
         menu.executeOption(game);
         Mockito.verify(game, Mockito.times(1)).showStartMenu();
