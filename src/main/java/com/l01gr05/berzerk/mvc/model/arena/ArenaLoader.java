@@ -27,8 +27,11 @@ public class ArenaLoader {
         Arena arena = new Arena(game);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
-        arena.getAgent().setPowerUp(game.getPowerUp());
-        if (arena.getAgent().getPowerUp() != null )arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
+        if (game.getPowerUp() != null) {
+            arena.getAgent().setPowerUp(game.getPowerUp());
+            arena.getAgent().getPowerUp().setEnabled(false);
+            game.getPowerUp().setEnabled(false);
+        }
         return arena;
     }
     private List<String> readArenaFile(int level) throws IOException {
