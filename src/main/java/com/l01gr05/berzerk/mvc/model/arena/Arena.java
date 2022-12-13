@@ -137,6 +137,13 @@ public class Arena {
         return false;
     }
 
+    public boolean isPowerUp(Position position) {
+        for (PowerUp powerUp : powerUps)
+            if (powerUp.getPosition().equals(position))
+                return true;
+        return false;
+    }
+
     public Key getKey() {
         return key;
     }
@@ -156,6 +163,17 @@ public class Arena {
     }
 
     public List<PowerUp> getPowerUps() { return powerUps; }
+
+    public PowerUp getPowerUp(Position position) {
+        for (PowerUp powerUp : powerUps)
+            if (powerUp.getPosition().equals(position))
+                return powerUp;
+        return null;
+    }
+
+    public void removePowerUp(Position position) {
+        powerUps.remove(getPowerUp(position));
+    }
 
     public void addPowerUp(PowerUp powerUp) { powerUps.add(powerUp); }
     

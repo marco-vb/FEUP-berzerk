@@ -8,10 +8,9 @@ import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import java.io.IOException;
 
 public class ArenaController extends Controller<Arena> {
-    private final AgentController agentController;
+    private AgentController agentController;
     private final EnemyController enemyController;
     private final BulletController bulletController;
-
     private final TowerController towerController;
     private final ShieldController shieldController;
     private final LazerController lazerController;
@@ -33,15 +32,14 @@ public class ArenaController extends Controller<Arena> {
     public void update(Game game, GUI.INPUT action) throws IOException {
         if (action == GUI.INPUT.QUIT) {
             game.showStartMenu();
-
         } else {
             agentController.update(game, action);
             enemyController.update(game, action);
             bulletController.update(game, action);
             towerController.update(game, action);
-            shieldController.update(game, action);
-            canonController.update(game, action);
-            lazerController.update(game, action);
+            //shieldController.update(game, action);
+            //canonController.update(game, action);
+            //lazerController.update(game, action);
         }
     }
 }
