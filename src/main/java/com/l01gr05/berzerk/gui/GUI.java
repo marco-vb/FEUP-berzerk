@@ -33,7 +33,7 @@ public interface GUI {
 
     void drawCanon(Element model);
 
-    void drawLazer(Element model);
+    void drawLaser(Element model);
 
     void draw(int x, int y, char c, TextColor color);
 

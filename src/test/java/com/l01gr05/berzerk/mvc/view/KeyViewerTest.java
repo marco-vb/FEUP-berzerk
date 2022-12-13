@@ -15,7 +15,6 @@ public class KeyViewerTest {
     private KeyViewer keyViewer;
     private GUI gui;
     private Key key;
-    private Screen screen;
 
     @BeforeEach
     void setUp()  {

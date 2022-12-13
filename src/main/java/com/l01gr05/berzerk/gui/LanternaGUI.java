@@ -166,7 +166,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawLazer(Element model){
+    public void drawLaser(Element model){
         if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '?', TextColor.ANSI.BLUE_BRIGHT);
     }
 
