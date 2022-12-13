@@ -37,13 +37,13 @@ public class BulletController extends Controller<Arena> {
             for (int i = 0; i < getModel().getEnemies().size(); i++) {
                 if (getModel().getEnemies().get(i).getPosition().equals(position)) {
                     if (random == 0) {
-                        getModel().addPowerUp(new Shield(getModel().getEnemies().get(i).getPosition()));
+                        getModel().addElement(new Shield(getModel().getEnemies().get(i).getPosition()));
                     }
                     else if (random == 1) {
-                        getModel().addPowerUp(new Cannon(getModel().getEnemies().get(i).getPosition()));
+                        getModel().addElement(new Cannon(getModel().getEnemies().get(i).getPosition()));
                     }
                     else if (random == 2){
-                        getModel().addPowerUp(new Laser(getModel().getEnemies().get(i).getPosition()));
+                        getModel().addElement(new Laser(getModel().getEnemies().get(i).getPosition()));
                     }
                     getModel().removeEnemy(getModel().getEnemies().get(i));
                 }

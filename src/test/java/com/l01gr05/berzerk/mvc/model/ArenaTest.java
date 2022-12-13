@@ -4,9 +4,7 @@ import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.menu.MenuController;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Key;
-import com.l01gr05.berzerk.mvc.model.elements.Tower;
-import com.l01gr05.berzerk.mvc.model.elements.Wall;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import com.l01gr05.berzerk.mvc.view.menu.MenuViewer;
@@ -58,5 +56,26 @@ public class ArenaTest {
     void testGetGame() throws IOException {
         arena = new Arena(game);
         Assertions.assertEquals(game, arena.getGame());
+    }
+
+    @Test
+    void testGetPowerUp() throws IOException {
+        arena = new Arena(game);
+        PowerUp powerUp = new Laser(new Position(1, 1));
+        arena.addElement(powerUp);
+        Assertions.assertEquals(powerUp, arena.getPowerUp(new Position(1, 1)));
+        Assertions.assertEquals(powerUp, arena.getPowerUps().get(0));
+    }
+
+    @Test
+    void testRemovePowerUp() throws IOException {
+        arena = new Arena(game);
+        PowerUp powerUp1 = new Shield(new Position(1, 1));
+        PowerUp powerUp2 = new Cannon(new Position(2, 2));
+        arena.addElement(powerUp1);
+        arena.addElement(powerUp2);
+        arena.removePowerUp(new Position(1, 1));
+        arena.removePowerUp(new Position(2, 2));
+        Assertions.assertEquals(0, arena.getPowerUps().size());
     }
 }

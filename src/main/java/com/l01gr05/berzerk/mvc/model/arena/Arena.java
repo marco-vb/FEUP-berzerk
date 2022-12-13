@@ -173,8 +173,6 @@ public class Arena {
     public void removePowerUp(Position position) {
         powerUps.remove(getPowerUp(position));
     }
-
-    public void addPowerUp(PowerUp powerUp) { powerUps.add(powerUp); }
     
     public List<Wall> getWalls() {
         return walls;
