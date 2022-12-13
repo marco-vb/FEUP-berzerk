@@ -21,6 +21,7 @@ import org.mockito.Mockito;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 
 public class LanternaGUITest {
@@ -65,9 +66,9 @@ public class LanternaGUITest {
     @Test
     void testGetInput() throws IOException {
         KeyStroke keyStroke = Mockito.mock(KeyStroke.class);
-        List<KeyType> keyTypes = List.of(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft, KeyType.Tab,
+        List<KeyType> keyTypes = Arrays.asList(KeyType.ArrowUp, KeyType.ArrowDown, KeyType.ArrowLeft, KeyType.Tab,
                 KeyType.ArrowRight, KeyType.Enter, KeyType.Escape, KeyType.Character, KeyType.Character, KeyType.F2);
-        List<GUI.INPUT> inputs = List.of(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT, GUI.INPUT.ACTIVATE,
+        List<GUI.INPUT> inputs = Arrays.asList(GUI.INPUT.UP, GUI.INPUT.DOWN, GUI.INPUT.LEFT, GUI.INPUT.ACTIVATE,
                 GUI.INPUT.RIGHT, GUI.INPUT.ENTER, GUI.INPUT.QUIT, GUI.INPUT.SHOOT, GUI.INPUT.NONE, GUI.INPUT.NONE);
 
         boolean isEqual = true;

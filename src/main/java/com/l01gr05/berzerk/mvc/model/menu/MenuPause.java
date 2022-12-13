@@ -4,11 +4,12 @@ import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.states.State;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuPause extends Menu {
     public MenuPause(Game game) {
-        super("GAME PAUSED", List.of("CONTINUE", "MAIN MENU", "EXIT"));
+        super("GAME PAUSED", Arrays.asList("CONTINUE", "MAIN MENU", "EXIT"));
     }
 
     @Override

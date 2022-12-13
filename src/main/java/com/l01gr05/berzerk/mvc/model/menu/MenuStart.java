@@ -4,11 +4,12 @@ import com.l01gr05.berzerk.Game;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuStart extends Menu {
     public MenuStart() {
-        super("BERZERK", List.of("START", "SETTINGS", "EXIT"));
+        super("BERZERK", Arrays.asList("START", "SETTINGS", "EXIT"));
     }
 
     @Override

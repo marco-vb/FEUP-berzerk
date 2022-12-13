@@ -3,11 +3,12 @@ package com.l01gr05.berzerk.mvc.model.menu;
 import com.l01gr05.berzerk.Game;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuDeath extends Menu{
     public MenuDeath() {
-        super("YOU LOST", List.of("RETRY", "MAIN MENU", "EXIT"));
+        super("YOU LOST", Arrays.asList("RETRY", "MAIN MENU", "EXIT"));
     }
 
     @Override

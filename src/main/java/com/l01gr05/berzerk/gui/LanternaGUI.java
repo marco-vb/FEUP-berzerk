@@ -123,8 +123,17 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawAgent(Element model) {
         Agent agent = (Agent) model;
-        Map<Character, Character> directionToChar = Map.of('N', '%','S', '!','E', '$','W', '&');
-        char c = directionToChar.get(agent.getDirection());
+        char c = '%';
+        switch (agent.getDirection()) {
+            case 'N':
+                c = '%'; break;
+            case 'S':
+                c = '!'; break;
+            case 'E':
+                c = '$'; break;
+            case 'W':
+                c = '&'; break;
+        }
         draw(model.getPosition().getX(), model.getPosition().getY(), c, TextColor.Factory.fromString("#E22B5E"));
     }
     @Override

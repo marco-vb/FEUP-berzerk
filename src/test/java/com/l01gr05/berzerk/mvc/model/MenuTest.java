@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuTest {
@@ -113,7 +114,7 @@ public class MenuTest {
     void testMenuStart() {
         menu = new MenuStart();
         boolean title = menu.getTitle().equals("BERZERK");
-        boolean options = menu.getOptions().equals(List.of("START", "SETTINGS", "EXIT"));
+        boolean options = menu.getOptions().equals(Arrays.asList("START", "SETTINGS", "EXIT"));
         Assertions.assertTrue(title && options);
     }
 
@@ -121,7 +122,7 @@ public class MenuTest {
     void testMenuSettings() {
         menu = new MenuSettings();
         boolean title = menu.getTitle().equals("SETTINGS");
-        boolean options = menu.getOptions().equals(List.of("MUSIC", "SOUND", "BACK"));
+        boolean options = menu.getOptions().equals(Arrays.asList("MUSIC", "SOUND", "BACK"));
         Assertions.assertTrue(title && options);
     }
 }

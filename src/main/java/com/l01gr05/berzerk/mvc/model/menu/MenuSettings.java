@@ -2,11 +2,12 @@ package com.l01gr05.berzerk.mvc.model.menu;
 
 import com.l01gr05.berzerk.Game;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuSettings extends Menu {
     public MenuSettings() {
-        super("SETTINGS", List.of("MUSIC", "SOUND", "BACK"));
+        super("SETTINGS", Arrays.asList("MUSIC", "SOUND", "BACK"));
     }
 
     @Override
