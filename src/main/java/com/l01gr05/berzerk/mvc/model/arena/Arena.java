@@ -5,7 +5,6 @@ import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Arena {
@@ -75,10 +74,10 @@ public class Arena {
             towers.add((Tower) element);
         } else if (element instanceof Shield) {
             powerUps.add((Shield) element);
-        } else if (element instanceof Canon) {
-            powerUps.add((Canon) element);
-        } else if (element instanceof Lazer) {
-            powerUps.add((Lazer) element);
+        } else if (element instanceof Cannon) {
+            powerUps.add((Cannon) element);
+        } else if (element instanceof Laser) {
+            powerUps.add((Laser) element);
         } else if (element instanceof Key) {
             key = (Key) element;
         }
@@ -137,6 +136,13 @@ public class Arena {
         return false;
     }
 
+    public boolean isPowerUp(Position position) {
+        for (PowerUp powerUp : powerUps)
+            if (powerUp.getPosition().equals(position))
+                return true;
+        return false;
+    }
+
     public Key getKey() {
         return key;
     }
@@ -156,6 +162,17 @@ public class Arena {
     }
 
     public List<PowerUp> getPowerUps() { return powerUps; }
+
+    public PowerUp getPowerUp(Position position) {
+        for (PowerUp powerUp : powerUps)
+            if (powerUp.getPosition().equals(position))
+                return powerUp;
+        return null;
+    }
+
+    public void removePowerUp(Position position) {
+        powerUps.remove(getPowerUp(position));
+    }
 
     public void addPowerUp(PowerUp powerUp) { powerUps.add(powerUp); }
     

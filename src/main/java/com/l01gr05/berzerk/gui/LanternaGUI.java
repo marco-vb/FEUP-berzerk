@@ -196,15 +196,15 @@ public class LanternaGUI implements GUI {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
-        textGraphics.putString(Game.WIDTH + 2, 7, "Score: " + String.format("%03d", game.getScore()));
-        textGraphics.putString(Game.WIDTH + 2, 9, "Power: ");
+        textGraphics.putString(Game.WIDTH + 2, 7, "SCORE: " + String.format("%03d", game.getScore()));
+        textGraphics.putString(Game.WIDTH + 2, 9, "POWER: ");
         textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.WHITE_BRIGHT);
-        textGraphics.putString(Game.WIDTH + 11, 9, (game.getPowerUp() == null) ? " " : game.getPowerUp().getType().substring(0,1));
+        textGraphics.putString(Game.WIDTH + 9, 9, (game.getPowerUp() == null) ? " " : game.getPowerUp().getType().substring(0,1));
 
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
         StringBuilder lives = new StringBuilder();
         for (int i = 0; i < game.getLives(); i++)
             lives.append("%");
-        textGraphics.putString(Game.WIDTH + 2, 11, "Lives: " + lives);
+        textGraphics.putString(Game.WIDTH + 2, 11, "LIVES: " + lives);
     }
 }

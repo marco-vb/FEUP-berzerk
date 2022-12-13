@@ -18,17 +18,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Game {
-    public static final int WIDTH = 31;
-    public static final int HEIGHT = 19;
-    public static final int STATS_WIDTH = 15;
-
+    public static final int WIDTH = 31, HEIGHT = 19, STATS_WIDTH = 15;
     public static final String BACKGROUND_COLOR = "#180030";
-    private int level;
-    private int score;
-    private int lives;
-    private PowerUp powerUp;
-    private boolean isPowerUpActive;
     private final LanternaGUI gui;
+    private int level, score, lives;
+    private PowerUp powerUp;
     private State state;
     private State previousState;
     private AudioInputStream inputStream;
@@ -44,35 +38,31 @@ public class Game {
         this.clip = AudioSystem.getClip();
         this.powerUp = null;
     }
-
+    
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
+
         Game game = new Game();
         game.run();
     }
-
     public void setState(State state) {
         this.state = state;
     }
-
     public void setScore(int score) {
         this.score = score;
     }
-
     public void decreaseLives() {
         this.lives--;
     }
-
     public int getScore() {
         return score;
     }
-
     public int getLives() {
         return lives;
     }
-
     public boolean isGameOver() {
         return lives == 0;
     }
+
 
     private void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         int FPS = 10;
@@ -100,24 +90,21 @@ public class Game {
         this.score = 0;
         this.lives = 3;
         this.level = 1;
-
         this.powerUp = null;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
-
     public void nextLevel() throws IOException {
         this.level++;
         this.score += 100;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
-
     public void showStartMenu() {
         this.state = new MenuState(new MenuStart());
     }
-
     public void showSettings() {
         this.state = new MenuState(new MenuSettings());
     }
+
 
     public void showDeathMenu() {
         this.state = new MenuState(new MenuDeath());
@@ -127,10 +114,10 @@ public class Game {
         this.state = new MenuState(new MenuPause(this));
     }
 
+
     public void exit() {
         this.state = null;
     }
-
     public void toggleMusic() {
         if (clip.isRunning()) {
             clip.stop();
@@ -139,7 +126,6 @@ public class Game {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
-
     public void toggleSound() {
         if (soundsOn) {
             soundsOn = false;
@@ -151,21 +137,14 @@ public class Game {
     public boolean isSoundOn() {
         return soundsOn;
     }
-
     public PowerUp getPowerUp() {
         return powerUp;
     }
-
     public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
-
     public boolean isPowerUpActive() {
         return (powerUp == null) ? false : powerUp.isEnabled();
-    }
-
-    public void setIsPowerUpActive(boolean state) {
-        isPowerUpActive = state;
     }
     public State getState () {
             return state;
@@ -173,6 +152,7 @@ public class Game {
     public int getLevel () {
         return level;
     }
+
 
     public void resumeGame() throws IOException {
         this.state = previousState;

@@ -13,6 +13,7 @@ public class Agent extends Element {
         super(p);
         this.initialPosition = p;
         this.direction = 'N';
+        this.powerUp = null;
     }
 
     @Override

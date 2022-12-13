@@ -2,10 +2,7 @@ package com.l01gr05.berzerk.mvc.control;
 
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.mvc.control.game.AgentController;
 import com.l01gr05.berzerk.mvc.control.game.ArenaController;
-import com.l01gr05.berzerk.mvc.control.game.BulletController;
-import com.l01gr05.berzerk.mvc.control.game.EnemyController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;

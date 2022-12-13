@@ -3,6 +3,7 @@ package com.l01gr05.berzerk.mvc.model.arena;
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.elements.*;
+import com.l01gr05.berzerk.mvc.view.game.ElementViewer;
 
 import java.io.*;
 import java.net.URL;
@@ -26,10 +27,8 @@ public class ArenaLoader {
         Arena arena = new Arena(game);
         List<String> lines = readArenaFile(level);
         setArenaElements(arena, lines);
-        if (level > 1 ) {
-            arena.getAgent().setPowerUp(game.getPowerUp());
-            if (arena.getAgent().getPowerUp() != null )arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
-        }
+        arena.getAgent().setPowerUp(game.getPowerUp());
+        if (arena.getAgent().getPowerUp() != null )arena.getAgent().getPowerUp().setEnabled(game.isPowerUpActive());
         return arena;
     }
     private List<String> readArenaFile(int level) throws IOException {
@@ -147,8 +146,8 @@ public class ArenaLoader {
             case 'E': return Math.random() > level * 0.1 ? new DumbEnemy(new Position(x, y)) : new SmartEnemy(new Position(x, y));
             case '#': return new Wall(new Position(x, y));
             case 'S': return new Shield(new Position(x, y));
-            case 'C': return new Canon(new Position(x, y));
-            case 'L': return new Canon(new Position(x, y));
+            case 'C': return new Cannon(new Position(x, y));
+            case 'L': return new Cannon(new Position(x, y));
             case 'T': return new Tower(new Position(x, y));
             case 'K': return new Key(new Position(x, y));
         }
