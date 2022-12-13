@@ -5,10 +5,7 @@ import com.l01gr05.berzerk.gui.GUI;
 import com.l01gr05.berzerk.mvc.control.game.AgentController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.elements.Agent;
-import com.l01gr05.berzerk.mvc.model.elements.Exit;
-import com.l01gr05.berzerk.mvc.model.elements.Key;
-import com.l01gr05.berzerk.mvc.model.elements.Wall;
+import com.l01gr05.berzerk.mvc.model.elements.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,7 +15,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AgentControllerStateTest {
+public class AgentControllerTest {
     private AgentController agentController;
     private Agent agent;
     private Arena arena;
@@ -78,7 +75,35 @@ public class AgentControllerStateTest {
     }
 
     @Test
-    void testShoot() throws IOException {
+    void testShoot1() throws IOException {
+        agentController.update(game, GUI.INPUT.SHOOT);
+        assertEquals(1, arena.getBullets().size());
+    }
+
+    @Test
+    void testShoot2() throws IOException {
+        agent.setPowerUp(new Shield(new Position(1, 1)));
+        game.setPowerUp(agent.getPowerUp());
+        agentController.update(game, GUI.INPUT.ACTIVATE);
+        agentController.update(game, GUI.INPUT.SHOOT);
+        assertEquals(1, arena.getBullets().size());
+    }
+
+    @Test
+    void testShoot3() throws IOException {
+        agent.setPowerUp(new Cannon(new Position(1, 1)));
+        game.setPowerUp(agent.getPowerUp());
+        agentController.update(game, GUI.INPUT.ACTIVATE);
+        agentController.update(game, GUI.INPUT.SHOOT);
+        assertEquals(4, arena.getBullets().size());
+    }
+
+    @Test
+    void testShoot4() throws IOException {
+        arena.addElement(new Wall(new Position(1, 0)));
+        agent.setPowerUp(new Laser(new Position(1, 2)));
+        game.setPowerUp(agent.getPowerUp());
+        agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(1, arena.getBullets().size());
     }

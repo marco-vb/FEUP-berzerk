@@ -11,10 +11,10 @@ public class AgentCannon implements AgentState {
     public void shoot(Game game, Arena arena) {
         game.playCannonSound();
         Position p = arena.getAgent().getPosition();
-        arena.addElement(new AgentBullet(p, 'N'));
-        arena.addElement(new AgentBullet(p, 'S'));
-        arena.addElement(new AgentBullet(p, 'E'));
-        arena.addElement(new AgentBullet(p, 'W'));
+        arena.addElement(new AgentBullet(new Position(p.getX(), p.getY() - 1), 'N'));
+        arena.addElement(new AgentBullet(new Position(p.getX(), p.getY() + 1), 'S'));
+        arena.addElement(new AgentBullet(new Position(p.getX() - 1, p.getY()), 'W'));
+        arena.addElement(new AgentBullet(new Position(p.getX() + 1, p.getY()), 'E'));
         arena.getAgent().setPowerUp(null);
 
         game.setPowerUp(null);
