@@ -10,6 +10,13 @@ public class MenuSettings extends Menu {
         super("SETTINGS", Arrays.asList("MUSIC", "SOUND", "BACK"));
     }
 
+    public MenuSettings(Game game) {
+        super("SETTINGS", List.of(String.format("MUSIC %s", game.isMusicOn() ? "ON" : "OFF") ,String.format("SOUND %s", game.isSoundOn() ? "ON" : "OFF"), "BACK"));
+    }
+
+
+
+
     @Override
     public void executeOption(Game game) {
         switch (getCurrentOption()) {
