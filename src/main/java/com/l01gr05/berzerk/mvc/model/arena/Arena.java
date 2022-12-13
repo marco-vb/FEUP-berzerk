@@ -90,7 +90,7 @@ public class Arena {
         elements.addAll(bullets);
         elements.addAll(enemies);
         elements.addAll(walls);
-        if (powerUps != null) elements.addAll(powerUps);
+        elements.addAll(powerUps);
         elements.addAll(towers);
         if (key != null) elements.add(key);
         return elements;

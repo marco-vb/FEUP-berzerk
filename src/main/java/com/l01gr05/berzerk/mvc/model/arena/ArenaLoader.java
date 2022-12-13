@@ -51,7 +51,6 @@ public class ArenaLoader {
         createExit(grid, dx, dy);
         Position agent_spawn = spawnPlayer(grid, distances_from_exit);
         createRandomEnemies(distances_from_exit, grid, agent_spawn.getX(), agent_spawn.getY(), level);
-        //if (level > 3) createPowerUps(grid);
         if (level > 4) createTowers(grid, distances_from_exit, agent_spawn.getX(), agent_spawn.getY());
         if (level > 6) createKeys(grid, distances_from_exit, agent_spawn.getX(), agent_spawn.getY());
 
