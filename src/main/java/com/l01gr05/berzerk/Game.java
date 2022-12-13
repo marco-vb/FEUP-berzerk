@@ -28,6 +28,7 @@ public class Game {
     private AudioInputStream inputStream;
     private Clip clip;
     boolean soundsOn = true;
+    boolean musicOn = true;
     public Game() throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         this.gui = new LanternaGUI();
         this.state = new MenuState(new MenuStart());
@@ -102,7 +103,7 @@ public class Game {
         this.state = new MenuState(new MenuStart());
     }
     public void showSettings() {
-        this.state = new MenuState(new MenuSettings());
+        this.state = new MenuState(new MenuSettings(this));
     }
 
 
@@ -121,22 +122,29 @@ public class Game {
     public void toggleMusic() {
         if (clip.isRunning()) {
             clip.stop();
+            musicOn = false;
+            this.state = new MenuState(new MenuSettings(this));
         } else {
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            musicOn = true;
+            this.state = new MenuState(new MenuSettings(this));
         }
     }
     public void toggleSound() {
         if (soundsOn) {
             soundsOn = false;
+            this.state = new MenuState(new MenuSettings(this));
         } else {
             soundsOn = true;
+            this.state = new MenuState(new MenuSettings(this));
         }
     }
 
     public boolean isSoundOn() {
         return soundsOn;
     }
+    public boolean isMusicOn() {return musicOn; }
     public PowerUp getPowerUp() {
         return powerUp;
     }
