@@ -40,5 +40,4 @@ public class Agent extends Element {
     public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
-
 }

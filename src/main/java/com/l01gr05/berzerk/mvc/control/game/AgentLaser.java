@@ -13,7 +13,7 @@ public class AgentLaser implements AgentState {
         Agent agent = arena.getAgent();
         char direction = agent.getDirection();
         Position position = agent.getPosition();
-        while (!arena.isWall(position)){
+        while (!arena.isWall(position) && !arena.isExit(position)) {
             arena.addElement(new AgentBullet(position, direction));
             if (direction == 'N') position = position.getUp();
             if (direction == 'S') position = position.getDown();

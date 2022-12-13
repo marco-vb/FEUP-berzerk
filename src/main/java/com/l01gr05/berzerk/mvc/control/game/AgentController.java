@@ -41,15 +41,19 @@ public class AgentController extends Controller<Arena> {
         switch (p.getType()) {
             case "Laser":
                 getModel().getAgent().setPowerUp(p);
+                game.setPowerUp(p);
                 state = new AgentLaser(); break;
             case "Shield":
                 getModel().getAgent().setPowerUp(p);
+                game.setPowerUp(p);
                 state = new AgentShield(); break;
             case "Cannon":
                 getModel().getAgent().setPowerUp(p);
+                game.setPowerUp(p);
                 state = new AgentCannon(); break;
             default:
-                state = new AgentNormal();
+                getModel().getAgent().setPowerUp(null);
+                state = new AgentNormal(); break;
         }
     }
 
@@ -72,7 +76,7 @@ public class AgentController extends Controller<Arena> {
 
     public void shoot(Game game) {
         state.shoot(game, getModel());
-
+        this.state = new AgentNormal();
     }
 
     public void move(Position position, Game game) throws IOException {

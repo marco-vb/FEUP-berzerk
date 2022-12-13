@@ -16,6 +16,7 @@ public class AgentCannon implements AgentState {
         arena.addElement(new AgentBullet(p, 'E'));
         arena.addElement(new AgentBullet(p, 'W'));
         arena.getAgent().setPowerUp(null);
+
         game.setPowerUp(null);
     }
 }
