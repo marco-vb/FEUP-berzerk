@@ -57,6 +57,6 @@ public class ArenaViewerTest {
     @Test
     public void testDrawStats() throws IOException {
         arenaViewer.drawStats(gui, game);
-        Mockito.verify(gui, Mockito.times(1)).drawStats(arena, game);
+        Mockito.verify(gui, Mockito.times(1)).drawStats(game);
     }
 }

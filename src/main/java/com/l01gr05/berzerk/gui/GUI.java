@@ -33,13 +33,13 @@ public interface GUI {
 
     void drawCanon(Element model);
 
-    void drawLazer(Element model);
+    void drawLaser(Element model);
 
     void draw(int x, int y, char c, TextColor color);
 
     void drawMenu(Menu menu);
 
-    void drawStats(Arena model, Game game);
+    void drawStats(Game game);
 
     enum INPUT {UP, DOWN, LEFT, RIGHT, NONE, QUIT, ENTER, ACTIVATE, SHOOT};
 }

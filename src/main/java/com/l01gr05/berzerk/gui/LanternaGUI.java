@@ -12,7 +12,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 
@@ -167,7 +166,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawLazer(Element model){
+    public void drawLaser(Element model){
         if (model != null) draw(model.getPosition().getX(), model.getPosition().getY(), '?', TextColor.ANSI.BLUE_BRIGHT);
     }
 
@@ -191,8 +190,7 @@ public class LanternaGUI implements GUI {
             }
         }
     }
-    @Override
-    public void drawStats(Arena model, Game game) {
+    public void drawStats(Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
