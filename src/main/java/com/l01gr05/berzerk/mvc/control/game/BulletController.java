@@ -31,7 +31,8 @@ public class BulletController extends Controller<Arena> {
             getModel().removeBullet(bullet);
         }
 
-        if (getModel().isEnemy(position)) {
+        if (bullet instanceof AgentBullet && getModel().isEnemy(position)) {
+            game.playDeathSound();
             getModel().removeBullet(bullet);
             for (int i = 0; i < getModel().getEnemies().size(); i++) {
                 if (getModel().getEnemies().get(i).getPosition().equals(position)) {
@@ -62,8 +63,7 @@ public class BulletController extends Controller<Arena> {
                 game.decreaseLives();
             }
             if (game.isGameOver()) {
-                getModel().getGame().showStartMenu();
-                game.showStartMenu();
+                game.showDeathMenu();
                 agent.setPowerUp(null);
                 game.setPowerUp(agent.getPowerUp());
             };

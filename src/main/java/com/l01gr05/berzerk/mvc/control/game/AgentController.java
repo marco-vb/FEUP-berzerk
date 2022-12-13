@@ -69,14 +69,17 @@ public class AgentController extends Controller<Arena> {
         move(getModel().getAgent().getPosition().getRight(), game);
         getModel().getAgent().setDirection('E');
     }
+
     public void shoot(Game game) {
         state.shoot(game, getModel());
+
     }
 
     public void move(Position position, Game game) throws IOException {
         Arena arena = getModel();
         Agent agent = arena.getAgent();
         if (arena.getKey() == null) arena.setOpen();
+
         if (!(state instanceof AgentShield)) {
             List<Bullet> bullets = arena.getBullets();
             for (Bullet bullet : bullets)
@@ -88,6 +91,7 @@ public class AgentController extends Controller<Arena> {
             gotHit(game, agent); return;
         }
         if (arena.isExit(position)) {
+
             game.nextLevel();
             return;
         }

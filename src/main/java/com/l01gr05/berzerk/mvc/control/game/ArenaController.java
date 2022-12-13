@@ -24,7 +24,8 @@ public class ArenaController extends Controller<Arena> {
     @Override
     public void update(Game game, GUI.INPUT action) throws IOException {
         if (action == GUI.INPUT.QUIT) {
-            game.showStartMenu();
+            game.pauseGame();
+            game.showPauseMenu();
         } else {
             agentController.update(game, action);
             enemyController.update(game, action);
