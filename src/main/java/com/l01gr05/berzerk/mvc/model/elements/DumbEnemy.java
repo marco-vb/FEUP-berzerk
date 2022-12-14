@@ -9,6 +9,7 @@ public class DumbEnemy extends Enemy {
         super(p);
     }
 
+    @Override
     public MoveStrategy createMoveStrategy() {
         return new DumbStrategy();
     }

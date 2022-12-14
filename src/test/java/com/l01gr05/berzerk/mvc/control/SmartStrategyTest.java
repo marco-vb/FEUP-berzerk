@@ -15,7 +15,6 @@ public class SmartStrategyTest {
     private EnemyController enemyController;
     private Agent agent;
     private Arena arena;
-    private Exit exit;
     private Enemy enemy;
     private Game game;
 
@@ -24,7 +23,7 @@ public class SmartStrategyTest {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
         arena = new Arena(game);
-        exit = new Exit(new Position(1, 3));
+        Exit exit = new Exit(new Position(1, 3));
         enemy = new SmartEnemy(new Position(1, 2));
         arena.addElement(agent);
         arena.addElement(exit);
@@ -63,9 +62,9 @@ public class SmartStrategyTest {
             movedCorrectly = true;
         } else if (enemy.getPosition().equals(downLeftPos)) {
             movedCorrectly = true;
-        } else if (enemy.getPosition() == startingPos.getClosest(agent.getPosition())) {
+        } else if (enemy.getPosition().equals(startingPos.getClosest(agent.getPosition()))) {
             movedCorrectly = true;
-        }else if (enemy.getPosition() == startingPos) {
+        }else if (enemy.getPosition().equals(startingPos)) {
             movedCorrectly = true;
         }
         assertTrue(movedCorrectly);
