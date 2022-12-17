@@ -7,11 +7,14 @@ import com.l01gr05.berzerk.mvc.view.game.ElementViewer;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.min;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ArenaLoader {
     private final int level;
@@ -38,16 +41,18 @@ public class ArenaLoader {
         createRandomLevel(level);
         URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
-        BufferedReader level_reader = new BufferedReader(new FileReader(path.getFile()));
+        BufferedReader level_reader = Files.newBufferedReader(Paths.get(path.getFile()), UTF_8);
         return level_reader.lines().collect(Collectors.toList());
     }
     private void createRandomLevel(int level) throws IOException {
         URL path = getClass().getResource("/levels/lvl.txt");
         assert path != null;
-        BufferedWriter level_writer = new BufferedWriter(new FileWriter(path.getFile()));
+        BufferedWriter level_writer = Files.newBufferedWriter(Paths.get(path.getFile()), UTF_8);
 
         char[][] grid = new char[Game.HEIGHT][Game.WIDTH];
-        int dx[] = new int[8], dy[] = new int[8], distances_from_exit[][] = new int[Game.HEIGHT][Game.WIDTH];
+        int[] dx = new int[8];
+        int[] dy = new int[8];
+        int[][] distances_from_exit = new int[Game.HEIGHT][Game.WIDTH];
 
         setup_arrays(dx, dy, distances_from_exit);
         createWalls(grid, dx, dy);

@@ -78,6 +78,7 @@ public class LanternaGUI implements GUI {
     public void close() throws IOException {
         screen.close();
     }
+    @Override
     public INPUT getInput() throws IOException {
         KeyStroke keyStroke = screen.pollInput();
         if (keyStroke == null) {
@@ -101,9 +102,8 @@ public class LanternaGUI implements GUI {
             case Tab:
                 return INPUT.ACTIVATE;
             case Character:
-                if (keyStroke.getCharacter() == ' ') {
-                    return INPUT.SHOOT;
-                }
+                if (keyStroke.getCharacter() == ' ') return INPUT.SHOOT;
+                else return INPUT.NONE;
             default:
                 return INPUT.NONE;
         }
@@ -199,13 +199,14 @@ public class LanternaGUI implements GUI {
             }
         }
     }
+    @Override
     public void drawStats(Game game) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString(BACKGROUND_COLOR));
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
         textGraphics.putString(Game.WIDTH + 2, 7, "SCORE: " + String.format("%03d", game.getScore()));
         textGraphics.putString(Game.WIDTH + 2, 9, "POWER: ");
-        textGraphics.setForegroundColor((game.isPowerUpActive()) ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.WHITE_BRIGHT);
+        textGraphics.setForegroundColor(game.isPowerUpActive() ? TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.WHITE_BRIGHT);
         textGraphics.putString(Game.WIDTH + 9, 9, (game.getPowerUp() == null) ? " " : game.getPowerUp().getType().substring(0,1));
 
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);

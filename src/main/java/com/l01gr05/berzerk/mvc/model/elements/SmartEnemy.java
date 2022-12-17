@@ -9,6 +9,7 @@ public class SmartEnemy extends Enemy {
         super(p);
     }
 
+    @Override
     public MoveStrategy createMoveStrategy() {
         return new SmartStrategy();
     }
