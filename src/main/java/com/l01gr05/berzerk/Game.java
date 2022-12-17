@@ -63,7 +63,6 @@ public class Game {
         return lives == 0;
     }
 
-
     private void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         int FPS = 10;
         long frameDuration = 1000 / FPS;
@@ -120,22 +119,20 @@ public class Game {
         if (clip.isRunning()) {
             clip.stop();
             musicOn = false;
-            this.state = new MenuState(new MenuSettings(this));
         } else {
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             musicOn = true;
-            this.state = new MenuState(new MenuSettings(this));
         }
+        this.state = new MenuState(new MenuSettings(this));
     }
     public void toggleSound() {
         if (soundsOn) {
             soundsOn = false;
-            this.state = new MenuState(new MenuSettings(this));
         } else {
             soundsOn = true;
-            this.state = new MenuState(new MenuSettings(this));
         }
+        this.state = new MenuState(new MenuSettings(this));
     }
 
     public boolean isSoundOn() {
