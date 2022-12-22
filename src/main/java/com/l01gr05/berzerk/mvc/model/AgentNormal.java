@@ -1,12 +1,9 @@
-package com.l01gr05.berzerk.mvc.control.game;
+package com.l01gr05.berzerk.mvc.model;
 
 import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.Agent;
 import com.l01gr05.berzerk.mvc.model.elements.AgentBullet;
-
-import java.io.IOException;
 
 public class AgentNormal implements AgentState {
     @Override
@@ -17,3 +14,4 @@ public class AgentNormal implements AgentState {
         arena.addElement(bullet);
     }
 }
+

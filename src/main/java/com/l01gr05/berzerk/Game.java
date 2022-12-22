@@ -63,7 +63,6 @@ public class Game {
         return lives == 0;
     }
 
-
     private void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         int FPS = 10;
         long frameDuration = 1000 / FPS;
@@ -129,6 +128,7 @@ public class Game {
     }
     public void toggleSound() {
         soundsOn = !soundsOn;
+        
         this.state = new MenuState(new MenuSettings(this));
     }
 

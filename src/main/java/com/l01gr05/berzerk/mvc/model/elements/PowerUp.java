@@ -17,7 +17,6 @@ public abstract class PowerUp extends Element {
         this.enabled = state;
     }
 
-
     public void switchPowerUp(Agent agent) { enabled = !enabled; };
 
     public boolean isEnabled() {

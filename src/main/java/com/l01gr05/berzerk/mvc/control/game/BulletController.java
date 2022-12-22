@@ -16,12 +16,14 @@ public class BulletController extends Controller<Arena> {
     public void update(Game game, GUI.INPUT action) {
         for (int i = 0; i < getModel().getBullets().size(); i++) {
            Bullet bullet = getModel().getBullets().get(i);
-           if (bullet.getDirection() == 'N') move(bullet, bullet.getPosition().getUp(), game);
-           if (bullet.getDirection() == 'S') move(bullet, bullet.getPosition().getDown(), game);
-           if (bullet.getDirection() == 'W') move(bullet, bullet.getPosition().getLeft(), game);
-           if (bullet.getDirection() == 'E') move(bullet, bullet.getPosition().getRight(), game);
-       }
 
+           switch (bullet.getDirection()) {
+                case 'N': move(bullet, bullet.getPosition().getUp(), game); break;
+                case 'S': move(bullet, bullet.getPosition().getDown(), game); break;
+                case 'E': move(bullet, bullet.getPosition().getRight(), game); break;
+                case 'W': move(bullet, bullet.getPosition().getLeft(), game); break;
+           }
+       }
     }
 
     private void move(Bullet bullet, Position position, Game game) {
