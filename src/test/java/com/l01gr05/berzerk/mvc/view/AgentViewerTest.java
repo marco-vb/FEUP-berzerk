@@ -15,7 +15,6 @@ public class AgentViewerTest {
     private AgentViewer agentViewer;
     private GUI gui;
     private Agent agent;
-    private Screen screen;
 
     @BeforeEach
     void setUp()  {

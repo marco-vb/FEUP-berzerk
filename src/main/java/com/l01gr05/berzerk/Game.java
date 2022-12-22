@@ -77,7 +77,7 @@ public class Game {
                 try {
                     Thread.sleep(frameDuration - duration);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         }
@@ -127,11 +127,8 @@ public class Game {
         this.state = new MenuState(new MenuSettings(this));
     }
     public void toggleSound() {
-        if (soundsOn) {
-            soundsOn = false;
-        } else {
-            soundsOn = true;
-        }
+        soundsOn = !soundsOn;
+        
         this.state = new MenuState(new MenuSettings(this));
     }
 
@@ -146,7 +143,7 @@ public class Game {
         this.powerUp = powerUp;
     }
     public boolean isPowerUpActive() {
-        return (powerUp == null) ? false : powerUp.isEnabled();
+        return powerUp != null && powerUp.isEnabled();
     }
     public State getState () {
             return state;
@@ -184,7 +181,7 @@ public class Game {
             clip.open(inputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (LineUnavailableException | IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
     public void playShootSound() {
@@ -195,7 +192,7 @@ public class Game {
                 clip.open(inputStream);
                 clip.start();
             } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
@@ -207,7 +204,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
@@ -219,7 +216,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
@@ -231,7 +228,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }

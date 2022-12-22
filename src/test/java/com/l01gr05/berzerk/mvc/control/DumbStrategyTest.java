@@ -16,18 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DumbStrategyTest {
     private EnemyController enemyController;
-    private Agent agent;
     private Arena arena;
-    private Exit exit;
     private Enemy enemy;
     private Game game;
 
     @BeforeEach
     void setUp() {
         game = Mockito.mock(Game.class);
-        agent = new Agent(new Position(1, 1));
+        Agent agent = new Agent(new Position(1, 1));
         arena = new Arena(game);
-        exit = new Exit(new Position(1, 3));
+        Exit exit = new Exit(new Position(1, 3));
         enemy = new DumbEnemy(new Position(1, 2));
         arena.addElement(agent);
         arena.addElement(exit);

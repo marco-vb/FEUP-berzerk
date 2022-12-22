@@ -12,7 +12,7 @@ public class BulletController extends Controller<Arena> {
     public BulletController(Arena arena) {
         super(arena);
     }
-
+    @Override
     public void update(Game game, GUI.INPUT action) {
         for (int i = 0; i < getModel().getBullets().size(); i++) {
            Bullet bullet = getModel().getBullets().get(i);

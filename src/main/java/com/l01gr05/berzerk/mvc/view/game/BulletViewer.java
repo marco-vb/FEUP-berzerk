@@ -9,6 +9,7 @@ public class BulletViewer extends ElementViewer {
         super(bullet);
     }
 
+    @Override
     public void draw(GUI gui) {
         gui.drawBullet(getModel());
     }
