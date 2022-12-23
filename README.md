@@ -35,4 +35,4 @@ Death Menu
 
 Gameplay
 
-![]("docs/mockups/Gameplay.gif")
+<img src="https://i.imgur.com/enP7ksc.gif"/>
