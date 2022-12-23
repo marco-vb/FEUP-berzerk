@@ -38,4 +38,4 @@ Gameplay
 <img src="https://i.imgur.com/enP7ksc.gif"/>
 
 Gameplay with Audio
-https://user-images.githubusercontent.com/92639552/209405773-07bf3243-824d-4323-8a34-88ed246f14ae.mp4
+https://user-images.githubusercontent.com/92639552/209405971-8f714fb6-5137-4053-bdfb-0cbb3647cee2.mp4
