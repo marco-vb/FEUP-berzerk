@@ -20,7 +20,7 @@ public class DumbStrategyTest {
     @BeforeEach
     void setUp() {
         game = Mockito.mock(Game.class);
-        Agent agent = new Agent(new Position(1, 1));
+        Agent agent = new Agent(new Position(10, 10));
         arena = new Arena(game);
         Exit exit = new Exit(new Position(1, 3));
         enemy = new DumbEnemy(new Position(1, 2));

@@ -19,8 +19,23 @@ Start Menu
 <img src="docs/mockups/StartMenu.png"/>
 
 
+Settings Menu
+
+<img src="docs/mockups/SettingsMenu.png"/>
+
+
+Pause Menu
+
+<img src="docs/mockups/PauseMenu.png"/>
+
+
+Death Menu
+
+<img src="docs/mockups/DeathMenu.png"/>
+
 Gameplay
 
-<img src="docs/mockups/BerzerkGame_1.png"/>
-<img src="docs/mockups/BerzerkGame_2.png"/>
-<img src="docs/mockups/BerzerkGame_3.png"/>
+<img src="https://i.imgur.com/enP7ksc.gif"/>
+
+Gameplay with Audio
+https://user-images.githubusercontent.com/92639552/209405971-8f714fb6-5137-4053-bdfb-0cbb3647cee2.mp4
