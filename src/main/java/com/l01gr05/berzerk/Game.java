@@ -88,7 +88,7 @@ public class Game {
     public void startGame() throws IOException {
         this.score = 0;
         this.lives = 3;
-        this.level = 10;
+        this.level = 1;
         this.powerUp = null;
         this.state = new GameState(new ArenaLoader(this.level, this).load());
     }
