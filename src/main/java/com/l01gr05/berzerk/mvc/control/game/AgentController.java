@@ -120,7 +120,7 @@ public class AgentController extends Controller<Arena> {
     private void gotHit(Game game, Agent agent) {
         game.decreaseLives();
 
-        if (game.isGameOver()) game.showStartMenu();
+        if (game.isGameOver()) game.showDeathMenu();
 
         agent.setPosition(agent.getInitialPosition());
         agent.setState(new AgentNormal());
