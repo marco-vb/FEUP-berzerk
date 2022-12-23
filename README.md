@@ -19,8 +19,20 @@ Start Menu
 <img src="docs/mockups/StartMenu.png"/>
 
 
+Settings Menu
+
+<img src="docs/mockups/SettingsMenu.png"/>
+
+
+Pause Menu
+
+<img src="docs/mockups/PauseMenu.png"/>
+
+
+Death Menu
+
+<img src="docs/mockups/DeathMenu.png"/>
+
 Gameplay
 
-<img src="docs/mockups/BerzerkGame_1.png"/>
-<img src="docs/mockups/BerzerkGame_2.png"/>
-<img src="docs/mockups/BerzerkGame_3.png"/>
+![]("docs/mockups/Gameplay.gif")
