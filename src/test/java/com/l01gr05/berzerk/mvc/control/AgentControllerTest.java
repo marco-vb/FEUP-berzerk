@@ -82,7 +82,6 @@ public class AgentControllerTest {
     @Test
     void testShoot2() throws IOException {
         agent.setPowerUp(new Shield(new Position(1, 1)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(1, arena.getBullets().size());
@@ -91,7 +90,6 @@ public class AgentControllerTest {
     @Test
     void testShoot3() throws IOException {
         agent.setPowerUp(new Cannon(new Position(1, 1)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(4, arena.getBullets().size());
@@ -101,7 +99,6 @@ public class AgentControllerTest {
     void testShoot4() throws IOException {
         arena.addElement(new Wall(new Position(1, 0)));
         agent.setPowerUp(new Laser(new Position(1, 2)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(1, arena.getBullets().size());
