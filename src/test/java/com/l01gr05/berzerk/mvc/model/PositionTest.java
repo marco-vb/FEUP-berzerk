@@ -42,12 +42,12 @@ public class PositionTest {
 
     @Test
     public void testEquals() {
-        Assertions.assertTrue(position.equals(new Position(1, 1)));
+        Assertions.assertEquals(position, new Position(1, 1));
     }
 
     @Test
     public void testEqualsNull() {
-        Assertions.assertFalse(position.equals(null));
+        Assertions.assertNotEquals(null, position);
     }
 
     @Test

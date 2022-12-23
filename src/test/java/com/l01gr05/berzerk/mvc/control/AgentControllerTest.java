@@ -19,7 +19,6 @@ public class AgentControllerTest {
     private AgentController agentController;
     private Agent agent;
     private Arena arena;
-    private Exit exit;
     private Game game;
 
     @BeforeEach
@@ -27,7 +26,7 @@ public class AgentControllerTest {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
         arena = new Arena(game);
-        exit = new Exit(new Position(1, 3));
+        Exit exit = new Exit(new Position(1, 3));
         arena.addElement(agent);
         arena.addElement(exit);
         arena.addElement(new Key(new Position(2, 1)));
@@ -83,7 +82,6 @@ public class AgentControllerTest {
     @Test
     void testShoot2() throws IOException {
         agent.setPowerUp(new Shield(new Position(1, 1)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(1, arena.getBullets().size());
@@ -92,7 +90,6 @@ public class AgentControllerTest {
     @Test
     void testShoot3() throws IOException {
         agent.setPowerUp(new Cannon(new Position(1, 1)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(4, arena.getBullets().size());
@@ -102,7 +99,6 @@ public class AgentControllerTest {
     void testShoot4() throws IOException {
         arena.addElement(new Wall(new Position(1, 0)));
         agent.setPowerUp(new Laser(new Position(1, 2)));
-        game.setPowerUp(agent.getPowerUp());
         agentController.update(game, GUI.INPUT.ACTIVATE);
         agentController.update(game, GUI.INPUT.SHOOT);
         assertEquals(1, arena.getBullets().size());

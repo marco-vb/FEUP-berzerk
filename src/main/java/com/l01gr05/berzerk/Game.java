@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
 public class Game {
     public static final int WIDTH = 31, HEIGHT = 19, STATS_WIDTH = 15;
@@ -27,6 +28,7 @@ public class Game {
     private State previousState;
     private AudioInputStream inputStream;
     private Clip clip;
+    private Logger logger;
     boolean soundsOn = true;
     boolean musicOn = true;
     public Game() throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
@@ -38,6 +40,7 @@ public class Game {
         this.inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sounds/music.wav"));
         this.clip = AudioSystem.getClip();
         this.powerUp = null;
+        this.logger = Logger.getLogger(Game.class.getName());
     }
     
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
@@ -77,7 +80,7 @@ public class Game {
                 try {
                     Thread.sleep(frameDuration - duration);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    logger.warning("Thread interrupted");
                 }
             }
         }
@@ -116,19 +119,17 @@ public class Game {
         this.state = null;
     }
     public void toggleMusic() {
+        musicOn = !musicOn;
         if (clip.isRunning()) {
             clip.stop();
-            musicOn = false;
         } else {
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
-            musicOn = true;
         }
         this.state = new MenuState(new MenuSettings(this));
     }
     public void toggleSound() {
         soundsOn = !soundsOn;
-        
         this.state = new MenuState(new MenuSettings(this));
     }
 
@@ -153,11 +154,11 @@ public class Game {
     }
 
 
-    public void resumeGame() throws IOException {
+    public void resumeGame() {
         this.state = previousState;
     }
 
-    public void pauseGame() throws IOException {
+    public void pauseGame() {
         previousState = this.state;
     }
 
@@ -181,7 +182,7 @@ public class Game {
             clip.open(inputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (LineUnavailableException | IOException e) {
-            throw new RuntimeException(e);
+            logger.warning("Error playing music");
         }
     }
     public void playShootSound() {
@@ -192,7 +193,7 @@ public class Game {
                 clip.open(inputStream);
                 clip.start();
             } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-                throw new RuntimeException(e);
+                logger.warning("Error playing sound");
             }
         }
     }
@@ -204,7 +205,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                throw new RuntimeException(e);
+                logger.warning("Error playing sound");
             }
         }
     }
@@ -216,7 +217,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                throw new RuntimeException(e);
+                logger.warning("Error playing sound");
             }
         }
     }
@@ -228,7 +229,7 @@ public class Game {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                throw new RuntimeException(e);
+                logger.warning("Error playing sound");
             }
         }
     }

@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 public class MenuTest {
     private Menu menu;

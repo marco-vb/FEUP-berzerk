@@ -8,14 +8,12 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 import com.l01gr05.berzerk.mvc.model.menu.Menu;
 import com.l01gr05.berzerk.mvc.model.*;
 import com.l01gr05.berzerk.mvc.model.menu.MenuSettings;
 import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;

@@ -6,14 +6,11 @@ import com.l01gr05.berzerk.gui.LanternaGUI;
 import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 import com.l01gr05.berzerk.states.State;
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class GameTest {
     private Game game;

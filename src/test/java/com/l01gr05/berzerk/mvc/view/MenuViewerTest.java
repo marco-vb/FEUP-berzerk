@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class MenuViewerTest {
     private Game game;
-    private Menu menu;
     private GUI gui;
 
     @BeforeEach
@@ -23,7 +22,7 @@ public class MenuViewerTest {
 
     @Test
     void testMenuDraw() throws IOException {
-        menu = new MenuStart();
+        Menu menu = new MenuStart();
         MenuViewer menuViewer = new MenuViewer(menu);
         menuViewer.draw(gui, game);
         Mockito.verify(gui, Mockito.times(1)).clear();

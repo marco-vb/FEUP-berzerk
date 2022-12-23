@@ -1,13 +1,8 @@
 package com.l01gr05.berzerk.mvc.model;
 
 import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.mvc.control.menu.MenuController;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
-import com.l01gr05.berzerk.mvc.model.menu.Menu;
-import com.l01gr05.berzerk.mvc.model.menu.MenuStart;
-import com.l01gr05.berzerk.mvc.view.menu.MenuViewer;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

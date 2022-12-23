@@ -12,12 +12,9 @@ import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EnemyControllerTest {
-    private Position startingPos;
     private EnemyController enemyController;
     private Enemy enemy;
     private Agent agent;
@@ -39,7 +36,7 @@ public class EnemyControllerTest {
 
     @Test
     void testMoveEnemy() {
-        startingPos = enemy.getPosition();
+        Position startingPos = enemy.getPosition();
         enemyController.update(game, GUI.INPUT.UP);
         assertNotEquals(startingPos, enemy.getPosition());
     }
