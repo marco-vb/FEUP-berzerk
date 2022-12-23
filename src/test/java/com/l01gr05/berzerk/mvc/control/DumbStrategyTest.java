@@ -45,7 +45,9 @@ public class DumbStrategyTest {
         Position upLeftPos = enemy.getPosition().getLeft().getUp();
         Position downRightPos = enemy.getPosition().getRight().getDown();
         Position downLeftPos = enemy.getPosition().getLeft().getDown();
+
         enemy.move(arena);
+
         boolean movedCorrectly = false;
         if (enemy.getPosition().equals(upPos)) {
             movedCorrectly = true;
