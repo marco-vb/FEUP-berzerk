@@ -1,21 +1,10 @@
 package com.l01gr05.berzerk.mvc.model;
 
-import com.l01gr05.berzerk.Game;
-import com.l01gr05.berzerk.gui.*;
-import com.l01gr05.berzerk.mvc.control.*;
-import com.l01gr05.berzerk.mvc.control.menu.MenuController;
-import com.l01gr05.berzerk.mvc.model.*;
-import com.l01gr05.berzerk.mvc.model.arena.Arena;
-import com.l01gr05.berzerk.mvc.model.arena.ArenaLoader;
 import com.l01gr05.berzerk.mvc.model.elements.Cannon;
 import com.l01gr05.berzerk.mvc.model.elements.Laser;
 import com.l01gr05.berzerk.mvc.model.elements.PowerUp;
 import com.l01gr05.berzerk.mvc.model.elements.Shield;
-import com.l01gr05.berzerk.mvc.model.menu.*;
-import com.l01gr05.berzerk.mvc.view.*;
-import com.l01gr05.berzerk.mvc.view.menu.MenuViewer;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 
 public class PowerUpTests {
     private PowerUp shield;

@@ -2,18 +2,14 @@ package com.l01gr05.berzerk.mvc.control;
 
 import com.l01gr05.berzerk.Game;
 import com.l01gr05.berzerk.gui.GUI;
-import com.l01gr05.berzerk.mvc.control.game.AgentController;
 import com.l01gr05.berzerk.mvc.control.game.EnemyController;
 import com.l01gr05.berzerk.mvc.model.Position;
 import com.l01gr05.berzerk.mvc.model.arena.Arena;
 import com.l01gr05.berzerk.mvc.model.elements.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DumbStrategyTest {
     private EnemyController enemyController;

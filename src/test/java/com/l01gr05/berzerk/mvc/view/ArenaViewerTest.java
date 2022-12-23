@@ -11,7 +11,6 @@ import com.l01gr05.berzerk.mvc.model.elements.Exit;
 import com.l01gr05.berzerk.mvc.view.game.ArenaViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.IOException;
@@ -20,7 +19,6 @@ public class ArenaViewerTest {
     private Game game;
     private ArenaViewer arenaViewer;
     private GUI gui;
-    private Arena arena;
     private Agent agent;
     private Enemy enemy;
     private Exit exit;
@@ -28,7 +26,7 @@ public class ArenaViewerTest {
     @BeforeEach
     void setUp()  {
         game = Mockito.mock(Game.class);
-        this.arena = new Arena(game);
+        Arena arena = new Arena(game);
         agent = new Agent(new Position(1, 1));
         enemy = new DumbEnemy(new Position(1, 1));
         exit = new Exit(new Position(9, 9));
