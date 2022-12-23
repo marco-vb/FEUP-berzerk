@@ -15,7 +15,6 @@ public class ExitViewerTest {
     private ExitViewer exitViewer;
     private GUI gui;
     private Exit exit;
-    private Screen screen;
 
     @BeforeEach
     void setUp()  {

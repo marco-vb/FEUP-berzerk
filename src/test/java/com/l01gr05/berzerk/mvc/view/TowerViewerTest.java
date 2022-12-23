@@ -14,7 +14,6 @@ public class TowerViewerTest {
     private ElementViewer towerViewer;
     private GUI gui;
     private Tower tower;
-    private Screen screen;
 
     @BeforeEach
     void setUp()  {
