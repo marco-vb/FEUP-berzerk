@@ -9,12 +9,9 @@ import com.l01gr05.berzerk.mvc.model.elements.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class TowerControllerTest {

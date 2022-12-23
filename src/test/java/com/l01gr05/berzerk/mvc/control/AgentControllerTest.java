@@ -19,7 +19,6 @@ public class AgentControllerTest {
     private AgentController agentController;
     private Agent agent;
     private Arena arena;
-    private Exit exit;
     private Game game;
 
     @BeforeEach
@@ -27,7 +26,7 @@ public class AgentControllerTest {
         game = Mockito.mock(Game.class);
         agent = new Agent(new Position(1, 1));
         arena = new Arena(game);
-        exit = new Exit(new Position(1, 3));
+        Exit exit = new Exit(new Position(1, 3));
         arena.addElement(agent);
         arena.addElement(exit);
         arena.addElement(new Key(new Position(2, 1)));

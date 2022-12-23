@@ -19,10 +19,6 @@ public class ArenaControllerTest {
     private Game game;
     private Arena arena;
     private Agent agent;
-    private Enemy enemy;
-    private Exit exit;
-    private Key key;
-    private Wall wall;
     private ArenaController arenaController;
 
     @BeforeEach
@@ -30,10 +26,10 @@ public class ArenaControllerTest {
         game = Mockito.mock(Game.class);
         arena = new Arena(game);
         agent = new Agent(new Position(1, 1));
-        enemy = new DumbEnemy(new Position(1, 2));
-        exit = new Exit(new Position(1, 3));
-        key = new Key(new Position(2, 1));
-        wall = new Wall(new Position(0, 1));
+        Enemy enemy = new DumbEnemy(new Position(1, 2));
+        Exit exit = new Exit(new Position(1, 3));
+        Key key = new Key(new Position(2, 1));
+        Wall wall = new Wall(new Position(0, 1));
         arena.addElement(agent);
         arena.addElement(exit);
         arena.addElement(key);

@@ -36,6 +36,6 @@ public class DumbStrategyTest {
         enemyController.update(game, GUI.INPUT.UP);
         Position position = enemy.getPosition();
         enemy.move(arena);
-        Assertions.assertFalse(enemy.getPosition().equals(position));
+        Assertions.assertNotEquals(enemy.getPosition(), position);
     }
 }
