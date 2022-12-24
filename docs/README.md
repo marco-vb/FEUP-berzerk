@@ -51,7 +51,7 @@ Neste diagrama UML, podemos ver as classes que foram implementadas e como se rel
 **Pattern:** Para resolver este problema usamos o pattern State. Implementamos uma abstract class State, e as classes MenuState e GameState, que implementam o método update() de forma diferente. O método update() é chamado a cada frame, e é responsável por desenhar o estado atual do jogo.
 
 **Implementação:** O seguinte diagrama mostra a implementação do pattern State no nosso projeto:
-<img src="snippets/State.png"/>
+<img src="snippets/state.png"/>
 
 **Consequências:** Este pattern permite-nos desenhar a GUI de forma diferente consoante o estado do jogo, e permite-nos adicionar mais estados ao jogo sem ter de alterar a GUI.
 
