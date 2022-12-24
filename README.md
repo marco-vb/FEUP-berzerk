@@ -14,6 +14,14 @@
 	Este projeto foi desenvolvido por Duarte Gonçalves (up202108772@up.pt), 
     Gonçalo Miranda (up202108773@up.pt) e Marco Vilas Boas (up202108774@up.pt).
 
+Gameplay with Audio
+https://user-images.githubusercontent.com/92639552/209405971-8f714fb6-5137-4053-bdfb-0cbb3647cee2.mp4
+
+Gameplay
+
+<img src="https://i.imgur.com/enP7ksc.gif"/>
+
+
 Start Menu
 
 <img src="docs/mockups/StartMenu.png"/>
@@ -32,10 +40,3 @@ Pause Menu
 Death Menu
 
 <img src="docs/mockups/DeathMenu.png"/>
-
-Gameplay
-
-<img src="https://i.imgur.com/enP7ksc.gif"/>
-
-Gameplay with Audio
-https://user-images.githubusercontent.com/92639552/209405971-8f714fb6-5137-4053-bdfb-0cbb3647cee2.mp4
