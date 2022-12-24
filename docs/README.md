@@ -31,7 +31,7 @@ As seguintes funcionalidades foram implementadas:
 - [x] 2.5. Colisão entre o jogador e os robots: Se o jogador colidir com um robot, o jogador perde. No futuro poderá ser implementado um sistema de vidas.
 - [x] 2.6. Colisão entre o jogador e as paredes: Se o jogador colidir com uma parede, o jogador perde. No futuro poderá ser implementado um sistema de vidas.
 - [x] 2.7. Colisão entre os robots e os disparos do jogador: Se um disparo do jogador colidir com um robot, o robot morre.
-- [x] 3.1. "Loading" de um nível: Os níveis são carregados a partir de um ficheiro de texto.
+- [x] 3.1. "Loading" de um nível: Os níveis são ~~carregados a partir de um ficheiro de texto~~ gerados aleatoriamente.
 - [x] 3.2. Sistema de níveis: O jogador passa de nível quando chega à saída.
 - [x] 3.3. Sistema de vidas: O jogador tem um número limitado de vidas, e perde uma vida quando colide com um robot, com uma parede ou com um disparo de robot.
 - [x] 3.4. Sistema de score: O jogador ganha pontos quando mata um robot e quando ganha um nível.
