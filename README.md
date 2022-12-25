@@ -1,4 +1,4 @@
-### BERZERK2
+### BERZERK 2
 
 	O Agente Anthony é um curioso detetive que pretende descobrir os maiores e mais bem guardados segredos mundo! Para 
     tal, decide infiltrar-se no mais enigmático local do mundo: a Area 51. O que Anthony não sabia era que lhe esperavam
@@ -11,32 +11,7 @@
     Este jogo é inspirado no Berzerk, mas com mais elementos de interação. O Berzerk é um jogo para a Atari 2600 que tem
     como principal objetivo a saída de uma sala repleta de monstros.
 	
-	Este projeto foi desenvolvido por Duarte Gonçalves (up202108772@up.pt), 
-    Gonçalo Miranda (up202108773@up.pt) e Marco Vilas Boas (up202108774@up.pt).
+	Este projeto foi desenvolvido em Laboratório de Design e Teste de Software, na FEUP.
 
 Gameplay with Audio
 https://user-images.githubusercontent.com/92639552/209405971-8f714fb6-5137-4053-bdfb-0cbb3647cee2.mp4
-
-Gameplay
-
-<img src="https://i.imgur.com/enP7ksc.gif"/>
-
-
-Start Menu
-
-<img src="docs/mockups/StartMenu.png"/>
-
-
-Settings Menu
-
-<img src="docs/mockups/SettingsMenu.png"/>
-
-
-Pause Menu
-
-<img src="docs/mockups/PauseMenu.png"/>
-
-
-Death Menu
-
-<img src="docs/mockups/DeathMenu.png"/>
